@@ -20,7 +20,6 @@
     <link rel="apple-touch-icon-precomposed" href="https://ponyfoo.com/apple-touch-icon-precomposed.png" />
     <link rel="alternate" type="application/rss+xml" href="https://ponyfoo.com/articles/feed" />
     <link rel="search" type="application/opensearchdescription+xml" title="Pony Foo" href="https://ponyfoo.com/opensearch.xml" />
-    <link rel="canonical" href="./01_A Brief History of ES6 Tooling_files/01_A Brief History of ES6 Tooling.html" />
     <link rel="manifest" href="https://ponyfoo.com/manifest.json" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -29,7 +28,6 @@
     <meta name="keywords" content="es6,history-lesson,traceur,babel,es6-in-depth" />
     <meta name="description" property="og:description" itemprop="description" content="I wrote a few articles about React and ES6 these last few days, and today I wanted to add a bit more of context as to why I seem to be super into ES6 all of sudden. I’ve …" />
     <meta property="og:site_name" content="Pony Foo" />
-    <meta property="og:url" itemprop="url" content="/articles/a-brief-history-of-es6-tooling" />
     <meta name="twitter:title" itemprop="name" property="og:title" content="ES6 in Depth" />
     <meta name="twitter:description" content="I wrote a few articles about React and ES6 these last few days, and today I wanted to add a bit more of context as to why I seem to be super into ES6 all of sudden. I’ve …" />
     <meta name="twitter:card" content="summary" />
@@ -45,12 +43,28 @@
         p, li { font-size: 13pt !important; line-height: 30px; }
         pre { font-family: Share-Tech,monospace; font-size: 13pt;}
         strong, b { font-family: Share-Bold; font-weight: normal;}
-
+        hr.style8 {
+            border-top: 1px solid #8c8b8b;
+            border-bottom: 1px solid #fff;
+        } /*  from http://codepen.io/ibrahimjabbari/pen/ozinB  */
+        hr.style8:after {
+            content: '';
+            display: block;
+            margin-top: 2px;
+            border-top: 1px solid #8c8b8b;
+            border-bottom: 1px solid #fff;
+        }
+        img {
+           border:1px solid #989898 !important;
+        }
+        img.ponyfoo-top {
+           border:0px solid #fff !important;
+        }
     </style>
     <script>~function(e){var l=e.createElement("link"),t=e.getElementsByTagName("head")[0];l.rel="stylesheet",l.href="/css/all.41e187e0.css",l.media="only x",t.appendChild(l),setTimeout(function(){l.media="all"})}(document);
     </script>
     <!--  link rel="stylesheet" href="./01_A Brief History of ES6 Tooling_files/all.41e187e0.css" media="all" /  -->
-    <link rel="stylesheet" href="./01_A Brief History of ES6 Tooling_files/css" media="all" />
+    <!--  link rel="stylesheet" href="./01_A Brief History of ES6 Tooling_files/css" media="all" /  -->
     <link rel="stylesheet" href="./auxi/es6-in-depth.css" media="all" />
 
     <style type="text/css">
@@ -64,7 +78,7 @@
 
 
 </span>
-<span class="go-text-wrapper"> <img src="./auxi/ponyfoo.png" alt="Pony Foo"/></span>
+<span class="go-text-wrapper"> <img src="./auxi/ponyfoo.png" class="ponyfoo-top" alt="Pony Foo"/></span>
 </h1>
 <nav class="hn-navigation"></nav>
 </header>
@@ -9438,12 +9452,25 @@ p.catch(error <span class="md-code-operator">=&gt;</span> <span class="md-code-b
 <p data-reactid=".ya18e8tukg.2.4"><span data-reactid=".ya18e8tukg.2.4.0">Re-inventing the wheel is </span><strong data-reactid=".ya18e8tukg.2.4.1">a necessary evil</strong><span data-reactid=".ya18e8tukg.2.4.2"> if we want to learn from mistakes made in the past </span><em data-reactid=".ya18e8tukg.2.4.3">(regardless of who made them)</em><span data-reactid=".ya18e8tukg.2.4.4">.</span></p>
 </section>
 
-<section class="hm-section hm-photo-section" data-reactid=".ya18e8tukg.3"><a href="/blog" title="Pony Foo" target="_blank" data-reactid=".ya18e8tukg.3.0"><img class="hm-photo" src="./auxi/nicolas_bevacqua.jpg" alt="Pony Foo" data-reactid=".ya18e8tukg.3.0.0"></a><p>Disclaimer: it might be possible that I don't look this good anymore.</p>
+<section class="hm-section hm-photo-section" data-reactid=".ya18e8tukg.3"><a href="/blog" title="Pony Foo" target="_blank" data-reactid=".ya18e8tukg.3.0"><img class="hm-photo" src="./auxi/nicolas_bevacqua.jpg" alt="Pony Foo" data-reactid=".ya18e8tukg.3.0.0"></a>
+
+<p>Disclaimer: it might be possible that I don't look this good anymore.</p>
 </section>
 
 <section>
-<p><em>(This biographical note was taken from https://bevacqua.io/ and may not be covered by the CC BY-NC 2.5 license that the rest of the text at Pony Foo is.)</em>
-<p><a href="#top" class="top"><img src="./auxi/glyphicons-214-up-arrow.png" alt="up-arrow" style="width:9px; height:10px;" /> <b>Back to top</b></a></p>
+<p><em>(This biographical note was taken from https://bevacqua.io/ and may not be covered by the CC BY-NC 2.5 license that the rest of the text at Pony Foo is.)</em></p>
+
+<p><em>On the Pony Foo home page, this note appears:</em></p>
+
+
+<p>You can support my writing and <a href="https://bevacqua.io/opensource" aria-label="My Open Source Contributions">open-source</a> work through <a href="http://patreon.com/bevacqua" aria-label="Contribute to my writing!">Patreon</a> or <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=29CRFXW53HRP2" aria-label="Contribute to Pony Foo on PayPal">PayPal</a>.<br><strong>Looking for a consultant?</strong> Have a conference talk opportunity? <em><a href="mailto:hello@ponyfoo.com" aria-label="Send me an email">Contact me!</a></em></p>
+
+<p><a href="https://bevacqua.io/buildfirst" aria-label="JavaScript Application Design: A Build First Approach"><img alt="JavaScript Application Design" class="js-only" src="./auxi/javascript-application-design-cover.jpg"></a></p>
+
+<ul><li><a href="https://twitter.com/nzgb" aria-label="@nzgb on Twitter">@nzgb</a> on Twitter</li><li><a href="https://github.com/bevacqua" aria-label="@bevacqua on GitHub">@bevacqua</a> on GitHub</li><li><a href="http://patreon.com/bevacqua" aria-label="Contribute to my writing!">@bevacqua</a> on Patreon</li><li><a href="http://lanyrd.com/profile/bevacqua/" aria-label="My conference speaking experience">@bevacqua</a> on Lanyrd</li><li><a href="https://bevacqua.io" aria-label="My consulting minisite">bevacqua.io</a></li></ul>
+
+<p>Pony Foo is on <a href="https://twitter.com/ponyfoo">Twitter</a> and <a href="https://www.facebook.com/ponyfoo">Facebook</a>.</p>
+
 </article>
 </main>
 
@@ -9453,11 +9480,26 @@ p.catch(error <span class="md-code-operator">=&gt;</span> <span class="md-code-b
 
 
 
+
 <!--  ++++++++++++++++++++++++++++ ++++++++++++++++++++++++++++++++ +++++++++++++++++++++++++  -->
-<p><b>NOTE:</b> <em>This PDF last revised: 2015-11-05</em></p>
+<hr class="style8" />
+<p><b>NOTE:</b> <em>You can comment on any of these articles at <a href="https://ponyfoo.com/articles/tagged/es6-in-depth" title="link to Pony Foo page listing all the ES6 in Depth articles">Pony Foo</a>, and that’s where any factual errors should be noted. </em></p>
 <!--  ++++++++++++++++++++++++++++ ++++++++++++++++++++++++++++++++ +++++++++++++++++++++++++  -->
 
 
+
+
+<!--  ++++++++++++++++++++++++++++ ++++++++++++++++++++++++++++++++ +++++++++++++++++++++++++  -->
+<hr class="style8" />
+<p>This PDF was created (and styled) by <a href="https://github.com/rsperberg" title="link to Roger Sperberg github page">Roger Sperberg</a>. Any typographical or grammar errors or any issues with the PDF itself can be posted on the <a href="https://github.com/rsperberg/es6-info/issues" title="link to ES6-info issues page on github">issues page</a> of the <a href="https://github.com/rsperberg/es6-info" title="link to ES6-info repository on github">ES6-info repository</a> on GitHub.</p>
+<p>The <a href="https://github.com/rsperberg/es6-info/blob/master/ES6%20Whats%20new%20(smashing).pdf">latest version of this PDF</a> can be downloaded from the <a href="https://github.com/rsperberg/es6-info" title="link to ES6-info repository on github">ES6-info repository</a>.</p>
+<p><b>NOTE:</b> <em>This PDF was last revised on 2015-11-09</em></p>
+<hr class="style8" />
+
+<!--  ++++++++++++++++++++++++++++ ++++++++++++++++++++++++++++++++ +++++++++++++++++++++++++  -->
+
+
+<p><a href="#top" class="top"><img src="./auxi/glyphicons-214-up-arrow.png" alt="up-arrow" style="width:9px; height:10px;" /> <b>Back to top</b></a></p>
 
 
 
@@ -9490,10 +9532,9 @@ p.catch(error <span class="md-code-operator">=&gt;</span> <span class="md-code-b
 
 </script>
 
-<script src="./01_A Brief History of ES6 Tooling_files/a-brief-history-of-es6-tooling">
-</script>
-<script src="./01_A Brief History of ES6 Tooling_files/all.f0ef5aac.js">
-</script>
+
+<!--  script src="./01_A Brief History of ES6 Tooling_files/all.f0ef5aac.js">
+</script  -->
 <iframe id="rdbIndicator" width="100%" height="270" border="0" src="./auxi/indicator.html" style="display: none; border: 0; position: fixed; left: 0; top: 0; z-index: 2147483647">
 </iframe>
 
