@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<!-- saved from url=(0078)http://www.smashingmagazine.com/2015/10/es6-whats-new-next-version-javascript/ -->
+<html lang="en-US" prefix="og: http://ogp.me/ns#">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>ES6: What's New in the Next Version of JavaScript – Smashing Magazine</title>
+  <meta charset="UTF-8" />
+  <style>
+        .at-header, .at-teaser, .md-code-block { width: 1000px;}
+        .go-logo-container {  width: 1000px;}
+        p, li { font-size: 13pt !important; line-height: 30px; }
+        pre { font-family: Share-Tech,monospace; font-size: 13pt;}
+        pre.language-javascript { background-color: #002240; padding: 10px 40px !important; line-height: 24px;}
+        strong, b { font-family: Share-Bold; font-weight: 700;}
+  </style>
+    <link rel="stylesheet" href="./auxi/es6-in-depth.css" media="all" />
+    <!--  link rel="stylesheet" href="./auxi/main.min.css" media="all" />
+    <link rel="stylesheet" href="./auxi/print.min.css" media="all" /  -->
+<script id="smash-webfont-localstorage-js">!function(){function e(e,t,n){e.addEventListener?e.addEventListener(t,n,!1):e.attachEvent&&e.attachEvent("on"+t,n)}function t(e){return window.localStorage&&localStorage.font_css_cache&&localStorage.font_css_cache_file===e}function n(){if(window.localStorage&&window.XMLHttpRequest)if(t(o))a(localStorage.font_css_cache);else{var n=new XMLHttpRequest;n.open("GET",o,!0),e(n,"load",function(){4===n.readyState&&(a(n.responseText),localStorage.font_css_cache=n.responseText,localStorage.font_css_cache_file=o)}),n.send()}else{var c=document.createElement("link");c.href=o,c.rel="stylesheet",c.type="text/css",document.getElementsByTagName("head")[0].appendChild(c),document.cookie="font_css_cache"}}function a(e){var t=document.createElement("style");t.innerHTML=e,document.getElementsByTagName("head")[0].appendChild(t)}var o="https://media-mediatemple.netdna-ssl.com/wp-content/themes/smashing-magazine/assets/css/webfonts.min.css?ver=3.4.4";window.localStorage&&localStorage.font_css_cache||document.cookie.indexOf("font_css_cache")>-1?n():e(window,"load",n)}();</script>
+
+<!-- This site is optimized with the Yoast SEO Premium plugin v2.3.4 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="description" content="A hand-picked selection of ECMAScript 6 features that you can use when writing JavaScript today." />
+<link rel="canonical" href="./es6-smashing_files/es6-smashing.html" />
+<link rel="publisher" href="https://plus.google.com/+SmashingMagazine%E2%80%8E" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="ECMAScript 6 (ES6): What&#39;s New In The Next Version Of JavaScript – Smashing Magazine" />
+<meta property="og:description" content="A hand-picked selection of ECMAScript 6 features that you can use when writing JavaScript today." />
+<meta property="og:url" content="http://www.smashingmagazine.com/2015/10/es6-whats-new-next-version-javascript/" />
+<meta property="og:site_name" content="Smashing Magazine" />
+<meta property="article:publisher" content="https://www.facebook.com/smashmag" />
+<meta property="article:tag" content="JavaScript" />
+<meta property="article:tag" content="Web Development" />
+<meta property="article:section" content="Coding" />
+<meta property="article:published_time" content="2015-10-28T10:04:28+01:00" />
+<meta property="article:modified_time" content="2015-10-28T13:16:45+01:00" />
+<meta property="og:updated_time" content="2015-10-28T13:16:45+01:00" />
+<meta property="og:image" content="https://media-mediatemple.netdna-ssl.com/wp-content/uploads/2015/10/javascript-opt-.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="A hand-picked selection of ECMAScript 6 features that you can use when writing JavaScript today." />
+<meta name="twitter:title" content="ECMAScript 6 (ES6): What&#39;s New In The Next Version Of JavaScript – Smashing Magazine" />
+<meta name="twitter:site" content="@smashingmag" />
+<meta name="twitter:domain" content="Smashing Magazine" />
+<meta name="twitter:image:src" content="https://media-mediatemple.netdna-ssl.com/wp-content/uploads/2015/10/javascript-opt-.jpg" />
+<meta name="twitter:creator" content="@webprolific" />
+<!-- / Yoast SEO Premium plugin. -->
+
+<link rel="shortlink" href="http://www.smashingmagazine.com/?p=226053" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="icon" href="https://media-mediatemple.netdna-ssl.com/wp-content/themes/smashing-magazine/assets/images/favicon.png" />
+<meta name="application-name" content="Smashing Magazine" />
+<meta name="msapplication-TileColor" content="#fff" />
+<meta name="msapplication-square70x70logo" content="https://media-mediatemple.netdna-ssl.com/wp-content/themes/smashing-magazine/assets/images/smashing-windows-icon-70-70.png" />
+<meta name="msapplication-square150x150logo" content="https://media-mediatemple.netdna-ssl.com/wp-content/themes/smashing-magazine/assets/images/smashing-windows-icon-150-150.png" />
+<meta name="msapplication-wide310x150logo" content="https://media-mediatemple.netdna-ssl.com/wp-content/themes/smashing-magazine/assets/images/smashing-windows-icon-310-150.png" />
+<meta name="msapplication-square310x310logo" content="https://media-mediatemple.netdna-ssl.com/wp-content/themes/smashing-magazine/assets/images/smashing-windows-icon-310-310.png" />
+<meta name="msapplication-notification" content="frequency=30;polling-uri1=http://notifications.buildmypinnedsite.com/?feed=http://www.smashingmagazine.com/feed/&amp;id=1;polling-uri2=http://notifications.buildmypinnedsite.com/?feed=http://www.smashingmagazine.com/feed/&amp;id=2;polling-uri3=http://notifications.buildmypinnedsite.com/?feed=http://www.smashingmagazine.com/feed/&amp;id=3;polling-uri4=http://notifications.buildmypinnedsite.com/?feed=http://www.smashingmagazine.com/feed/&amp;id=4;cycle=1" />
+<link rel="apple-touch-icon-precomposed" href="https://media-mediatemple.netdna-ssl.com/wp-content/themes/smashing-magazine/assets/images/apple-touch-icon-precomposed.png" />
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="https://media-mediatemple.netdna-ssl.com/wp-content/themes/smashing-magazine/assets/images/apple-touch-icon-57x57-precomposed.png" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://media-mediatemple.netdna-ssl.com/wp-content/themes/smashing-magazine/assets/images/apple-touch-icon-72x72-precomposed.png" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://media-mediatemple.netdna-ssl.com/wp-content/themes/smashing-magazine/assets/images/apple-touch-icon-114x114-precomposed.png" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://media-mediatemple.netdna-ssl.com/wp-content/themes/smashing-magazine/assets/images/apple-touch-icon-144x144-precomposed.png" />
+<link rel="preconnect" href="http://media.smashingmagazine.netdna-cdn.com/" />
+<link rel="preconnect" href="http://auslieferung.commindo-media-resourcen.de/" />
+</style>
+</head>
+<body id="top" class="single single-post postid-226053 single-format-standard www-section">
+  <div class="mnb">
+
+</div>
+  <header class="h" role="banner">
+    <h1 class="logo">
+      <span class="sr">Smashing Magazine</span>
+	    <a href="http://www.smashingmagazine.com/" style="border: 0px;"><img src="./es6-smashing_files/logo.png" alt="Smashing Magazine Logo" srcset="http://www.smashingmagazine.com/wp-content/themes/smashing-magazine/assets/images/logo.svg"></a>
+    </h1>
+  </header>
+
+
+  <main class="ly-main">
+    <div class="cc">
+      <div class="fluid clearfix">
+        <div class="grid clearfix">
+
+
+
+<div id="content" class="col main">
+<article class="post-226053 post type-post status-publish format-standard has-post-thumbnail hentry category-coding tag-javascript tag-web-development" vocab="http://schema.org/" typeof="TechArticle">
+
+    <h2 style="font-family:Share-Bold;">ECMAScript 6 (ES6): What’s New In The Next Version Of JavaScript</h2>
+
+
+
+<img src="./es6-smashing_files/computer-screen-large.jpg" alt="computer screen showing code" style="width: 75%;" />
+
+<p>You’ve probably heard about <strong>ECMAScript 6</strong> (or ES6) already. It’s the next version of JavaScript, and it has some great new features. The features have varying degrees of complexity and are useful in both simple scripts and complex applications. In this article, we’ll discuss a <strong>hand-picked selection of ES6 features</strong> that you can use in your everyday JavaScript coding.</p>
+
+<p>Please note that support for these new ES6 features is well underway in modern browsers, although support varies. If you need to support old versions of browsers that lack many ES6 features, I’ll touch on solutions that might help you start using ES6 today.</p>
+
+<p>Most of the code samples come with an external “Run this code” link, so that you can see the code and play with it.</p>
+
+
+<div class="stripe"><h3 id="variables">Variables</h3></div>
+
+<h4 id="let">let</h4>
+
+<p>You’re used to declaring variables using the <code class="md-code md-code-inline">var</code> keyword. You can now use <code class="md-code md-code-inline">let</code> as well. The subtle difference lies in scope. While <code class="md-code md-code-inline">var</code> results in a variable with the surrounding function as its scope, the scope of a variable declared using <code class="md-code md-code-inline">let</code> is only the block it is in.</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="kw">if</span><span class="punc"> (</span><span class="bool">true</span><span class="punc">)</span> <span class="punc">{</span>
+   <span class="kw">let</span> <span class="var">x</span> <span class="operator">=</span> <span class="number">1</span><span class="punc">;</span>
+<span class="punc">}</span>
+<span class="kw2">console.log<span class="punc">(</span></span><span class="var">x</span><span class="punc">)</span><span class="punc">;</span><span class="comment">  // undefined</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+<p>This can make for cleaner code, resulting in fewer variables hanging around. Take this classic array iteration:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class="language-javascript"><span class="kw">for</span><span class="punc"> (</span><span class="kw">let</span> <span class="var">i</span> <span class="operator">=</span> <span class="number">0</span><span class="punc">,</span> <span class="var">l</span> <span class="operator">=</span> list<span class="punc">.</span>length<span class="punc">;</span> <span class="var">i</span> <span class="operator">&lt;</span> <span class="var">l</span><span class="punc">;</span> <span class="var">i</span><span class="operator">++</span><span class="punc">)</span> <span class="punc">{</span>
+  <span class="comment">  // do something with list[i]
+</span><span class="punc">}</span>
+
+<span class="kw2">console.log<span class="punc">(</span></span><span class="var">i</span><span class="punc">)</span><span class="punc">;</span><span class="comment">  // undefined</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+<p>Often one would use, for example, the <code class="md-code md-code-inline">j</code> variable for another iteration in the same scope. But with <code class="md-code md-code-inline">let</code>, you could safely declare <code class="md-code md-code-inline">i</code> again, since it’s defined and available only within its own block scope.</p>
+
+<h4 id="const">const</h4>
+
+<p>There is another way to declare variables. With <code class="md-code md-code-inline">const</code>, you can declare immutable variables. This means you can’t change its value once it is set. Also, you must assign a variable directly. If you try to change the variable or if you don’t a set a value immediately, then you’ll get an error:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="kw">const</span> <span class="const">MY_CONSTANT</span> <span class="operator">=</span> <span class="number">1</span><span class="punc">;</span>
+<span class="const">MY_CONSTANT</span> <span class="operator">=</span> <span class="number">2</span><span class="comment">  // Error
+</span><span class="kw">const</span> <span class="const">SOME_CONST</span><span class="punc">;</span><span class="comment">  // Error</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+<h3 id="arrow-functions">Arrow Functions</h3>
+
+<p>Arrow functions are a great addition to the JavaScript language. They make for short and concise code. We are introducing arrow functions early in this article so that we can take advantage of them in other examples later on. The next code snippet shows an arrow function, with the same function written in the familiar ES5 style:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class="js language-javascript"><code class=" language-javascript"><span class="kw">let</span> <span class="var">books</span> <span class="operator">=</span> <span class="punc">[</span><span class="punc">{</span>title<span class="punc">:</span> <span class="str">'X'</span><span class="punc">,</span> price<span class="punc">:</span> <span class="number">10</span><span class="punc">}</span><span class="punc">,</span> <span class="punc">{</span>title<span class="punc">:</span> <span class="str">'Y'</span><span class="punc">,</span> price<span class="punc">:</span> <span class="number">15</span><span class="operator">...</span>
+
+<span class="kw">let</span> <span class="var">titles</span> <span class="operator">=</span> <span class="var">books</span><span class="punc">.</span><span class="token function">map<span class="punc">(</span></span> item <span class="operator">=&gt;</span> item<span class="punc">.</span>title <span class="punc">)</span><span class="punc">;</span>
+<span class="comment">
+// ES5 equivalent:
+</span><span class="kw">var</span> <span class="var">titles</span> <span class="operator">=</span> <span class="var">books</span><span class="punc">.</span><span class="token function">map<span class="punc">(</span></span><span class="kw">function</span><span class="punc">(</span>item<span class="punc">)</span> <span class="punc">{</span>
+   <span class="kw">return</span> item<span class="punc">.</span>title<span class="punc">;</span>
+<span class="operator">...</span>
+</code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+<p>If we look at the syntax of arrow functions, there is no <code class="md-code md-code-inline">function</code> keyword. What remains is zero or more arguments, the “fat arrow” (<code class="md-code md-code-inline">=&gt;</code>) and the function expression. The <code class="md-code md-code-inline">return</code> statement is implicitly added.</p>
+
+<p>With zero or more than one argument, you must provide parentheses:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="comment">// No arguments
+</span><span class="var">books</span><span class="punc">.</span><span class="token function">map<span class="punc">(</span></span> <span class="punc">(</span><span class="punc">)</span> <span class="operator">=&gt;</span> <span class="number">1</span> <span class="punc">)</span><span class="comment">; // [1, 1]
+</span><span class="comment">
+// Multiple arguments
+</span><span class="punc">[</span><span class="number">1</span><span class="punc">,</span><span class="number">2</span><span class="punc">]</span><span class="punc">.</span><span class="token function">map<span class="punc">(</span></span> <span class="punc">(</span>n<span class="punc">,</span> index<span class="punc">)</span> <span class="operator">=&gt;</span> n <span class="operator">*</span> index <span class="punc">)</span><span class="comment">; // [0, 2]</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+<p>Put the function expression in a block (<code class="md-code md-code-inline">{ ... }</code>) if you need more logic or more white space:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="kw">let</span> <span class="var">result</span> <span class="operator">=</span> <span class="punc">[</span><span class="number">1</span><span class="punc">,</span> <span class="number">2</span><span class="punc">,</span> <span class="number">3</span><span class="punc">,</span> <span class="number">4</span><span class="punc">,</span> <span class="number">5</span><span class="punc">]</span><span class="punc">.</span><span class="token function">map<span class="punc">(</span></span> n <span class="operator">=&gt;</span> <span class="punc">{</span>
+   n <span class="operator">=</span> n <span class="operator">%</span> <span class="number">3</span><span class="punc">;</span>
+   <span class="kw">return</span> n<span class="punc">;</span>
+<span class="operator">...</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+<p>Not only do arrow functions mean fewer characters to type, but they also behave differently from regular functions. An arrow function expression inherits <code class="md-code md-code-inline">this</code> and <code class="md-code md-code-inline">arguments</code> from the surrounding context. This means you can get rid of ugly statements like <code class="md-code md-code-inline">var that = this</code>, and you won’t need to bind functions to the correct context. Here’s an example (note <code class="md-code md-code-inline">this.title</code> versus <code class="md-code md-code-inline">that.title</code> in the ES5 version):</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="kw">let</span> <span class="var">book</span> <span class="operator">=</span> <span class="punc">{</span>
+   title<span class="punc">:</span> <span class="str">'X'</span><span class="punc">,</span>
+   sellers<span class="punc">:</span> <span class="punc">[</span><span class="str">'A'</span><span class="punc">,</span> <span class="str">'B'</span><span class="punc">]</span><span class="punc">,</span>
+   <span class="title">printSellers<span class="punc">(</span></span><span class="punc">)</span> <span class="punc">{</span>
+      this<span class="punc">.</span>sellers<span class="punc">.</span><span class="token function">forEach<span class="punc">(</span></span>seller <span class="operator">=&gt;</span> <span class="kw2">console.log<span class="punc">(</span></span>seller <span class="operator">+</span> <span class="str">' sells '</span> <span class="operator">+</span> this<span class="punc">.</span>title<span class="operator">...</span>
+   <span class="punc">}</span>
+<span class="punc">}</span>
+<span class="comment">
+// ES5 equivalent:
+</span><span class="kw">var</span> <span class="var">book</span> <span class="operator">=</span> <span class="punc">{</span>
+   title<span class="punc">:</span> <span class="str">'X'</span><span class="punc">,</span>
+   sellers<span class="punc">:</span> <span class="punc">[</span><span class="str">'A'</span><span class="punc">,</span> <span class="str">'B'</span><span class="punc">]</span><span class="punc">,</span>
+   printSellers<span class="punc">:</span> <span class="kw">function</span><span class="punc">(</span><span class="punc">)</span> <span class="punc">{</span>
+      <span class="kw">var</span> that <span class="operator">=</span> this<span class="punc">;</span>
+      this<span class="punc">.</span>sellers<span class="punc">.</span><span class="token function">forEach<span class="punc">(</span></span><span class="kw">function</span><span class="punc">(</span>seller<span class="punc">)</span> <span class="punc">{</span>
+         <span class="kw2">console.log<span class="punc">(</span></span>seller <span class="operator">+</span> <span class="str">' sells '</span> <span class="operator">+</span> that<span class="punc">.</span>title<span class="punc">)</span>
+      <span class="punc">}</span><span class="punc">)</span>
+   <span class="punc">}</span>
+<span class="punc">}</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+<h3 id="strings">Strings</h3>
+
+<h4 id="methods">Methods</h4>
+
+<p>A couple of convenience methods have been added to the <code class="md-code md-code-inline">String</code> prototype. Most of them basically eliminate some workarounds with the <code class="md-code md-code-inline">indexOf()</code> method to achieve the same:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="str">'my string'</span><span class="punc">.</span><span class="token function">startsWith<span class="punc">(</span></span><span class="str">'my'</span><span class="punc">)</span><span class="punc">;</span><span class="comment">  //true
+</span><span class="str">'my string'</span><span class="punc">.</span><span class="token function">endsWith<span class="punc">(</span></span><span class="str">'my'</span><span class="punc">)</span><span class="punc">;</span><span class="comment">  // false
+</span><span class="str">'my string'</span><span class="punc">.</span><span class="token function">includes<span class="punc">(</span></span><span class="str">'str'</span><span class="punc">)</span><span class="punc">;</span><span class="comment">  // true</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+<p>Simple but effective. Another convenience method has been added to create a repeating string:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="str">'my '</span><span class="punc">.</span><span class="token function">repeat<span class="punc">(</span></span><span class="number">3</span><span class="punc">)</span><span class="punc">;</span><span class="comment">  // 'my my my '</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+<h4 id="template-literal">Template Literal</h4>
+
+<p>Template literals provide a clean way to create strings and perform string interpolation. You might already be familiar with the syntax; it’s based on the dollar sign and curly braces <code class="md-code md-code-inline">${..}</code>. Here’s a quick demonstration:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class="js language-javascript"><code class=" language-javascript"><span class="kw">let</span> <span class="var">name</span> <span class="operator">=</span> <span class="str">'John'</span><span class="punc">,</span>
+   <span class="var">apples</span> <span class="operator">=</span> <span class="number">5</span><span class="punc">,</span>
+   <span class="var">pears</span> <span class="operator">=</span> <span class="number">7</span><span class="punc">,</span>
+   <span class="var">bananas</span> <span class="operator">=</span> <span class="kw">function</span><span class="punc">(</span><span class="punc">)</span> <span class="punc">{</span> <span class="kw">return</span> <span class="number">3</span><span class="punc">;</span> <span class="punc">}</span>
+
+<span class="kw2">console.log<span class="punc">(</span></span><span class="str">`This is <span class="punc">${</span><span class="var">name</span><span class="punc">}</span><span class="punc">.</span>`</span><span class="punc">)</span><span class="punc">;</span>
+
+<span class="kw2">console.log<span class="punc">(</span></span><span class="str">`He carries <span class="punc">${</span><span class="var">apples</span><span class="punc">}</span> apples<span class="punc">,</span> <span class="punc">${</span><span class="var">pears</span><span class="punc">}</span> pears<span class="punc">,</span> and <span class="punc">${</span><span class="title">bananas<span class="punc">(</span></span><span class="punc">)</span><span class="punc">}</span> bananas<span class="punc">.</span>`</span><span class="punc">)</span><span class="punc">;</span>
+<span class="comment">
+// ES5 equivalent:
+</span><span class="kw2">console.log<span class="punc">(</span></span><span class="str">'He carries '</span> <span class="operator">+</span> <span class="var">apples</span> <span class="operator">+</span> <span class="str">' apples, '</span> <span class="operator">+</span> <span class="var">pears</span> <span class="operator">+</span> <span class="str">' pears, and '</span> <span class="operator">+</span> <span class="title">bananas</span><span class="punc">(</span><span class="punc">)</span> <span class="operator">+</span><span class="str">' bananas.'</span><span class="punc">)</span><span class="punc">;</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+
+<p>In the form above, compared to ES5, they’re merely a convenience for string concatenation. However, template literals can also be used for multi-line strings. Keep in mind that white space is part of the string:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="kw">let</span> <span class="var">x</span> <span class="operator">=</span> <span class="str">`<span class="number">1</span><span class="operator">...</span>
+<span class="number">2</span><span class="operator">...</span>
+<span class="number">3</span> lines long<span class="operator">!</span>`</span><span class="punc">;</span><span class="comment">  // Yay
+</span><span class="comment">
+// ES5 equivalents:
+</span><span class="kw">var</span> <span class="var">x</span> <span class="operator">=</span> <span class="str">"1...\n"</span> <span class="operator">+</span>
+<span class="str">"2...\n"</span> <span class="operator">+</span>
+<span class="str">"3 lines long!"</span><span class="punc">;</span>
+
+<span class="kw">var</span> <span class="var">x</span> <span class="operator">=</span> <span class="str">"1...\n2...\n3 lines long!"</span><span class="punc">;</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+<h3 id="arrays">Arrays</h3>
+
+<p>The <code class="md-code md-code-inline">Array</code> object now has some new static class methods, as well as new methods on the <code class="md-code md-code-inline">Array</code> prototype.</p>
+
+<p>First, <code class="md-code md-code-inline">Array.from</code> creates <code class="md-code md-code-inline">Array</code> instances from array-like and iterable objects. Examples of array-like objects include:</p>
+<ul>
+<li>the <code class="md-code md-code-inline">arguments</code> within a function;</li>
+<li>a <code class="md-code md-code-inline">nodeList</code> returned by <code class="md-code md-code-inline">document.getElementsByTagName()</code>;</li>
+<li>the new <code class="md-code md-code-inline">Map</code> and <code class="md-code md-code-inline">Set</code> data structures.</li>
+</ul>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="kw">let</span> <span class="var">itemElements</span> <span class="operator">=</span> <span class="kw">document</span><span class="punc">.</span><span class="token function">querySelectorAll<span class="punc">(</span></span><span class="str">'.items'</span><span class="punc">)</span><span class="punc">;</span>
+<span class="kw">let</span> <span class="var">items</span> <span class="operator">=</span> <span class="kw">Array</span><span class="punc">.</span><span class="token function">from<span class="punc">(</span></span><span class="var">itemElements</span><span class="punc">)</span><span class="punc">;</span>
+<span class="var">items</span><span class="punc">.</span><span class="token function">forEach<span class="punc">(</span></span><span class="kw">function</span><span class="punc">(</span>element<span class="punc">)</span> <span class="punc">{</span>
+    <span class="kw2">console.log<span class="punc">(</span></span>element<span class="punc">.</span>nodeType<span class="punc">)</span>
+<span class="operator">...</span>
+<span class="comment">
+// A workaround often used in ES5:
+</span><span class="kw">let</span> <span class="var">items</span> <span class="operator">=</span> <span class="kw">Array<span class="punc">.</span>prototype</span><span class="punc">.</span><span class="token function">slice</span><span class="punc">.</span><span class="token function">call<span class="punc">(</span></span><span class="var">itemElements</span><span class="punc">)</span><span class="punc">;</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+
+<p>In the example above, you can see that the <code class="md-code md-code-inline">items</code> array has the <code class="md-code md-code-inline">forEach</code> method, which isn’t available in the <code class="md-code md-code-inline">itemElements</code> collection.</p>
+
+<p>An interesting feature of <code class="md-code md-code-inline">Array.from</code> is the second optional <code class="md-code md-code-inline">mapFunction</code> argument. This allows you to create a new mapped array in a single invocation:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="kw">let</span> <span class="var">navElements</span> <span class="operator">=</span> <span class="kw">document</span><span class="punc">.</span><span class="token function">querySelectorAll<span class="punc">(</span></span><span class="str">'nav li'</span><span class="punc">)</span><span class="punc">;</span>
+<span class="kw">let</span> <span class="var">navTitles</span> <span class="operator">=</span> <span class="kw">Array</span><span class="punc">.</span><span class="token function">from<span class="punc">(</span></span><span class="var">navElements</span><span class="punc">,</span> el <span class="operator">=&gt;</span> el<span class="punc">.</span>textContent<span class="punc">)</span><span class="punc">;</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+
+<p>Then, we have <code class="md-code md-code-inline">Array.of</code>, which behaves much like the <code class="md-code md-code-inline">Array</code> constructor. It fixes the special case when passing it a single number argument. This results in <code class="md-code md-code-inline">Array.of</code> being preferable to <code class="md-code md-code-inline">new Array()</code>. However, in most cases, you’ll want to use array literals.</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="kw">let</span> <span class="var">x</span> <span class="operator">=</span> <span class="kw">new</span> <span class="kw token class-name">Array</span><span class="punc">(</span><span class="number">3</span><span class="punc">)</span><span class="punc">;</span><span class="comment">  // [undefined, undefined, undefined]
+</span><span class="kw">let</span> <span class="var">y</span> <span class="operator">=</span> <span class="kw">Array</span><span class="punc">.</span><span class="token function">of<span class="punc">(</span></span><span class="number">8</span><span class="punc">)</span><span class="punc">;</span><span class="comment">  // [8]
+</span><span class="kw">let</span> z <span class="operator">=</span> <span class="punc">[</span><span class="number">1</span><span class="punc">,</span> <span class="number">2</span><span class="punc">,</span> <span class="number">3</span><span class="punc">]</span><span class="punc">;</span><span class="comment">  // Array literal</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+<p>Last but not least, a couple of methods have been added to the <code class="md-code md-code-inline">Array</code> prototype. I think the <code class="md-code md-code-inline">find</code> methods will be very welcome to most JavaScript developers.</p>
+<ul>
+<li><code class="md-code md-code-inline">find</code> returns the first element for which the callback returns <code class="md-code md-code-inline">true</code>.</li>
+<li><code class="md-code md-code-inline">findIndex</code> returns the index of the first element for which the callback returns <code class="md-code md-code-inline">true</code>.</li>
+<li><code class="md-code md-code-inline">fill</code> “overwrites” the elements of an array with the given argument.</li>
+</ul>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="punc">[</span><span class="number">5</span><span class="punc">,</span> <span class="number">1</span><span class="punc">,</span> <span class="number">10</span><span class="punc">,</span> <span class="number">8</span><span class="punc">]</span><span class="punc">.</span><span class="token function">find<span class="punc">(</span></span>n <span class="operator">=&gt;</span> n <span class="operator">==</span><span class="operator">=</span> <span class="number">10</span><span class="punc">)</span><span class="comment">  // 10
+</span>
+<span class="punc">[</span><span class="number">5</span><span class="punc">,</span> <span class="number">1</span><span class="punc">,</span> <span class="number">10</span><span class="punc">,</span> <span class="number">8</span><span class="punc">]</span><span class="punc">.</span><span class="token function">findIndex<span class="punc">(</span></span>n <span class="operator">=&gt;</span> n <span class="operator">==</span><span class="operator">=</span> <span class="number">10</span><span class="punc">)</span><span class="comment">  // 2
+</span>
+<span class="punc">[</span><span class="number">0</span><span class="punc">,</span> <span class="number">0</span><span class="punc">,</span> <span class="number">0</span><span class="punc">]</span><span class="punc">.</span><span class="token function">fill<span class="punc">(</span></span><span class="number">7</span><span class="punc">)</span><span class="comment">  // [7, 7, 7]
+</span><span class="punc">[</span><span class="number">0</span><span class="punc">,</span> <span class="number">0</span><span class="punc">,</span> <span class="number">0</span><span class="punc">,</span> <span class="number">0</span><span class="punc">,</span> <span class="number">0</span><span class="punc">]</span><span class="punc">.</span><span class="token function">fill<span class="punc">(</span></span><span class="number">7</span><span class="punc">,</span> <span class="number">1</span><span class="punc">,</span> <span class="number">3</span><span class="punc">)</span><span class="comment">  // [0, 7, 7, 7, 0]</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+<h3 id="math">Math</h3>
+
+<p>A couple of new methods have been added to the <code class="md-code md-code-inline">Math</code> object.</p>
+<ul>
+<li><code class="md-code md-code-inline">Math.sign</code> returns the sign of a number as <code class="md-code md-code-inline">1</code>, <code class="md-code md-code-inline">-1</code> or <code class="md-code md-code-inline">0</code>.</li>
+<li><code class="md-code md-code-inline">Math.trunc</code> returns the passed number without fractional digits.</li>
+<li><code class="md-code md-code-inline">Math.cbrt</code> returns the cube root of a number.</li>
+</ul>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="kw">Math</span><span class="punc">.</span><span class="token function">sign<span class="punc">(</span></span><span class="number">5</span><span class="punc">)</span><span class="punc">;</span><span class="comment">  // 1
+</span><span class="kw">Math</span><span class="punc">.</span><span class="token function">sign<span class="punc">(</span></span><span class="operator">-</span><span class="number">9</span><span class="punc">)</span><span class="punc">;</span><span class="comment">  // -1
+</span>
+<span class="kw">Math</span><span class="punc">.</span><span class="token function">trunc<span class="punc">(</span></span><span class="number">5.9</span><span class="punc">)</span><span class="punc">;</span><span class="comment">  // 5
+</span><span class="kw">Math</span><span class="punc">.</span><span class="token function">trunc<span class="punc">(</span></span><span class="number">5.123</span><span class="punc">)</span><span class="punc">;</span><span class="comment">  // 5
+</span>
+<span class="kw">Math</span><span class="punc">.</span><span class="token function">cbrt<span class="punc">(</span></span><span class="number">64</span><span class="punc">)</span><span class="punc">;</span><span class="comment">  // 4
+</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+<p>If you want to learn more about the <a href="http://www.2ality.com/2015/04/numbers-math-es6.html">new number and math features in ES6</a><sup class="po" id="note-8"><a href="#8">8</a></sup>, Dr. Axel Rauschmayer has you covered.</p>
+
+
+
+
+<h3 id="spread-operator">Spread Operator</h3>
+
+<p>The spread operator (<code class="md-code md-code-inline">...</code>) is a very convenient syntax to expand elements of an array in specific places, such as arguments in function calls. Showing you some examples is probably the best way to demonstrate just how useful they are.</p>
+
+<p>First, let’s see how to expand elements of an array within another array:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class="js language-javascript"><code class=" language-javascript"><span class="kw">let</span> <span class="var">values</span> <span class="operator">=</span> <span class="punc">[</span><span class="number">1</span><span class="punc">,</span> <span class="number">2</span><span class="punc">,</span> <span class="number">4</span><span class="punc">]</span><span class="punc">;</span>
+<span class="kw">let</span> <span class="var">some</span> <span class="operator">=</span> <span class="punc">[</span><span class="operator">...</span><span class="var">values</span><span class="punc">,</span> <span class="number">8</span><span class="punc">]</span><span class="punc">;</span><span class="comment">  // [1, 2, 4, 8]
+</span><span class="kw">let</span> <span class="var">more</span> <span class="operator">=</span> <span class="punc">[</span><span class="operator">...</span><span class="var">values</span><span class="punc">,</span> <span class="number">8</span><span class="punc">,</span> <span class="operator">...</span><span class="var">values</span><span class="punc">]</span><span class="punc">;</span><span class="comment">  // [1, 2, 4, 8, 1, 2, 4]
+</span><span class="comment">
+// ES5 equivalent:
+</span><span class="kw">let</span> <span class="var">values</span> <span class="operator">=</span> <span class="punc">[</span><span class="number">1</span><span class="punc">,</span> <span class="number">2</span><span class="punc">,</span> <span class="number">4</span><span class="punc">]</span><span class="comment">;
+// Iterate, push, sweat, repeat...
+</span><span class="comment">// Iterate, push, sweat, repeat...</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+
+<p>The spread syntax is also powerful when calling functions with arguments:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="kw">let</span> <span class="var">values</span> <span class="operator">=</span> <span class="punc">[</span><span class="number">1</span><span class="punc">,</span> <span class="number">2</span><span class="punc">,</span> <span class="number">4</span><span class="punc">]</span><span class="punc">;</span>
+
+<span class="title">doSomething<span class="punc">(</span></span><span class="operator">...</span><span class="var">values</span><span class="punc">)</span><span class="punc">;</span>
+
+<span class="kw">function</span> <span class="title">doSomething<span class="punc">(</span></span>x<span class="punc">,</span> y<span class="punc">,</span> z<span class="punc">)</span> <span class="punc">{</span>
+  <span class="comment">  // x = 1, y = 2, z = 4
+</span><span class="punc">}</span>
+<span class="comment">
+// ES5 equivalent:
+</span><span class="title">doSomething</span><span class="punc">.</span><span class="token function">apply<span class="punc">(</span></span><span class="null">null</span><span class="punc">,</span> <span class="var">values</span><span class="punc">)</span><span class="punc">;</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+
+<p>As you can see, this saves us from the often-used <code class="md-code md-code-inline">fn.apply()</code> workaround. The syntax is very flexible, because the spread operator can be used anywhere in the argument list. This means that the following invocation produces the same result:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="kw">let</span> <span class="var">values</span> <span class="operator">=</span> <span class="punc">[</span><span class="number">2</span><span class="punc">,</span> <span class="number">4</span><span class="punc">]</span><span class="punc">;</span>
+<span class="title">doSomething<span class="punc">(</span></span><span class="number">1</span><span class="punc">,</span> <span class="operator">...</span><span class="var">values</span><span class="punc">)</span><span class="punc">;</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+
+<p>We’ve been applying the spread operator to arrays and arguments. In fact, it can be applied to all iterable objects, such as a <code class="md-code md-code-inline">NodeList</code>:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="kw">let</span> <span class="var">form</span> <span class="operator">=</span> <span class="kw">document</span><span class="punc">.</span><span class="token function">querySelector<span class="punc">(</span></span><span class="str">'#my-form'</span><span class="punc">)</span><span class="punc">,</span>
+   <span class="var">inputs</span> <span class="operator">=</span> <span class="var">form</span><span class="punc">.</span><span class="token function">querySelectorAll<span class="punc">(</span></span><span class="str">'input'</span><span class="punc">)</span><span class="punc">,</span>
+   <span class="var">selects</span> <span class="operator">=</span> <span class="var">form</span><span class="punc">.</span><span class="token function">querySelectorAll<span class="punc">(</span></span><span class="str">'select'</span><span class="punc">)</span><span class="punc">;</span>
+
+<span class="kw">let</span> <span class="var">allTheThings</span> <span class="operator">=</span> <span class="punc">[</span><span class="var">form</span><span class="punc">,</span> <span class="operator">...</span><span class="var">inputs</span><span class="punc">,</span> <span class="operator">...</span><span class="var">selects</span><span class="punc">]</span><span class="punc">;</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+
+<p>Now, <code class="md-code md-code-inline">allTheThings</code> is a flat array containing the <code class="md-code md-code-inline">&lt;form&gt;</code> node and its <code class="md-code md-code-inline">&lt;input&gt;</code> and <code class="md-code md-code-inline">&lt;select&gt;</code> child nodes.</p>
+<h3 id="destructuring">Destructuring</h3>
+
+<p>Destructuring provides a convenient way to extract data from objects or arrays. For starters, a good example can be given using an array:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class="js language-javascript"><code class=" language-javascript"><span class="kw">let</span> <span class="punc">[</span><span class="var">x</span><span class="punc">,</span> <span class="var">y</span><span class="punc">]</span> <span class="operator">=</span> <span class="punc">[</span><span class="number">1</span><span class="punc">,</span> <span class="number">2</span><span class="punc">]</span><span class="punc">;</span><span class="comment">  // x = 1, y = 2
+</span><span class="comment">
+// ES5 equivalent:
+</span><span class="kw">var</span> <span class="var">arr</span> <span class="operator">=</span> <span class="punc">[</span><span class="number">1</span><span class="punc">,</span> <span class="number">2</span><span class="punc">]</span><span class="punc">;</span>
+<span class="kw">var</span> <span class="var">x</span> <span class="operator">=</span> <span class="var">arr</span><span class="punc">[</span><span class="number">0</span><span class="punc">]</span><span class="punc">;</span>
+<span class="kw">var</span> <span class="var">y</span> <span class="operator">=</span> <span class="var">arr</span><span class="punc">[</span><span class="number">1</span><span class="punc">]</span><span class="punc">;</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+<p>With this syntax, multiple variables can be assigned a value in one go. A nice side effect is that you can easily swap variable values:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="kw">let</span> <span class="var">x</span> <span class="operator">=</span> <span class="number">1</span><span class="punc">,</span>
+   <span class="var">y</span> <span class="operator">=</span> <span class="number">2</span><span class="punc">;</span>
+
+<span class="punc">[</span><span class="var">x</span><span class="punc">,</span> <span class="var">y</span><span class="punc">]</span> <span class="operator">=</span> <span class="punc">[</span><span class="var">y</span><span class="punc">,</span> <span class="var">x</span><span class="punc">]</span><span class="punc">;</span><span class="comment">  // x = 2, y = 1</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+
+<p>Destructuring also works with objects. Make sure to have matching keys:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="kw">let</span> <span class="var">obj</span> <span class="operator">=</span> <span class="punc">{</span>x<span class="punc">:</span> <span class="number">1</span><span class="punc">,</span> y<span class="punc">:</span> <span class="number">2</span><span class="punc">}</span><span class="punc">;</span>
+<span class="kw">let</span> <span class="punc">{</span><span class="var">x</span><span class="punc">,</span> <span class="var">y</span><span class="punc">}</span> <span class="operator">=</span> <span class="var">obj</span><span class="punc">;</span><span class="comment">  // x = 1, y = 2</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+
+<p>You could also use this mechanism to change variable names:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="kw">let</span> <span class="var">obj</span> <span class="operator">=</span> <span class="punc">{</span>x<span class="punc">:</span> <span class="number">1</span><span class="punc">,</span> y<span class="punc">:</span> <span class="number">2</span><span class="punc">}</span><span class="punc">;</span>
+<span class="kw">let</span> <span class="punc">{</span>x<span class="punc">:</span> a<span class="punc">,</span> y<span class="punc">:</span> b<span class="punc">}</span> <span class="operator">=</span> <span class="var">obj</span><span class="punc">;</span><span class="comment">  // a = 1, b = 2</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+<p>Another interesting pattern is to simulate multiple return values:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="kw">function</span> <span class="title">doSomething<span class="punc">(</span></span><span class="punc">)</span> <span class="punc">{</span>
+   <span class="kw">return</span> <span class="punc">[</span><span class="number">1</span><span class="punc">,</span> <span class="number">2</span><span class="punc">]</span>
+<span class="punc">}</span>
+
+<span class="kw">let</span> <span class="punc">[</span><span class="var">x</span><span class="punc">,</span> <span class="var">y</span><span class="punc">]</span> <span class="operator">=</span> <span class="title">doSomething<span class="punc">(</span></span><span class="punc">)</span><span class="punc">;</span><span class="comment">  // x = 1, y = 2</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+
+<p>Destructuring can be used to assign default values to argument objects. With an object literal, you can actually simulate named parameters.</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class="js language-javascript"><code class=" language-javascript"><span class="kw">function</span> <span class="title">doSomething<span class="punc">(</span></span><span class="punc">{</span>y <span class="operator">=</span> <span class="number">1</span><span class="punc">,</span> z <span class="operator">=</span> <span class="number">0</span><span class="punc">}</span><span class="punc">)</span> <span class="punc">{</span>
+   <span class="kw2">console.log<span class="punc">(</span></span>y<span class="punc">,</span> z<span class="punc">)</span><span class="punc">;</span>
+<span class="punc">}</span>
+<span class="title">doSomething<span class="punc">(</span></span><span class="punc">{</span>y<span class="punc">:</span> <span class="number">2</span><span class="operator">...</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+<h3 id="parameters">Parameters</h3>
+
+<h4 id="default-values">Default Values</h4>
+
+<p>In ES6, defining default values for function parameters is possible. The syntax is as follows:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class="js language-javascript"><code class=" language-javascript"><span class="kw">function</span> <span class="title">doSomething<span class="punc">(</span></span>x<span class="punc">,</span> y <span class="operator">=</span> <span class="number">2</span><span class="punc">)</span> <span class="punc">{</span>
+   <span class="kw">return</span> x <span class="operator">*</span> y<span class="punc">;</span>
+<span class="punc">}</span>
+
+<span class="title">doSomething<span class="punc">(</span></span><span class="number">5</span><span class="punc">)</span><span class="punc">;</span><span class="comment">  // 10
+</span><span class="title">doSomething<span class="punc">(</span></span><span class="number">5</span><span class="punc">,</span> <span class="undef">undefined</span><span class="punc">)</span><span class="punc">;</span><span class="comment">  // 10
+</span><span class="title">doSomething<span class="punc">(</span></span><span class="number">5</span><span class="punc">,</span> <span class="number">3</span><span class="punc">)</span><span class="punc">;</span><span class="comment">  // 15</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+
+<p>Looks pretty clean, right? I’m sure you’ve needed to fill up some arguments in ES5 before:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class="js language-javascript"><code class=" language-javascript"><span class="kw">function</span> <span class="title">doSomething<span class="punc">(</span></span>x<span class="punc">,</span> y<span class="punc">)</span> <span class="punc">{</span>
+   y <span class="operator">=</span> y <span class="operator">==</span><span class="operator">=</span> <span class="undef">undefined</span> <span class="operator">?</span> <span class="number">2</span> <span class="operator">:</span> y<span class="punc">;</span>
+   <span class="kw">return</span> x <span class="operator">*</span> y<span class="punc">;</span>
+<span class="punc">}</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+<p>Either <code class="md-code md-code-inline">undefined</code> or no argument triggers the default value for that argument.</p>
+
+<h4 id="rest-parameters">Rest Parameters</h4>
+
+<p>We’ve been looking into the spread operator. Rest parameters are very similar. It also uses the <code class="md-code md-code-inline">...</code> syntax and allows you to store trailing arguments in an array:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class="js language-javascript"><code class=" language-javascript"><span class="kw">function</span> <span class="title">doSomething<span class="punc">(</span></span>x<span class="punc">,</span> <span class="operator">...</span>remaining<span class="punc">)</span> <span class="punc">{</span>
+   <span class="kw">return</span> x <span class="operator">*</span> remaining<span class="punc">.</span><span class="method">length</span><span class="punc">;</span>
+<span class="punc">}</span>
+
+<span class="title">doSomething<span class="punc">(</span></span><span class="number">5</span><span class="punc">,</span> <span class="number">0</span><span class="punc">,</span> <span class="number">0</span><span class="punc">,</span> <span class="number">0</span><span class="punc">)</span><span class="punc">;</span><span class="comment">  // 15</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+<h3 id="modules">Modules</h3>
+
+<p>Modules are certainly a welcome addition to the JavaScript language. I think this major feature alone is worth digging into ES6.</p>
+
+<p>Any serious JavaScript project today uses some sort of module system — maybe something like the “revealing module pattern” or the more extensive formats AMD or CommonJS. However, browsers don’t feature any kind of module system. You always need a build step or a loader for your AMD or CommonJS modules. Tools to handle this include RequireJS, Browserify and Webpack.</p>
+
+<p>The ES6 specification includes both a new syntax and a loader mechanism for modules. If you want to use modules and write for the future, this is the syntax you should use. Modern build tools support this format, perhaps via a plugin, so you should be good to go. (No worries — we’ll discuss this further in the “Transpilation” section later on.)</p>
+
+<p>Now, on to the ES6 module syntax. Modules are designed around the <code class="md-code md-code-inline">export</code> and <code class="md-code md-code-inline">import</code> keywords. Let’s examine an example with two modules right away:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="comment">// lib/math.js
+</span>
+<span class="kw">export</span> <span class="kw">function</span> <span class="title">sum<span class="punc">(</span></span>x<span class="punc">,</span> y<span class="punc">)</span> <span class="punc">{</span>
+   <span class="kw">return</span> x <span class="operator">+</span> y<span class="punc">;</span>
+<span class="punc">}</span>
+<span class="kw">export</span> <span class="kw">var</span> <span class="var">pi</span> <span class="operator">=</span> <span class="number">3.141593</span><span class="punc">;</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="comment">// app.js
+</span>
+<span class="kw">import</span> <span class="punc">{</span> <span class="title">sum</span><span class="punc">,</span> <span class="var">pi</span> <span class="punc">}</span> <span class="kw">from</span> <span class="str">"lib/math"</span><span class="punc">;</span>
+<span class="kw2">console.log<span class="punc">(</span></span><span class="str">'2π = '</span> <span class="operator">+</span> <span class="title">sum<span class="punc">(</span></span><span class="var">pi</span><span class="punc">,</span> <span class="var">pi</span><span class="operator">...</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+<p>As you can see, there can be multiple <code class="md-code md-code-inline">export</code> statements. Each must explicitly state the type of the exported value (<code class="md-code md-code-inline">function</code> and <code class="md-code md-code-inline">var</code>, in this example).</p>
+
+<p>The <code class="md-code md-code-inline">import</code> statement in this example uses a syntax (similar to destructuring) to explicitly define what is being imported. To import the module as a whole, the <code class="md-code md-code-inline">*</code> wildcard can be used, combined with the <code class="md-code md-code-inline">as</code> keyword to give the module a local name:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="comment">// app.js
+</span>
+<span class="kw">import</span> <span class="operator">*</span> <span class="kw">as</span> math <span class="kw">from</span> <span class="str">"lib/math"</span><span class="punc">;</span>
+<span class="kw2">console.log<span class="punc">(</span></span><span class="str">'2π = '</span> <span class="operator">+</span> math<span class="punc">.</span><span class="title">sum<span class="punc">(</span></span>math<span class="punc">.</span><span class="var">pi</span><span class="punc">,</span> math<span class="punc">.</span><span class="kw">var</span><span class="operator">...</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+<p>The module system features a <code class="md-code md-code-inline">default</code> export. This can also be a function. To import this default value in a module, you’ll just need to provide the local name (i.e., no destructuring):</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="comment">// lib/my-fn.js
+</span>
+<span class="kw">export</span> default <span class="kw">function</span><span class="punc">(</span><span class="punc">)</span> <span class="punc">{</span>
+   <span class="kw2">console.log<span class="punc">(</span></span><span class="str">'echo echo'</span><span class="punc">)</span><span class="punc">;</span>
+<span class="punc">}</span><span class="comment">
+
+// app.js
+</span>
+<span class="kw">import</span> <span class="title">doSomething</span> <span class="kw">from</span> <span class="str">'lib/my-fn'</span><span class="punc">;</span>
+<span class="title">doSomething<span class="punc">(</span></span><span class="punc">)</span><span class="punc">;</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+<p>Please note that the <code class="md-code md-code-inline">import</code> statements are synchronous, but the module code doesn’t execute until all dependencies have loaded.</p>
+
+
+
+<h3 id="classes">Classes</h3>
+
+<p>Classes are a well-debated feature of ES6. Some believe that they go against the prototypal nature of JavaScript, while others think they lower the barrier to entry for beginners and people coming from other languages and that they help people writing large-scale applications. In any case, they are part of ES6. Here’s a very quick introduction.</p>
+
+<p>Classes are built around the <code class="md-code md-code-inline">class</code> and <code class="md-code md-code-inline">constructor</code> keywords. Here’s a short example:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="kw">class</span> <span class="token class-name">Vehicle</span> <span class="punc">{</span>
+   <span class="kw">constructor<span class="punc">(</span></span>name<span class="punc">)</span> <span class="punc">{</span>
+      this<span class="punc">.</span>name <span class="operator">=</span> name<span class="punc">;</span>
+      this<span class="punc">.</span>kind <span class="operator">=</span> <span class="str">'vehicle'</span><span class="punc">;</span>
+   <span class="punc">}</span>
+   <span class="token function">getName<span class="punc">(</span></span><span class="punc">)</span> <span class="punc">{</span>
+      <span class="kw">return</span> this<span class="punc">.</span>name<span class="punc">;</span>
+   <span class="punc">}</span>
+<span class="punc">}</span>
+<span class="comment">
+// Create an instance
+</span><span class="kw">let</span> <span class="var">myVehicle</span> <span class="operator">=</span> <span class="kw">new</span> <span class="token class-name">Vehicle</span><span class="punc">(</span><span class="str">'rocky'</span><span class="punc">)</span><span class="punc">;</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+
+<p>Note that the class definition is not a regular object; hence, there are no commas between class members.</p>
+
+<p>To create an instance of a class, you must use the <code class="md-code md-code-inline">new</code> keyword. To inherit from a base class, use <code class="md-code md-code-inline">extends</code>:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class="js language-javascript"><code class=" language-javascript"><span class="kw">class</span> <span class="token class-name">Car</span> extends <span class="token class-name">Vehicle</span> <span class="punc">{</span>
+   <span class="kw">constructor<span class="punc">(</span></span>name<span class="punc">)</span> <span class="punc">{</span>
+      <span class="kw">super<span class="punc">(</span></span>name<span class="punc">)</span><span class="punc">;</span>
+      this<span class="punc">.</span>kind <span class="operator">=</span> <span class="str">'car'</span>
+   <span class="punc">}</span>
+<span class="punc">}</span>
+
+<span class="kw">let</span> <span class="var">myCar</span> <span class="operator">=</span> <span class="kw">new</span> <span class="token class-name">Car</span><span class="punc">(</span><span class="str">'bumpy'</span><span class="punc">)</span><span class="punc">;</span>
+
+<span class="var">myCar</span><span class="punc">.</span><span class="token function">getName<span class="punc">(</span></span><span class="punc">)</span><span class="punc">;</span><span class="comment">  // 'bumpy'
+</span><span class="var">myCar</span> <span class="kw">instanceof</span> <span class="token class-name">Car</span><span class="punc">;</span><span class="comment">  // true
+</span><span class="var">myCar</span> <span class="kw">instanceof</span> <span class="token class-name">Vehicle</span><span class="punc">;</span><span class="comment">  //true</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+
+<p>From the derived class, you can use <code class="md-code md-code-inline">super</code> from any constructor or method to access its base class:</p>
+<ul>
+<li>To call the parent constructor, use <code class="md-code md-code-inline">super()</code>.</li>
+<li>To call another member, use, for example, <code class="md-code md-code-inline">super.getName()</code>.</li>
+</ul>
+
+<p>There’s more to using classes. If you want to dig deeper into the subject, I recommend “<a href="http://www.2ality.com/2015/02/es6-classes-final.html">Classes in ECMAScript 6</a><sup class="po" id="note-20"><a href="#20">20</a></sup>” by Dr. Axel Rauschmayer.</p>
+<h3 id="symbols">Symbols</h3>
+
+<p>Symbols are a new primitive data type, like <code class="md-code md-code-inline">Number</code> and <code class="md-code md-code-inline">String</code>. You can use symbols to create unique identifiers for object properties or to create unique constants.</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="kw">const</span> <span class="const">MY_CONSTANT</span> <span class="operator">=</span> <span class="token function">Symbol<span class="punc">(</span></span><span class="punc">)</span><span class="punc">;</span>
+
+<span class="kw">let</span> <span class="var">obj</span> <span class="operator">=</span> <span class="operator">...</span>
+<span class="var">obj</span><span class="punc">[</span><span class="const">MY_CONSTANT</span><span class="punc">]</span> <span class="operator">=</span> <span class="number">1</span><span class="punc">;</span>
+</code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+<p>Note that key-value pairs set with symbols are not returned by <code class="md-code md-code-inline">Object.getOwnPropertyNames()</code>, and they are not visible in <code class="md-code md-code-inline">for...in</code> iterations, <code class="md-code md-code-inline">Object.keys()</code> or <code class="md-code md-code-inline">JSON.stringify()</code>. This is in contrast to regular string-based keys. You can get an array of symbols for an object with <code class="md-code md-code-inline">Object.getOwnPropertySymbols()</code>.</p>
+
+<p>Symbols work naturally with <code class="md-code md-code-inline">const</code> because of their immutable character:</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class="js language-javascript"><code class=" language-javascript"><span class="kw">const</span> <span class="const">CHINESE</span> <span class="operator">=</span> <span class="token function">Symbol<span class="punc">(</span></span><span class="punc">)</span><span class="punc">;</span>
+<span class="kw">const</span> <span class="const">ENGLISH</span> <span class="operator">=</span> <span class="token function">Symbol<span class="punc">(</span></span><span class="punc">)</span><span class="punc">;</span>
+<span class="kw">const</span> <span class="const">SPANISH</span> <span class="operator">=</span> <span class="token function">Symbol<span class="punc">(</span></span><span class="punc">)</span><span class="punc">;</span>
+
+<span class="token switch">switch<span class="punc">(</span></span>language<span class="punc">)</span> <span class="punc">{</span>
+   <span class="case">case</span> <span class="const">CHINESE</span><span class="punc">:</span>
+     <span class="comment">  //
+</span>      <span class="kw">break</span><span class="punc">;</span>
+   <span class="case">case</span> <span class="const">ENGLISH</span><span class="punc">:</span>
+     <span class="comment">  //
+</span>      <span class="kw">break</span><span class="punc">;</span>
+   <span class="case">case</span> <span class="const">SPANISH</span><span class="punc">:</span>
+     <span class="comment">  //
+</span>      <span class="kw">break</span><span class="punc">;</span>
+   <span class="case">default</span><span class="punc">:</span>
+     <span class="comment">  //
+</span>      <span class="kw">break</span><span class="punc">;</span>
+<span class="punc">}</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+<p>You can give a symbol a description. You can’t use it to access the symbol itself, but it’s useful for debugging.</p>
+
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<pre class=" language-javascript"><code class=" language-javascript"><span class="kw">const</span> <span class="const">CONST_1</span> <span class="operator">=</span> <span class="token function">Symbol<span class="punc">(</span></span><span class="str">'my symbol'</span><span class="punc">)</span><span class="punc">;</span>
+<span class="kw">const</span> <span class="const">CONST_2</span> <span class="operator">=</span> <span class="token function">Symbol<span class="punc">(</span></span><span class="str">'my symbol'</span><span class="punc">)</span><span class="punc">;</span>
+
+<span class="kw">typeof</span> <span class="const">CONST_1</span> <span class="operator">==</span><span class="operator">=</span> <span class="str">'symbol'</span><span class="punc">;</span><span class="comment">  // true
+</span>
+<span class="const">CONST_1</span> <span class="operator">==</span><span class="operator">=</span> <span class="const">CONST_2</span><span class="punc">;</span><span class="comment">  // false</span></code></pre>
+<!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+<p>Want to learn more about symbols? Mozilla Developer Network has a good page about the new <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol">symbol primitive</a><sup class="po" id="note-21"><a href="#21">21</a></sup>.</p>
+<h3 id="transpilation">Transpilation</h3>
+
+<p>We can write our code in ES6 today. As mentioned in the introduction, browser support for ES6 features is not extensive yet and varies a lot. It’s very likely that not all of the ES6 code you write will be understood by the browsers of your users. This is why we need to convert it to the previous version of JavaScript (ES5), which runs fine in any modern browser. This conversion is often referred to as “transpilation.” We’ll need to do this with our applications until the browsers we want to support understand ES6.</p>
+
+<h4 id="getting-started">Getting Started</h4>
+
+<p>Transpiling code is not hard. You can transpile code directly from the command line, or you can include it as a plugin for a task runner, such as Grunt or Gulp. Plenty of transpilation solutions are out there, including Babel, Traceur and TypeScript. See, for instance, the <a href="http://babeljs.io/docs/setup/">many ways to start using ES6</a><sup class="po" id="note-22"><a href="#22">22</a></sup> with Babel (formerly “6to5”). Most features of ES6 are at your disposal!</p>
+
+<p>Now that you’re hopefully enthusiastic about using ES6, why not start using it? Depending on the features you want to use and the browsers or environments you need to support (such as Node.js), you’ll probably want to incorporate a transpiler in your workflow. And if you’re up for it, there are also file watchers and live browser reloaders to make your coding experience seamless.</p>
+
+<p>If you’re starting from scratch, you might just want to transpile your code from the command line (see, for example, the <a href="https://babeljs.io/docs/usage/cli/">Babel CLI documentation</a><sup class="po" id="note-23"><a href="#23">23</a></sup>). If you are already using a task runner, such as Grunt or Gulp, you can add a plugin such as <a href="https://www.npmjs.com/package/gulp-babel">gulp-babel</a><sup class="po" id="note-24"><a href="#24">24</a></sup> or the <a href="https://github.com/babel/babel-loader">babel-loader</a><sup class="po" id="note-25"><a href="#25">25</a></sup> for Webpack. For Grunt, there is <a href="https://github.com/babel/grunt-babel">grunt-babel</a><sup class="po" id="note-26"><a href="#26">26</a></sup> and many other <a href="http://gruntjs.com/plugins?q=es6">ES6-related plugins</a><sup class="po" id="note-27"><a href="#27">27</a></sup>. Folks using Browserify might want to check out <a href="https://github.com/babel/babelify">babelify</a><sup class="po" id="note-28"><a href="#28">28</a></sup>.</p>
+
+<p>Many features can be converted to ES5-compatible code without significant overhead. Others do require extra stopgaps (which can be provided by the transpiler) and/or come with a performance penalty. Some are simply impossible. To play around with ES6 code and see what the transpiled code looks like, you can use various interactive environments (also known as REPLs):</p>
+<ul>
+<li>Traceur: <a href="https://github.com/google/traceur-compiler">website</a><sup class="po" id="note-29"><a href="#29">29</a></sup>, <a href="https://google.github.io/traceur-compiler/demo/repl.html">REPL</a><sup class="po" id="note-30"><a href="#30">30</a></sup></li>
+<li>Babel: <a href="https://babeljs.io/">website</a><sup class="po" id="note-31"><a href="#31">31</a></sup>, <a href="https://babeljs.io/repl/">REPL</a><sup class="po" id="note-32"><a href="#32">32</a></sup></li>
+<li>TypeScript: <a href="http://www.typescriptlang.org/">website</a><sup class="po" id="note-33"><a href="#33">33</a></sup>, <a href="http://www.typescriptlang.org/Playground">REPL</a><sup class="po" id="note-34"><a href="#34">34</a></sup></li>
+<li><a href="https://github.com/richgilbank/Scratch-JS">ScratchJS</a><sup class="po" id="note-35"><a href="#35">35</a></sup> (Chrome extension)</li>
+</ul>
+
+<p>Note that TypeScript is not exactly a transpiler. It’s a typed superset of JavaScript that compiles to JavaScript. Among other features, it supports many ES6 features, much like the other transpilers.</p>
+
+<h4 id="so-what-exactly-can-i-use">So, What Exactly Can I Use?</h4>
+
+<p>In general, some of the features of ES6 can be used almost for “free,” such as modules, arrow functions, rest parameters and classes. These features can be transpiled to ES5 without much overhead. Additions to <code class="md-code md-code-inline">Array</code>, <code class="md-code md-code-inline">String</code> and <code class="md-code md-code-inline">Math</code> objects and prototypes (such as <code class="md-code md-code-inline">Array.from()</code> and <code class="md-code md-code-inline">"it".startsWith("you")</code>) require so-called “polyfills.” Polyfills are stopgaps for functionality that a browser doesn’t natively support yet. You can load a polyfill first, and your code will run as if the browser has that functionality. Both Babel and Traceur do provide such polyfills.</p>
+
+<p>See Kangax’s <a href="https://kangax.github.io/compat-table/es6/">ES6 compatibility table</a><sup class="po" id="note-36"><a href="#36">36</a></sup> for a full overview of ES6 features that are supported by both transpilers and browsers. It is motivating to see that, at the time of writing, the latest browsers already support 55% to over 70% of all ES6 features. Microsoft Edge, Google Chrome and Mozilla’s Firefox are really competing with each other here, which is great for the web at large.</p>
+
+<p>Personally, I’m finding that being able to easily use new ES6 features such as modules, arrow functions and rest parameters is a relief and a significant improvement to my own coding. Now that I’m comfortable with writing in ES6 and transpiling my code to ES5, more ES6 goodness will follow naturally over time.</p>
+<h3 id="whats-next">What’s Next?</h3>
+
+<p>Once you’ve installed a transpiler, you might want to start using “small” features, such as <code class="md-code md-code-inline">let</code> and arrow functions. Keep in mind that code that is already written as ES5 will be left untouched by the transpiler. As you enhance your scripts with ES6 and enjoy using it, you can gradually sprinkle more and more ES6 features onto your code. Perhaps convert some of the code to the new modules or class syntax. I promise it’ll be good!</p>
+
+<p>There is much more to ES6 than we were able to cover in this article. Uncovered features include <code class="md-code md-code-inline">Map</code>, <code class="md-code md-code-inline">Set</code>, tagged template strings, generators, <code class="md-code md-code-inline">Proxy</code> and <code class="md-code md-code-inline">Promise</code>. Let me know if you want these features to be covered in a follow-up article. In any case, a book that covers all of ES6 is <a href="http://exploringjs.com/"><em>Exploring ES6</em></a><sup class="po" id="note-37"><a href="#37">37</a></sup> by Dr. Axel Rauschmayer, which I can happily recommend for a deep dive.</p>
+
+
+<h3 id="closing-thought">Closing Thought</h3>
+
+<p>By using a transpiler, all of your code is effectively “locked” to ES5, while browsers keep adding new features. So, even if a browser fully supports a particular ES6 feature, the ES5-compatible version will be used, <a href="http://kpdecker.github.io/six-speed/">possibly performing worse</a><sup class="po" id="note-38"><a href="#38">38</a></sup>. You can count on the fact that any ES6 feature, and eventually all of them, will be supported at some point (in the browsers and environments you need to support at that time). Until then, we need to manage this and selectively disable ES6 features from getting transpiled to ES5 and prevent unnecessary overhead. With this in mind, decide for yourself whether it is time to start using (parts of) ES6. <a href="http://babeljs.io/users/">Some companies think it is</a><sup class="po" id="note-39"><a href="#39">39</a></sup>.</p>
+
+<p><em>Excerpt Image: <a href="https://www.flickr.com/photos/ruiwen/3260095534/in/">Ruiwen Chua</a><sup class="po" id="note-40"><a href="#40">40</a></sup></em></p>
+
+<p><em property="editor">(al, ml)</em></p>
+
+<h3 class="po" id="footnotes">Footnotes</h4>
+<p><em>Click the note number to return to the link spot in the text.</em></p>
+
+<ol class="po" style="list-style-type:none;">
+
+<li id="#1"><a href="#note-1" title="return to text">1 </a><a href="https://babeljs.io/repl/#?experimental=false&amp;evaluate=true&amp;loose=false&amp;spec=false&amp;code=let%20books%20%3D%20%5B%7Btitle%3A%20'X'%2C%20price%3A%2010%7D%2C%20%7Btitle%3A%20'Y'%2C%20price%3A%2015%7D%5D%3B%0A%0Alet%20titles%20%3D%20books.map(%20item%20%3D%3E%20item.title%20)%3B%0A" title="Run this code example 1">Run the example code using babeljs.io/repl/</a>
+</li>
+
+<li id="#2"><a href="#note-2" title="return to text">2 </a><a href="https://babeljs.io/repl/#?experimental=false&amp;evaluate=true&amp;loose=false&amp;spec=false&amp;code= let%20result%20%3D%20%5B1%2C%202%2C%203%2C%204%2C%205%5D.map(%20n%20%3D%3E%20%7B%0A%20n%20%3D%20n%20%25%203%3B%0A%20 return%20n%3B%0A%7D)%3B" title="Run this code example 2">Run the example code using babeljs.io/repl/</a></li>
+
+<li id="#3"><a href="#note-3" title="return to text">3 </a><a href="https://babeljs.io/repl/#?experimental=false&amp;evaluate=true&amp;loose=false&amp;spec=false&amp;code=let%20book%20%3D%20%7B%0A%20title%3A%20'X'%2C%0A%20sellers%3A%20%5B'A'%2C%20'B'%5D%2C%0A%20printSellers()%20%7B%0A%20 this.sellers.forEach(seller%20%3D%3E%20console.log(seller%20%2B%20'%20sells%20'%20%2B%20this.title))%3B%0A%20%7D%0A%7D" title="Run this code example 3">Run the example code using babeljs.io/repl/</a></li>
+
+<li id="#4"><a href="#note-4" title="return to text">4 </a><a href="https://babeljs.io/repl/#?experimental=false&amp;evaluate=true&amp;loose=false&amp;spec=false&amp;code=let%20name%20%3D%20'John'%2C%0A%20apples%20%3D%205%2C%0A%20pears%20%3D%207%2C%0A%20bananas%20%3D%20function()%20%7B%20 return%203%3B%20%7D%0A%0Aconsole.log(%60This%20is%20%24%7Bname%7D.%60)%3B%0A%0Aconsole.log(%60He%20carries%20%24%7Bapples%7D%20apples%2C%20%24%7Bpears%7D%20pears%2C%20and%20%24%7Bbananas()%7D%20bananas.%60)%3B%0A" title="Run this code example 4">Run the example code using babeljs.io/repl/</a></li>
+
+<li id="#5"><a href="#note-5" title="return to text">5 </a><a href="https://babeljs.io/repl/#?experimental=false&amp;evaluate=true&amp;loose=false&amp;spec=false&amp;code=let%20x%20%3D%20%601...%0A2...%0A3%20lines%20long!%60%3B" title="Run this code example 5">Run the example code using babeljs.io/repl/</a></li>
+
+<li id="#6"><a href="#note-6" title="return to text">6 </a><a href="https://babeljs.io/repl/#?experimental=false&amp;evaluate=true&amp;loose=false&amp;spec=false&amp;code=let%20itemElements%20%3D%20document.querySelectorAll('div')%3B%0Alet%20items%20%3D%20Array.from(itemElements)%3B%0Aitems.forEach(function(element)%20%7B%0A%20console.log(element.nodeType)%0A%7D)%3B%0A" title="Run this code example 6">Run the example code using babeljs.io/repl/</a></li>
+
+<li id="#7"><a href="#note-7" title="return to text">7 </a><a href="https://babeljs.io/repl/#?experimental=false&amp;evaluate=true&amp;loose=false&amp;spec=false&amp;code=let%20navElements%20%3D%20document.querySelectorAll('nav%20li')%3B%0Alet%20navTitles%20%3D%20Array.from(navElements%2C%20el%20%3D%3E%20el.textContent)%3B%0Aconsole.log(navTitles.join(''))%3B" title="Run this code example 7">Run the example code using babeljs.io/repl/</a></li>
+
+<li id="#8"><a href="#note-8" title="return to text">8 </a><a href="http://www.2ality.com/2015/04/numbers-math-es6.html" title="link to ">http://www.2ality.com/2015/04/numbers-math-es6.html</li>
+
+<li id="#9"><a href="#note-9" title="return to text">9 </a><a href="https://babeljs.io/repl/#?experimental=false&amp;evaluate=true&amp;loose=false&amp;spec=false&amp;code=let%20values%20%3D%20%5B1%2C%202%2C%204%5D%3B%0Alet%20some%20%3D%20%5B...values%2C%208%5D%3B%0Alet%20more%20%3D%20%5B...values%2C%208%2C%20...values%5D%3B%0Aconsole.log(some)%3B%0Aconsole.log(more)%3B" title="Run this code example 9">Run the example code using babeljs.io/repl/</a></li>
+
+<li id="#10"><a href="#note-10" title="return to text">10 </a><a href="https://babeljs.io/repl/#?experimental=false&amp;evaluate=true&amp;loose=false&amp;spec=false&amp;code=let%20values%20%3D%20%5B1%2C%202%2C%204%5D%3B%0AdoSomething(...values)%3B%0Afunction%20doSomething(x%2C%20y%2C%20z)%20%7B%0A%20console.log(arguments)%3B%0A%7D%0A" title="Run this code example 10">Run the example code using babeljs.io/repl/</a></li>
+
+<li id="#11"><a href="#note-11" title="return to text">11 </a><a href="https://babeljs.io/repl/#?experimental=false&amp;evaluate=true&amp;loose=false&amp;spec=false&amp;code=let%20values%20%3D%20%5B2%2C%204%5D%3B%0AdoSomething(1%2C%20...values)%3B%0Afunction%20doSomething(x%2C%20y%2C%20z)%20%7B%0A%20console.log(arguments)%3B%0A%7D" title="Run this code example 11">Run the example code using babeljs.io/repl/</a></li>
+
+<li id="#12"><a href="#note-12" title="return to text">12 </a><a href="http://jsbin.com/vibaxerino/edit?html,js,console" title="link to ">http://jsbin.com/vibaxerino/edit?html,js,console</a></li>
+
+<li id="#13"><a href="#note-13" title="return to text">13 </a><a href="https://babeljs.io/repl/#?experimental=false&amp;evaluate=true&amp;loose=false&amp;spec=false&amp;code=let%20x%20%3D%201%2C%0A%20y%20%3D%202%3B%0A%0A%5Bx%2C%20y%5D%20%3D%20%5By%2C%20x%5D%3B%0A" title="Run this code example 13">Run the example code using babeljs.io/repl/</a></li>
+
+<li id="#14"><a href="#note-14" title="return to text">14 </a><a href="https://babeljs.io/repl/#?experimental=false&amp;evaluate=true&amp;loose=false&amp;spec=false&amp;code=let%20obj%20%3D%20%7Bx%3A%201%2C%20y%3A%202%7D%3B%0Alet%20%7Bx%2C%20y%7D%20%3D%20obj%3B" title="Run this code example 14">Run the example code using babeljs.io/repl/</a></li>
+
+<li id="#15"><a href="#note-15" title="return to text">15 </a><a href="https://babeljs.io/repl/#?experimental=false&amp;evaluate=true&amp;loose=true&amp;spec=false&amp;code=function%20doSomething()%20%7B%0A%20return%20%5B1%2C%202%5D%0A%7D%0A%0Alet%20%5Bx%2C%20y%5D%20%3D%20doSomething()%3B" title="Run this code example 15">Run the example code using babeljs.io/repl/</a></li>
+
+<li id="#16"><a href="#note-16" title="return to text">16 </a><a href="https://babeljs.io/repl/#?experimental=false&amp;evaluate=true&amp;loose=true&amp;spec=false&amp;code=function%20doSomething(x%2C%20y%20%3D%202)%20%7B%0A%20return%20x%20*%20y%3B%0A%7D%0A%0Aconsole.log(doSomething(5))%3B%0Aconsole.log(doSomething(5%2C%20undefined))%3B%0Aconsole.log(doSomething(5%2C%203))%3B" title="Run this code example 16">Run the example code using babeljs.io/repl/</a></li>
+
+<li id="#17"><a href="#note-17" title="return to text">17 </a><a href="https://babeljs.io/repl/#?experimental=false&amp;evaluate=true&amp;loose=false&amp;spec=false&amp;code=function%20doSomething(x%2C%20...remaining)%20%7B%0A%20return%20x%20*%20remaining.length%3B%0A%7D%0A%0AdoSomething(5%2C%200%2C%200%2C%200)%3B" title="Run this code example 17">Run the example code using babeljs.io/repl/</a></li>
+
+<li id="#18"><a href="#note-18" title="return to text">18 </a><a href="https://babeljs.io/repl/#?experimental=false&amp;evaluate=true&amp;loose=true&amp;spec=false&amp;code=class%20Vehicle%20%7B%0A%20constructor(name)%20%7B%0A%20%20this.name%20%3D%20name%3B%0A%20this.kind%20%3D%20'vehicle'%3B%0A%20%7D%0A%20getName()%20%7B%0A%20return%20this.name%3B%0A%20%7D%20%0A%7D%0A%0Alet%20myVehicle%20%3D%20new%20Vehicle('rocky')%3B%0A%0Aconsole.log(myVehicle.getName())%3B%0A" title="Run this code example 18">Run the example code using babeljs.io/repl/</a></li>
+
+<li id="#19"><a href="#note-19" title="return to text">19 </a><a href="https://babeljs.io/repl/#?experimental=false&amp;evaluate=true&amp;loose=true&amp;spec=false&amp;code=class%20Vehicle%20%7B%0A%20constructor(name)%20%7B%0A%20%20this.name%20%3D%20name%3B%0A%20this.kind%20%3D%20'vehicle'%3B%0A%20%7D%0A%20getName()%20%7B%0A%20return%20this.name%3B%0A%20%7D%20%0A%7D%0A%0Aclass%20Car%20extends%20Vehicle%20%7B%0A%20constructor(name)%20%7B%0A%20super(name)%3B%0A%20this.kind%20%3D%20'car'%0A%20%7D%0A%7D%0A%0Alet%20myCar%20%3D%20new%20Car('bumpy')%3B%0A%0Aconsole.log(myCar.getName())%3B%0Aconsole.log(myCar%20instanceof%20Car)%3B%0Aconsole.log(myCar%20instanceof%20Vehicle)%3B" title="Run this code example 19">Run the example code using babeljs.io/repl/</a></li>
+
+<li id="#20"><a href="#note-20" title="return to text">20 </a><a href="http://www.2ality.com/2015/02/es6-classes-final.html" title="link to ">http://www.2ality.com/2015/02/es6-classes-final.html</a></li>
+
+<li id="#21"><a href="#note-21" title="return to text">21 </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol" title="link to ">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol</a></li>
+
+<li id="#22"><a href="#note-22" title="return to text">22 </a><a href="http://babeljs.io/docs/setup/" title="link to ">http://babeljs.io/docs/setup/</a></li>
+
+<li id="#23"><a href="#note-23" title="return to text">23 </a><a href="https://babeljs.io/docs/usage/cli/" title="link to ">https://babeljs.io/docs/usage/cli/</a></li>
+
+<li id="#24"><a href="#note-24" title="return to text">24 </a><a href="https://www.npmjs.com/package/gulp-babel" title="link to ">https://www.npmjs.com/package/gulp-babel</a></li>
+
+<li id="#25"><a href="#note-25" title="return to text">25 </a><a href="https://github.com/babel/babel-loader" title="link to ">https://github.com/babel/babel-loader</a></li>
+
+<li id="#26"><a href="#note-26" title="return to text">26 </a><a href="https://github.com/babel/grunt-babel" title="link to ">https://github.com/babel/grunt-babel</a></li>
+
+<li id="#27"><a href="#note-27" title="return to text">27 </a><a href="http://gruntjs.com/plugins?q=es6" title="link to ">http://gruntjs.com/plugins?q=es6</a></li>
+
+<li id="#28"><a href="#note-28" title="return to text">28 </a><a href="https://github.com/babel/babelify" title="link to ">https://github.com/babel/babelify</a></li>
+
+<li id="#29"><a href="#note-29" title="return to text">29 </a><a href="https://github.com/google/traceur-compiler" title="link to ">https://github.com/google/traceur-compiler</a></li>
+
+<li id="#30"><a href="#note-30" title="return to text">30 </a><a href="https://google.github.io/traceur-compiler/demo/repl.html" title="link to ">https://google.github.io/traceur-compiler/demo/repl.html</a></li>
+
+<li id="#31"><a href="#note-31" title="return to text">31 </a><a href="https://babeljs.io/" title="link to ">https://babeljs.io/</a></li>
+
+<li id="#32"><a href="#note-32" title="return to text">32 </a><a href="https://babeljs.io/repl/" title="link to ">https://babeljs.io/repl/</a></li>
+
+<li id="#33"><a href="#note-33" title="return to text">33 </a><a href="http://www.typescriptlang.org/" title="link to ">http://www.typescriptlang.org/</a></li>
+
+<li id="#34"><a href="#note-34" title="return to text">34 </a><a href="http://www.typescriptlang.org/Playground" title="link to ">http://www.typescriptlang.org/Playground</a></li>
+
+<li id="#35"><a href="#note-35" title="return to text">35 </a><a href="https://github.com/richgilbank/Scratch-JS" title="link to ">https://github.com/richgilbank/Scratch-JS</a></li>
+
+<li id="#36"><a href="#note-36" title="return to text">36 </a><a href="https://kangax.github.io/compat-table/es6/" title="link to ">https://kangax.github.io/compat-table/es6/</a></li>
+
+<li id="#37"><a href="#note-37" title="return to text">37 </a><a href="http://exploringjs.com/" title="link to ">http://exploringjs.com/</a></li>
+
+<li id="#38"><a href="#note-38" title="return to text">38 </a><a href="http://kpdecker.github.io/six-speed/" title="link to six-speed project page">http://kpdecker.github.io/six-speed/</a></li>
+
+<li id="#39"><a href="#note-39" title="return to text">39 </a><a href="http://babeljs.io/users/" title="link to babeljs.io/users">http://babeljs.io/users/</a></li>
+
+<li id="#40"><a href="#note-40" title="return to text">40 </a><a href="https://www.flickr.com/photos/ruiwen/3260095534/in/" title="link to image on flickr">https://www.flickr.com/photos/ruiwen/3260095534/in/</a></li></ol>
+	<div id="textadtarget"></div>
+
+	<div class="lt"><a href="http://www.smashingmagazine.com/tag/javascript/">JavaScript</a><a href="http://www.smashingmagazine.com/tag/web-development/">Web Development</a></div>
+
+<p>
+	<a href="#top" class="top">↑ Back to top</a>
+	</p>
+    <p></p>
+
+</article>
+<div class="bio clearfix">
+  <div class="grv">
+    <img src="./es6-smashing_files/saved_resource" data-src="http://1.gravatar.com/avatar/24f5c266f0241825b12bed1a43120022/?s=78&amp;d=mm&amp;r=g" data-src-retina="http://1.gravatar.com/avatar/24f5c266f0241825b12bed1a43120022/?s=156&amp;d=mm&amp;r=g" class="avatar" height="78" width="78">	</div>
+	<div class="about">
+		<a rel="author" class="poa" href="http://www.smashingmagazine.com/author/lars-kappert/?rel=author" title="Posts by Lars Kappert">Lars Kappert</a>
+        <p>Lars Kappert is a Dutch <a href="https://webpro.nl/">front-end solution architect &amp; lead developer</a>. He specializes in architecture, solutions, tooling, performance, and development of web sites and applications. Core web technologies include HTML5, JavaScript, Node.js, and CSS. Lars <a href="https://github.com/webpro">contributes to OSS</a> at GitHub, <a href="https://medium.com/@webprolific">publishes articles</a> at Medium, and you can follow <a href="https://twitter.com/webprolific">@webprolific</a> on Twitter.</p>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+			</div>		</div>		<p><a href="#top" class="top" title="Jump to the top of the page">↑ Back to top</a></p>
+	</div></div>
+
+</main>
+<aside id="wpsidebar" class="sb" role="complementary">
+	<div class="col side">
+		<div class="mise sf clearfix">
+
+</div>
+
+
+
+
+
+
+
+
+
+	</div>
+</aside>
+<footer class="f" id="footer" role="contentinfo">
+
+</footer>
+
+	<script>var clicky_site_ids = clicky_site_ids || [];clicky_site_ids.push( 2727 ), function() {var e = document.createElement( "script" );e.type = "text/javascript", e.async = !0, e.src = "//static.getclicky.com/js", (document.getElementsByTagName( "head" )[ 0 ] || document.getElementsByTagName( "body" )[ 0 ]).appendChild( e )}();</script>
+	<!--  script id="smash-loadCSS-js">!function(a){"use strict";a.loadCSS=function(b,c,d){var e,f=a.document,g=f.createElement("link");if(c)e=c;else{var h;h=f.querySelectorAll?f.querySelectorAll("style,link[rel=stylesheet],script"):(f.body||f.getElementsByTagName("head")[0]).childNodes,e=h[h.length-1]}var i=f.styleSheets;g.rel="stylesheet",g.href=b,g.media="only x",e.parentNode.insertBefore(g,c?e:e.nextSibling);var j=function(a){for(var b=g.href,c=i.length;c--;)if(i[c].href===b)return a();setTimeout(function(){j(a)})};return g.onloadcssdefined=j,j(function(){g.media=d||"all"}),g}}(this);loadCSS( "auxi/main.min.css", false, "all" );loadCSS( "auxi/print.min.css", false, "print" );</script  -->
+    <script id="smash-loadJS-js">!function(a){"use strict";a.loadOnloadJS=function(b,c){a.addEventListener("load",function(){loadJS(b,c)},!1)},a.loadJS=function(b,c){var d=a.document.createElement("script");d.src=b,d.async=c||!1,a.document.body.appendChild(d)}}(window);loadOnloadJS( "https://media-mediatemple.netdna-ssl.com/wp-content/themes/smashing-magazine/assets/js/onload.min.js?ver=3.4.4", true );</script>
+    <!--  script id="smash-loadJS-js">!function(a){"use strict";a.loadOnloadJS=function(b,c){a.addEventListener("load",function(){loadJS(b,c)},!1)},a.loadJS=function(b,c){var d=a.document.createElement("script");d.src=b,d.async=c||!1,a.document.body.appendChild(d)}}(window);loadOnloadJS( "https://media-mediatemple.netdna-ssl.com/wp-content/themes/smashing-magazine/assets/js/onload.min.js?ver=3.4.4", true );loadOnloadJS( "https://media-mediatemple.netdna-ssl.com/wp-content/themes/smashing-magazine/assets/js/prism.js?ver=3.4.4", true );</script  -->
+
+<script src="./es6-smashing_files/onload.min.js" async=""></script>
+
+<!--  script src="./es6-smashing_files/prism.js" async=""></script  -->
+
+<!-- iframe id="rdbIndicator" width="100%" height="270" border="0" src="./es6-smashing_files/indicator.html" style="display: none; border: 0; position: fixed; left: 0; top: 0; z-index: 2147483647"></iframe  -->
+</body></html>
