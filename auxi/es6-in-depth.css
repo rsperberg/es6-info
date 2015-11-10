@@ -215,14 +215,14 @@ h3 {
 	  }
 }
 code.md-code, pre code { color: #f8f8f8; font-family: Share-Tech; font-weight: 700; }
-.md-code-inline, code.md-code-inline, p code.md-code-inline, .md-code-inline .md-mark { color: maroon; font-family: Share-Tech;
+.md-code-inline, code.md-code-inline, p code.md-code-inline, .md-code-inline .md-mark .md-code-mark { color: maroon; font-family: Share-Tech;
     padding-top: 0.15625em;
     padding-right: 0.3125em;
     padding-bottom: 0.15625em;
     padding-left: 0.3125em;
     background-color: #fdf5d9 !important;
     }
-.md-code-block { background-color: #002240; font-weight: 700; }  /* was light yellow: #fbf9ec  */
+.md-code-block { background-color: #002c55; font-weight: 700; }  /*  #00396e #002f5a #003d73 #002240 was light yellow: #fbf9ec  */
 .md-code-block{margin:0 -10px;padding:0
   }
 .md-code-block:first-child{margin-top:-10px
@@ -231,8 +231,8 @@ code.md-code, pre code { color: #f8f8f8; font-family: Share-Tech; font-weight: 7
   }
 .md-code-block{padding:10px 40px;margin:0 -20px;line-height:24px
   }
- .md-code-operator, .operator, .oper, .op{color:#ffd700;}
-.md-code-comment, .comment {color:#07c340 }  /* lime green  was #8e908c */
+.md-code-operator, .operator, .oper, .op{color:#ff7f2a;}  /* was  #ffd700  */
+.md-code-comment, .comment, .com, .cm {color:#0088FF }  /* was #07c340  lime green  was #8e908c */
 
 .md-code-attribute, .md-code-regexp,
 .md-lang-css .md-code-class,.md-lang-css .md-code-id,.md-lang-css .md-code-pseudo,
@@ -240,43 +240,57 @@ code.md-code, pre code { color: #f8f8f8; font-family: Share-Tech; font-weight: 7
 .md-lang-xml .md-code-doctype,.md-lang-xml .md-code-pi
 {color:#c82829
   }
-.md-code-variable, .md-code-const, .md-code-let, .variable, .var { color:#05e69a;}
-.md-code-tag, .md-code-punc  { color: #ccbca2;}  /* khaki */
+.md-code-variable, .md-code-const, .md-code-let, .variable, .var { color:#d6defe;} /*   #e7e0d4 #cffafa #b8f8f8 #42cbf8  #11d0f6 #ffd6dc #ffbcc6  #cccccc was  #05e69a  */
+/*   .md-code-params{color:#f8f8f8;
+  }    white  */
+.params, .md-code-params, .parameters, .md-code-parameters, .param, .parameter { color:#d6defe; } /*  #ebe6dc #cffafa   #a5e7fc #8ce0fb  */
+.props, .md-code-props, .properties, .md-code-properties,
+  .prop, .md-code-prop, .property, .md-code-property,
+  .label, .md-code-label { color: #3AD900; } /* same as string #a5e7fc   #8ce0fb  */
+.md-code-tag, .md-code-punc, .tag, .punc, .punct  { color: #ccbca2;}  /* khaki */
+.arrow-function, .arrow-func, .arrow, .arr, .af { color: #FFc800;}  /*   #FFDD00 #ff7f2a */
+.tag-name, .el-name { color: #8986c1; }  /*  desaturated blue */
 .md-code-built_in,.md-code-constant,.md-code-literal,
-.md-code-pragma,.md-code-preprocessor, .kw2, .keyword2, .built_in, .method{color:#f5871f
-  }  /*  orange  */
+  .md-code-pragma,.md-code-preprocessor, .kw2, .keyword2, .built_in, .method,
+  .literal, .lit, .built-in {color:#FFDD00
+  }  /*   was #f5871f orange  */
+.kw3, .keyword3, .md-code-keyword3 {color:#F6AA11
+  }  /*  vivid orange ; using it for "return for break yield" */
+.kw4, .keyword4, .md-code-keyword4 {color:#FFB054;
+  }  /*  another orange ; using it for "console.log" */
 .switch, .case, .token.switch, .token.case{color:#f5871f
   }  /*  orange  */
-.md-code-params{color:#f8f8f8;
-  }  /*  white  */
 .md-code-boolean, .md-code-bool, .boolean, .bool {color:#de3163
   }  /*  cherry  */
 .md-code-null, .null, .md-code-undefined, .undefined, .undef, .md-code-nan, .nan {color:#de3163}
 
-.md-code-number, .number, .num{color:#de3163
+.md-code-number, .number, .num{color:#de3163;
   }  /*  cherry  */
+.template-literal, .temp-lit, .tmp-lit {color:#ff74df; }  /*    #ff7f2a  */
 .md-lang-css .md-code-rule .md-code-attribute,.md-lang-ruby .md-code-class .md-code-title{color:#eab700
   }
-.md-code-class, .md-code-classname, .md-code-class-name, .token.class-name, .class-name, .classname { color: #ffbcc6;}  /*  pale red;  */
+.md-code-class, .md-code-classname, .md-code-class-name, .token.class-name, .class-name,
+  .classname, .cls, .clss { color:#9DF39F;}  /* #71b0fe was #ffbcc6 pale red;  */
 .md-code-error, .error, .md-code-type-error, .md-code-typeerror, .type-error, .typeerror { color: red;}
-.md-code-symbol, .symbol, .md-code-map, .map, .md-code-date, .date, .md-code-set, .set, .md-code-proxy, .proxy { color: #ffbcc6;}  /*  pale red;  */
+.md-code-symbol, .symbol, .md-code-map, .map, .md-code-date, .date, .md-code-set, .set,
+  .md-code-proxy, .proxy { color: #9DF39F;}  /*     now same as class   #ffbcc6 pale red;  */
 
 .md-code-header,.md-code-inheritance,.md-code-name,
 .md-code-value,.md-lang-ruby .md-code-symbol,.md-lang-xml .md-code-cdata{color:#718c00
   }
-.md-code-string, .string, .str {color:#ffd700
-  }
+.md-code-string, .string, .str {color:#3AD900;
+  }  /*  was  #ffd700  */
 .md-code-title,.md-lang-css .md-code-hexcolor{color:#3e999f
   }
 .md-lang-xml .md-code-tag .md-code-title, .md-code-function,.md-lang-coffeescript .md-code-title,
 .md-lang-perl .md-code-sub,.md-lang-python .md-code-decorator,.md-lang-python .md-code-title,
 .md-lang-ruby .md-code-function .md-code-title,
 .md-lang-ruby .md-code-title .md-code-keyword {color:#2879e2;
-  }  /* was a darker blue: #4271ae  */
+  }  /*  was ;   was a darker blue: #4271ae  */
 
-.md-code-title, .md-lang-javascript .md-code-title, .title, .token.function  {color: #71b0fe;}
-.md-code-keyword,.md-lang-javascript .md-code-function, .keyword, .kw, .kw1{color:#8986c1
-  }  /* slightly desaturated blue, eg., a purply blue  */
+.md-code-title, .md-lang-javascript .md-code-title, .title, .token.function, .fn, .func-name  {color: #FFDD00;} /* was  #71b0fe   */
+.md-code-keyword,.md-lang-javascript .md-code-function, .keyword, .kw, .kw1{color:#FFEE80
+  }  /* was #8986c1  slightly desaturated blue, eg., a purply blue   ; using it for "var function" */
 /*  .md-mark,.md-mark span {color:inherit
   }   */
 .md-lang-coffeescript .md-lang-javascript,.md-lang-javascript .md-lang-xml,
@@ -287,7 +301,7 @@ code.md-code, pre code { color: #f8f8f8; font-family: Share-Tech; font-weight: 7
 	filter:alpha(opacity=50)
   }
 mark { border: 1px solid red !important;}
-mark { background-color: #002240 !important; color:inherit !important;}
+mark.md-mark { background-color: #002240 !important; color:inherit !important;}
 
 .c-pink { color: #e92c6c }
 .punctuation, .punc, .punct {color:#ccbca2; }
