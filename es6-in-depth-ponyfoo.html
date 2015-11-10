@@ -2669,7 +2669,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="md-code-function"><span class="kw">function</span> <span class="fn">genie</span> <span class="params">(questions)</span> </span>{
-  <span class="kw">var</span> <span class="var">g</span> <span class="op">=</span> questions()
+  <span class="kw">var</span> <span class="var">g</span> <span class="op">=</span> <span class="param">questions</span>()
   <span class="fn">pull</span>()
   <span class="md-code-function"><span class="kw">function</span> <span class="fn">pull</span> <span class="params">()</span> </span>{
     <span class="kw">let</span> <span class="var">question</span> <span class="op">=</span> <span class="var">g</span>.<span class="built_in">next</span>()
@@ -2679,14 +2679,14 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
     <span class="fn">ask</span>(<span class="var">question</span>.<span class="built_in">value</span>, <span class="fn">pull</span>)
   }
   <span class="md-code-function"><span class="kw">function</span> <span class="fn">ask</span> <span class="params">(q, next)</span> </span>{
-    xhr(<span class="str">'https://computer.genie/?q='</span> <span class="op">+</span> <span class="built_in">encodeURIComponent</span>(q), got)
+    xhr(<span class="str">'https://computer.genie/?q='</span> <span class="op">+</span> <span class="built_in">encodeURIComponent</span>(<span class="param">q</span>), <span class="fn">got</span>)
     <span class="md-code-function"><span class="kw">function</span> <span class="fn">got</span> <span class="params">(err, res, body)</span> </span>{
-      <span class="kw">if</span> (err) {
-        <mark class="md-mark md-code-mark"><span class="var">g</span>.<span class="built_in">throw</span>(err)</mark>
+      <span class="kw">if</span> (<span class="param">err</span>) {
+        <mark class="md-mark md-code-mark"><span class="var">g</span>.<span class="built_in">throw</span>(<span class="param">err</span>)</mark>
       }
-      <span class="kw4">console.log</span>(q)
-      <span class="kw4">console.log</span>(<span class="str">'[Genie] '</span> <span class="op">+</span> body.answer)
-      next()
+      <span class="kw4">console.log</span>(<span class="param">q</span>)
+      <span class="kw4">console.log</span>(<span class="str">'[Genie] '</span> <span class="op">+</span> <span class="param">body</span>.answer)
+      <span class="param">next</span>()
     }
   }
 }
@@ -3199,10 +3199,10 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">registry</span> <span class="op">=</span> {}
 <span class="md-code-function"><span class="kw">function</span> <span class="fn">add</span> <span class="params">(name, meta)</span> </span>{
-  <span class="var">registry</span>[name] <span class="op">=</span> meta
+  <span class="var">registry</span>[<span class="param">name</span>] <span class="op">=</span> <span class="param">meta</span>
 }
 <span class="md-code-function"><span class="kw">function</span> <span class="fn">get</span> <span class="params">(name)</span> </span>{
-  <span class="kw3">return</span> <span class="var">registry</span>[name]
+  <span class="kw3">return</span> <span class="var">registry</span>[<span class="param">name</span>]
 }
 <span class="var">add</span>(<span class="str">'contra'</span>, { description: <span class="str">'Asynchronous flow control'</span> })
 <span class="var">add</span>(<span class="str">'dragula'</span>, { description: <span class="str">'Drag and drop'</span> })
@@ -3211,7 +3211,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
 
-<p>There’s several issues with this approach, to wit:</p><ul>
+<p>There are several issues with this approach, to wit:</p><ul>
   <li><strong>Security issues</strong> where user-provided keys like <code class="md-code md-code-inline">__proto__</code>, <code class="md-code md-code-inline">toString</code>, or anything in <code class="md-code md-code-inline">Object.prototype</code> break expectations and make interaction with these kinds of <em>hash-map</em> data structures more cumbersome</li>
   <li>Iteration over list items is verbose with <code class="md-code md-code-inline">Object.keys(registry).forEach</code> or implementing the <a href="#es6-iterators-in-depth" aria-label="ES6 Iterators in Depth"><em>iterable</em> protocol</a> on the <code class="md-code md-code-inline">registry</code></li>
   <li>Keys are limited to strings, making it hard to create hash-maps where you’d like to index values by DOM elements or other non-string references</li></ul>
@@ -3221,10 +3221,10 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">registry</span> <span class="op">=</span> {}
 <span class="md-code-function"><span class="kw">function</span> <span class="fn">add</span> <span class="params">(name, meta)</span> </span>{
-  <span class="var">registry</span>[<mark class="md-mark md-code-mark"><span class="str">'map:'</span> <span class="op">+</span> </mark>name] <span class="op">=</span> meta
+  <span class="var">registry</span>[<mark class="md-mark md-code-mark"><span class="str">'map:'</span> <span class="op">+</span> </mark><span class="param">name</span>] <span class="op">=</span> <span class="param">meta</span>
 }
 <span class="md-code-function"><span class="kw">function</span> <span class="fn">get</span> <span class="params">(name)</span> </span>{
-  <span class="kw3">return</span> <span class="var">registry</span>[<mark class="md-mark md-code-mark"><span class="str">'map:'</span> <span class="op">+</span> </mark>name]
+  <span class="kw3">return</span> <span class="var">registry</span>[<mark class="md-mark md-code-mark"><span class="str">'map:'</span> <span class="op">+</span> </mark><span class="param">name</span>]
 }
 <span class="var">add</span>(<span class="str">'contra'</span>, { description: <span class="str">'Asynchronous flow control'</span> })
 <span class="var">add</span>(<span class="str">'dragula'</span>, { description: <span class="str">'Drag and drop'</span> })
@@ -3311,7 +3311,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <span class="var">map</span>.<span class="built_in">set</span>(<span class="str">'n'</span>, <span class="str">'y'</span>)
 <span class="var">map</span>.<span class="built_in">set</span>(<span class="str">'f'</span>, <span class="str">'o'</span>)
 <span class="var">map</span>.<span class="built_in">set</span>(<span class="str">'o'</span>, <span class="str">'!'</span>)
-<span class="kw3">for</span> (<span class="kw">let</span> <mark class="md-mark md-code-mark">[key, value]</mark> <span class="kw">of</span> <span class="var">map</span>) {
+<span class="kw3">for</span> (<span class="kw">let</span> <mark class="md-mark md-code-mark">[<span class="var">key</span>, <span class="var">value</span>]</mark> <span class="kw">of</span> <span class="var">map</span>) {
   <span class="kw4">console.log</span>(<mark class="md-mark md-code-mark"><span class="str">`${key}: ${value}`</span></mark>)
   <span class="com">// &lt;- 'p: o'</span>
   <span class="com">// &lt;- 'n: y'</span>
@@ -3356,25 +3356,25 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">cache</span> <span class="op">=</span> []
 <span class="md-code-function"><span class="kw">function</span> <span class="fn">put</span> <span class="params">(el, api)</span> </span>{
-  <span class="var">cache</span>.<span class="built_in">push</span>({ el: el, api: api })
+  <span class="var">cache</span>.<span class="built_in">push</span>({ el: <span class="param">el</span>, api: <span class="param">api</span> })
 }
-<span class="md-code-function"><span class="kw">function</span> <span class="fn">find</span> <span class="params">(el)</span> </span>{
+<span class="md-code-function"><span class="kw">function</span> <span class="fn">find</span> <span class="params">(<span class="param">el</span>)</span> </span>{
   <span class="kw3">for</span> (<span class="var">i</span> <span class="op">=</span> <span class="num">0</span>; <span class="var">i</span> <span class="op">&lt;</span> <span class="var">cache</span>.<span class="built_in">length</span>; <span class="var">i</span><span class="op">++</span>) {
-    <span class="kw">if</span> (<span class="var">cache</span>[<span class="var">i</span>].el <span class="op">===</span> el) {
-      <span class="kw3">return</span> <span class="var">cache</span>[<span class="var">i</span>].api
+    <span class="kw">if</span> (<span class="var">cache</span>[<span class="var">i</span>].<span class="param">el</span> <span class="op">===</span> <span class="param">el</span>) {
+      <span class="kw3">return</span> <span class="var">cache</span>[<span class="var">i</span>].<span class="param">api</span>
     }
   }
 }
 <span class="md-code-function"><span class="kw">function</span> <span class="fn">destroy</span> <span class="params">(el)</span> </span>{
   <span class="kw3">for</span> (<span class="var">i</span> <span class="op">=</span> <span class="num">0</span>; <span class="var">i</span> <span class="op">&lt;</span> <span class="var">cache</span>.<span class="built_in">length</span>; <span class="var">i</span><span class="op">++</span>) {
-    <span class="kw">if</span> (<span class="var">cache</span>[<span class="var">i</span>].el <span class="op">===</span> el) {
+    <span class="kw">if</span> (<span class="var">cache</span>[<span class="var">i</span>].<span class="param">el</span> <span class="op">===</span> <span class="param">el</span>) {
       <span class="var">cache</span>.<span class="built_in">splice</span>(<span class="var">i</span>, <span class="num">1</span>)
       <span class="kw3">return</span>
     }
   }
 }
 <span class="md-code-function"><span class="kw">function</span> <span class="fn">thing</span> <span class="params">(el)</span> </span>{
-  <span class="kw">var</span> <span class="var">api</span> <span class="op">=</span> <span class="fn">find</span>(el)
+  <span class="kw">var</span> <span class="var">api</span> <span class="op">=</span> <span class="fn">find</span>(<span class="param">el</span>)
   <span class="kw">if</span> (<span class="var">api</span>) {
     <span class="kw3">return</span> <span class="var">api</span>
   }
@@ -3382,9 +3382,9 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
     method: method,
     method2: method2,
     method3: method3,
-    destroy: destroy.<span class="built_in">bind</span>(<span class="md-code-null">null</span>, el)
+    destroy: destroy.<span class="built_in">bind</span>(<span class="md-code-null">null</span>, <span class="param">el</span>)
   }
-  <span class="kw">put</span>(el, <span class="var">api</span>)
+  <span class="kw">put</span>(<span class="param">el</span>, <span class="var">api</span>)
   <span class="kw3">return</span> <span class="var">api</span>
 }
 </code></pre>
@@ -3396,16 +3396,16 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">cache</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-map">Map</span>()
 <span class="md-code-function"><span class="kw">function</span> <span class="fn">put</span> <span class="params">(el, api)</span> </span>{
-  <mark class="md-mark md-code-mark"><span class="var">cache</span>.<span class="built_in">set</span>(el, api)</mark>
+  <mark class="md-mark md-code-mark"><span class="var">cache</span>.<span class="built_in">set</span>(<span class="param">el</span>, <span class="param">api</span>)</mark>
 }
-<span class="md-code-function"><span class="kw">function</span> <span class="fn">find</span> <span class="params">(el)</span> </span>{
-  <span class="kw3">return</span> <mark class="md-mark md-code-mark"><span class="var">cache</span>.<span class="built_in">get</span>(el)</mark>
+<span class="md-code-function"><span class="kw">function</span> <span class="fn">find</span> <span class="params">(<span class="param">el</span>)</span> </span>{
+  <span class="kw3">return</span> <mark class="md-mark md-code-mark"><span class="var">cache</span>.<span class="built_in">get</span>(<span class="param">el</span>)</mark>
 }
-<span class="md-code-function"><span class="kw">function</span> <span class="fn">destroy</span> <span class="params">(el)</span> </span>{
-  <mark class="md-mark md-code-mark"><span class="var">cache</span>.<span class="built_in">delete</span>(el)</mark>
+<span class="md-code-function"><span class="kw">function</span> <span class="fn">destroy</span> <span class="params">(<span class="param">el</span>)</span> </span>{
+  <mark class="md-mark md-code-mark"><span class="var">cache</span>.<span class="built_in">delete</span>(<span class="param">el</span>)</mark>
 }
-<span class="md-code-function"><span class="kw">function</span> <span class="fn">thing</span> <span class="params">(el)</span> </span>{
-  <span class="kw">var</span> <span class="var">api</span> <span class="op">=</span> <span class="fn">find</span>(el)
+<span class="md-code-function"><span class="kw">function</span> <span class="fn">thing</span> <span class="params">(<span class="param">el</span>)</span> </span>{
+  <span class="kw">var</span> <span class="var">api</span> <span class="op">=</span> <span class="fn">find</span>(<span class="param">el</span>)
   <span class="kw">if</span> (<span class="var">api</span>) {
     <span class="kw3">return</span> <span class="var">api</span>
   }
@@ -3413,9 +3413,9 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
     method: method,
     method2: method2,
     method3: method3,
-    destroy: destroy.<span class="built_in">bind</span>(<span class="md-code-null">null</span>, el)
+    destroy: destroy.<span class="built_in">bind</span>(<span class="md-code-null">null</span>, <span class="param">el</span>)
   }
-  <span class="kw">put</span>(el, <span class="var">api</span>)
+  <span class="kw">put</span>(<span class="param">el</span>, <span class="var">api</span>)
   <span class="kw3">return</span> <span class="var">api</span>
 }
 </code></pre>
@@ -3427,7 +3427,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">cache</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-map">Map</span>()
 <span class="md-code-function"><span class="kw">function</span> <span class="fn">thing</span> <span class="params">(el)</span> </span>{
-  <span class="kw">var</span> <span class="var">api</span> <span class="op">=</span> <mark class="md-mark md-code-mark"><span class="var">cache</span>.<span class="built_in">get</span>(el)</mark>
+  <span class="kw">var</span> <span class="var">api</span> <span class="op">=</span> <mark class="md-mark md-code-mark"><span class="var">cache</span>.<span class="built_in">get</span>(<span class="param">el</span>)</mark>
   <span class="kw">if</span> (<span class="var">api</span>) {
     <span class="kw3">return</span> <span class="var">api</span>
   }
@@ -3435,9 +3435,9 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
     method: method,
     method2: method2,
     method3: method3,
-    destroy: () <span class="op">=&gt;</span> <mark class="md-mark md-code-mark"><span class="var">cache</span>.<span class="built_in">delete</span>(el)</mark>
+    destroy: () <span class="op">=&gt;</span> <mark class="md-mark md-code-mark"><span class="var">cache</span>.<span class="built_in">delete</span>(<span class="param">el</span>)</mark>
   }
-  <mark class="md-mark md-code-mark"><span class="var">cache</span>.<span class="built_in">set</span>(el, <span class="var">api</span>)</mark>
+  <mark class="md-mark md-code-mark"><span class="var">cache</span>.<span class="built_in">set</span>(<span class="param">el</span>, <span class="var">api</span>)</mark>
   <span class="kw3">return</span> <span class="var">api</span>
 }
 </code></pre>
@@ -3851,9 +3851,9 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {
-  <span class="built_in">get</span> (target, key) {
+  <span class="built_in">get</span> <span class="params">(target, key)</span> {
     <span class="built_in">console.info</span>(<span class="str">`Get on property "${key}"`</span>)
-    <span class="kw3">return</span> target[key]
+    <span class="kw3">return</span> <span class="param">target</span>[<span class="param">key</span>]
   }
 }
 <span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> {}
@@ -3878,17 +3878,17 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {
-  <span class="built_in">get</span> (target, key) {
-    <span class="fn">invariant</span>(key, <span class="str">'get'</span>)
-    <span class="kw3">return</span> target[key]
+  <span class="built_in">get</span> <span class="params">(target, key)</span> {
+    <span class="fn">invariant</span>(<span class="param">key</span>, <span class="str">'get'</span>)
+    <span class="kw3">return</span> <span class="param">target</span>[<span class="param">key</span>]
   },
-  <span class="built_in">set</span> (target, key, value) {
-    <span class="fn">invariant</span>(key, <span class="str">'set'</span>)
+  <span class="built_in">set</span> <span class="params">(target, key, value)</span> {
+    <span class="fn">invariant</span>(<span class="param">key</span>, <span class="str">'set'</span>)
     <mark class="md-mark md-code-mark"><span class="kw3">return</span> <span class="md-code-boolean">true</span></mark>
   }
 }
-<span class="md-code-function"><span class="kw">function</span> <span class="fn">invariant</span> <span class="params">(key, action)</span> </span>{
-  <span class="kw">if</span> (key[<span class="num">0</span>] <span class="op">===</span> <span class="str">'_'</span>) {
+<span class="md-code-function"><span class="kw">function</span> <span class="fn">invariant</span> <span class="params">(<span class="param">key</span>, action)</span> </span>{
+  <span class="kw">if</span> (<span class="param">key</span>[<span class="num">0</span>] <span class="op">===</span> <span class="str">'_'</span>) {
     <span class="kw">throw</span> <span class="kw">new</span> <span class="md-code-error">Error</span>(<mark class="md-mark md-code-mark"><span class="str">`Invalid attempt to ${action} private "${key}" property`</span></mark>)
   }
 }
@@ -3915,19 +3915,19 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="md-code-function"><span class="kw">function</span> <span class="fn">proxied</span> <span class="params">()</span> </span>{
   <span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> {}
   <span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {
-    <span class="kw">get</span> (<span class="var">target</span>, key) {
-      <span class="fn">invariant</span>(key, <span class="str">'get'</span>)
-      <span class="kw3">return</span> <span class="var">target</span>[key]
+    <span class="kw">get</span> <span class="params">(target, key)</span> {
+      <span class="fn">invariant</span>(<span class="param">key</span>, <span class="str">'get'</span>)
+      <span class="kw3">return</span> <span class="param">target</span>[<span class="param">key</span>]
     },
-    <span class="kw">set</span> (target, key, value) {
-      <span class="fn">invariant</span>(key, <span class="str">'set'</span>)
+    <span class="kw">set</span> <span class="params">(target, key, value)</span> {
+      <span class="fn">invariant</span>(<span class="param">key</span>, <span class="str">'set'</span>)
       <span class="kw3">return</span> <span class="md-code-boolean">true</span>
     }
   }
-  <span class="kw3">return</span> <mark class="md-mark md-code-mark"><span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, <span class="var">handler</span>)</mark>
+  <span class="kw3">return</span> <mark class="md-mark md-code-mark"><span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="param">target</span>, <span class="var">handler</span>)</mark>
 }
 <span class="md-code-function"><span class="kw">function</span> <span class="fn">invariant</span> <span class="params">(key, action)</span> </span>{
-  <span class="kw">if</span> (key[<span class="num">0</span>] <span class="op">===</span> <span class="str">'_'</span>) {
+  <span class="kw">if</span> (<span class="param">key</span>[<span class="num">0</span>] <span class="op">===</span> <span class="str">'_'</span>) {
     <span class="kw">throw</span> <span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">`Invalid attempt to ${action} private "${key}" property`</span>)
   }
 }
@@ -3950,12 +3950,12 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">validator</span> <span class="op">=</span> {
-  <span class="kw">set</span> (target, key, value) {
-    <span class="kw">if</span> (key <span class="op">===</span> <span class="str">'age'</span>) {
-      <span class="kw">if</span> (<span class="kw">typeof</span> value <span class="op">!==</span> <span class="str">'number'</span> <span class="op">||</span> <span class="cls">Number</span>.<span class="built_in">isNaN</span>(value)) {
+  <span class="kw">set</span> <span class="params">(target, key, value)</span> {
+    <span class="kw">if</span> (<span class="param">key</span> <span class="op">===</span> <span class="str">'age'</span>) {
+      <span class="kw">if</span> (<span class="kw">typeof</span> <span class="param">value</span> <span class="op">!==</span> <span class="str">'number'</span> <span class="op">||</span> <span class="cls">Number</span>.<span class="built_in">isNaN</span>(<span class="param">value</span>)) {
         <span class="kw">throw</span> <span class="kw">new</span> <span class="md-code-error">TypeError</span>(<span class="str">'Age must be a number'</span>)
       }
-      <span class="kw">if</span> (value <span class="op">&lt;=</span> <span class="num">0</span>) {
+      <span class="kw">if</span> (<span class="param">value</span> <span class="op">&lt;=</span> <span class="num">0</span>) {
         <span class="kw">throw</span> <span class="kw">new</span> <span class="md-code-error">TypeError</span>(<span class="str">'Age must be a positive number'</span>)
       }
     }
@@ -3987,13 +3987,13 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> {}
 <span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {}
-<span class="kw">var</span> <mark class="md-mark md-code-mark">{<span class="var">proxy</span>, revoke} <span class="op">=</span> <span class="md-code-proxy">Proxy</span>.<span class="built_in">revocable</span>(<span class="var">target</span>, <span class="var">handler</span>)</mark>
+<span class="kw">var</span> <mark class="md-mark md-code-mark">{<span class="var">proxy</span>, <span class="var">revoke</span>} <span class="op">=</span> <span class="md-code-proxy">Proxy</span>.<span class="built_in">revocable</span>(<span class="var">target</span>, <span class="var">handler</span>)</mark>
 <span class="var">proxy</span>.a <span class="op">=</span> <span class="str">'b'</span>
 <span class="kw4">console.log</span>(<span class="var">proxy</span>.a)
 <span class="com">// &lt;- 'b'</span>
-<mark class="md-mark md-code-mark">revoke()</mark>
-revoke()
-revoke()
+<mark class="md-mark md-code-mark"><span class="var">revoke</span>()</mark>
+<span class="var">revoke</span>()
+<span class="var">revoke</span>()
 <span class="kw4">console.log</span>(<span class="var">proxy</span>.a)
 <span class="com">// &lt;- TypeError: illegal operation attempted on a revoked proxy</span>
 </code></pre>
@@ -4086,23 +4086,23 @@ revoke()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {
-  <span class="built_in">get</span> (target, key) {
-    <span class="fn">invariant</span>(key, <span class="str">'get'</span>)
-    <span class="kw3">return</span> target[key]
+  <span class="built_in">get</span> <span class="params">(target, key)</span> {
+    <span class="fn">invariant</span>(<span class="param">key</span>, <span class="str">'get'</span>)
+    <span class="kw3">return</span> <span class="param">target</span>[<span class="param">key</span>]
   },
-  <span class="built_in">set</span> (target, key, value) {
-    <span class="fn">invariant</span>(key, <span class="str">'set'</span>)
+  <span class="built_in">set</span> <span class="params">(target, key, value)</span> {
+    <span class="fn">invariant</span>(<span class="param">key</span>, <span class="str">'set'</span>)
     <span class="kw3">return</span> <span class="md-code-boolean">true</span>
   },
-  <mark class="md-mark md-code-mark"><span class="built_in">has</span> (target, key) {</mark>
-    <span class="kw">if</span> (key[<span class="num">0</span>] <span class="op">===</span> <span class="str">'_'</span>) {
+  <mark class="md-mark md-code-mark"><span class="built_in">has</span> (<span class="param">target</span>, <span class="param">key</span>) {</mark>
+    <span class="kw">if</span> (<span class="param">key</span>[<span class="num">0</span>] <span class="op">===</span> <span class="str">'_'</span>) {
       <mark class="md-mark md-code-mark"><span class="kw3">return</span> <span class="md-code-boolean">false</span></mark>
     }
-    <mark class="md-mark md-code-mark"><span class="kw3">return</span> key <span class="kw">in</span> target</mark>
+    <mark class="md-mark md-code-mark"><span class="kw3">return</span> <span class="param">key</span> <span class="kw">in</span> <span class="param">target</span></mark>
   }
 }
 <span class="md-code-function"><span class="kw">function</span> <span class="fn">invariant</span> <span class="params">(key, action)</span> </span>{
-  <span class="kw">if</span> (key[<span class="num">0</span>] <span class="op">===</span> <span class="str">'_'</span>) {
+  <span class="kw">if</span> (<span class="param">key</span>[<span class="num">0</span>] <span class="op">===</span> <span class="str">'_'</span>) {
     <span class="kw">throw</span> <span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">`Invalid attempt to ${action} private "${key}" property`</span>)
   }
 }
@@ -4165,21 +4165,21 @@ revoke()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {
-  <span class="built_in">get</span> (target, key) {
-    <span class="fn">invariant</span>(key, <span class="str">'get'</span>)
-    <span class="kw3">return</span> target[key]
+  <span class="built_in">get</span> <span class="params">(target, key)</span> {
+    <span class="fn">invariant</span>(<span class="param">key</span>, <span class="str">'get'</span>)
+    <span class="kw3">return</span> <span class="param">target</span>[<span class="param">key</span>]
   },
-  <span class="built_in">set</span> (target, key, value) {
-    <span class="fn">invariant</span>(key, <span class="str">'set'</span>)
+  <span class="built_in">set</span> <span class="params">(target, key, value)</span> {
+    <span class="fn">invariant</span>(<span class="param">key</span>, <span class="str">'set'</span>)
     <span class="kw3">return</span> <span class="md-code-boolean">true</span>
   },
-  <mark class="md-mark md-code-mark">deleteProperty (target, key) {</mark>
-    <span class="fn">invariant</span>(key, <span class="str">'delete'</span>)
+  <mark class="md-mark md-code-mark">deleteProperty <span class="params">(target, key)</span> {</mark>
+    <span class="fn">invariant</span>(<span class="param">key</span>, <span class="str">'delete'</span>)
     <span class="kw3">return</span> <span class="md-code-boolean">true</span>
   }
 }
 <span class="md-code-function"><span class="kw">function</span> <span class="fn">invariant</span> <span class="params">(key, action)</span> </span>{
-  <span class="kw">if</span> (key[<span class="num">0</span>] <span class="op">===</span> <span class="str">'_'</span>) {
+  <span class="kw">if</span> (<span class="param">key</span>[<span class="num">0</span>] <span class="op">===</span> <span class="str">'_'</span>) {
     <span class="kw">throw</span> <span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">`Invalid attempt to ${action} private "${key}" property`</span>)
   }
 }
@@ -4243,7 +4243,7 @@ revoke()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {
-  defineProperty (target, key, descriptor) {
+  defineProperty <span class="params">(target, key, descriptor)</span> {
     <mark class="md-mark md-code-mark"><span class="kw3">return</span> <span class="md-code-boolean">false</span></mark>
   }
 }
@@ -4259,13 +4259,13 @@ revoke()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {
-  defineProperty (target, key, descriptor) {
-    <mark class="md-mark md-code-mark"><span class="fn">invariant</span>(key, <span class="str">'define'</span>)</mark>
+  defineProperty <span class="params">(target, key, descriptor)</span> {
+    <mark class="md-mark md-code-mark"><span class="fn">invariant</span>(<span class="param">key</span>, <span class="str">'define'</span>)</mark>
     <span class="kw3">return</span> <span class="md-code-boolean">true</span>
   }
 }
 <span class="md-code-function"><span class="kw">function</span> <span class="fn">invariant</span> <span class="params">(key, action)</span> </span>{
-  <span class="kw">if</span> (key[<span class="num">0</span>] <span class="op">===</span> <span class="str">'_'</span>) {
+  <span class="kw">if</span> (<span class="param">key</span>[<span class="num">0</span>] <span class="op">===</span> <span class="str">'_'</span>) {
     <span class="kw">throw</span> <span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">`Invalid attempt to ${action} private "${key}" property`</span>)
   }
 }
@@ -4294,11 +4294,11 @@ revoke()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {
-  <span class="built_in">has</span> (target, key) {
-    <span class="kw">if</span> (key[<span class="num">0</span>] <span class="op">===</span> <span class="str">'_'</span>) {
+  <span class="built_in">has</span> <span class="params">(target, key)</span> {
+    <span class="kw">if</span> (<span class="param">key</span>[<span class="num">0</span>] <span class="op">===</span> <span class="str">'_'</span>) {
       <span class="kw3">return</span> <span class="md-code-boolean">false</span>
     }
-    <span class="kw3">return</span> key <span class="kw">in</span> target
+    <span class="kw3">return</span> <span class="param">key</span> <span class="kw">in</span> <span class="param">target</span>
   }
 }
 <span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> { _prop: <span class="str">'foo'</span> }
@@ -4315,14 +4315,14 @@ revoke()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {
-  <span class="built_in">has</span> (target, key) {
-    <span class="kw">if</span> (key[<span class="num">0</span>] <span class="op">===</span> <span class="str">'_'</span>) {
+  <span class="built_in">has</span> <span class="param">(target, key)</span> {
+    <span class="kw">if</span> (<span class="param">key</span>[<span class="num">0</span>] <span class="op">===</span> <span class="str">'_'</span>) {
       <span class="kw3">return</span> <span class="md-code-boolean">false</span>
     }
-    <span class="kw3">return</span> key <span class="kw">in</span> target
+    <span class="kw3">return</span> <span class="param">key</span> <span class="kw">in</span> <span class="param">target</span>
   },
-  <span class="built_in">enumerate</span> (target) {
-    <span class="kw3">return</span> <span class="cls">Object</span>.<span class="built_in">keys</span>(target).<span class="built_in">filter</span>(key <span class="op">=&gt;</span> key[<span class="num">0</span>] <span class="op">!==</span> <span class="str">'_'</span>)<mark class="md-mark md-code-mark">[<span class="md-code-symbol">Symbol</span>.<span class="built_in">iterator</span>]()</mark>
+  <span class="built_in">enumerate</span> <span class="param">(target)</span> {
+    <span class="kw3">return</span> <span class="cls">Object</span>.<span class="built_in">keys</span>(<span class="param">target</span>).<span class="built_in">filter</span>(key <span class="op">=&gt;</span> key[<span class="num">0</span>] <span class="op">!==</span> <span class="str">'_'</span>)<mark class="md-mark md-code-mark">[<span class="md-code-symbol">Symbol</span>.<span class="built_in">iterator</span>]()</mark>
   }
 }
 <span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> { pony: <span class="str">'foo'</span>, _bar: <span class="str">'baz'</span>, _prop: <span class="str">'foo'</span> }
@@ -4345,8 +4345,8 @@ revoke()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {
-  <span class="built_in">ownKeys</span> (target) {
-    <mark class="md-mark md-code-mark"><span class="kw3">return</span> <span class="cls">Reflect</span>.<span class="built_in">ownKeys</span>(target)</mark>
+  <span class="built_in">ownKeys</span> <span class="params">(target)</span> {
+    <mark class="md-mark md-code-mark"><span class="kw3">return</span> <span class="cls">Reflect</span>.<span class="built_in">ownKeys</span>(<span class="param">target</span>)</mark>
   }
 }
 </code></pre>
@@ -4383,8 +4383,8 @@ revoke()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {
-  <span class="built_in">ownKeys</span> (target) {
-    <span class="kw3">return</span> <span class="cls">Reflect</span>.<span class="built_in">ownKeys</span>(target).<span class="built_in">filter</span>(<mark class="md-mark md-code-mark">key <span class="op">=&gt;</span> key[<span class="num">0</span>] !== <span class="str">'_'</span></mark>)
+  <span class="built_in">ownKeys</span> <span class="params">(target)</span> {
+    <span class="kw3">return</span> <span class="cls">Reflect</span>.<span class="built_in">ownKeys</span>(<span class="param">target</span>).<span class="built_in">filter</span>(<mark class="md-mark md-code-mark">key <span class="op">=&gt;</span> key[<span class="num">0</span>] <span class="op">!==</span> <span class="str">'_'</span></mark>)
   }
 }
 </code></pre>
@@ -4418,7 +4418,7 @@ revoke()
   [<mark class="md-mark md-code-mark"><span class="md-code-symbol">Symbol</span>(<span class="str">'secret'</span>)</mark>]: <span class="str">'baz'</span>,
   pony: <span class="str">'ponyfoo'</span>
 }
-<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(target, handler)
+<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, handler)
 <span class="kw3">for</span> (<span class="kw">let</span> <span class="var">key</span> <span class="kw">of</span> <mark class="md-mark md-code-mark"><span class="cls">Object</span>.getOwnPropertySymbols(<span class="var">proxy</span>)</mark>) {
   <span class="kw4">console.log</span>(<span class="var">key</span>)
   <span class="com">// &lt;- Symbol(secret)</span>
@@ -4453,8 +4453,8 @@ revoke()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {
-  apply (target, ctx, args) {
-    <span class="kw3">return</span> <mark class="md-mark md-code-mark"><span class="cls">Reflect</span>.<span class="built_in">apply</span>(<span class="op">...</span>arguments)</mark>
+  <span class="fn">apply</span> <span class="params">(target, ctx, args)</span> {
+    <span class="kw3">return</span> <mark class="md-mark md-code-mark"><span class="cls">Reflect</span>.<span class="fn">apply</span>(<span class="op">...</span>arguments)</mark>
   }
 }
 </code></pre>
@@ -4467,12 +4467,12 @@ revoke()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">twice</span> <span class="op">=</span> {
-  apply (target, ctx, args) {
-    <span class="kw3">return</span> <span class="cls">Reflect</span>.<span class="built_in">apply</span>(<span class="op">...</span>arguments) <mark class="md-mark md-code-mark">* <span class="num">2</span></mark>
+  <span class="fn">apply</span> <span class="params">(target, ctx, args)</span> {
+    <span class="kw3">return</span> <span class="cls">Reflect</span>.<span class="fn">apply</span>(<span class="op">...</span>arguments) <mark class="md-mark md-code-mark">* <span class="num">2</span></mark>
   }
 }
 <span class="md-code-function"><span class="kw">function</span> <span class="fn">sum</span> <span class="params">(left, right)</span> </span>{
-  <span class="kw3">return</span> left <span class="op">+</span> right
+  <span class="kw3">return</span> <span class="param">left</span> <span class="op">+</span> <span class="param">right</span>
 }
 <span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <mark class="md-mark md-code-mark"><span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="fn">sum</span>, <span class="var">twice</span>)</mark>
 <span class="kw4">console.log</span>(<span class="var">proxy</span>(<span class="num">1</span>, <span class="num">2</span>))
@@ -4570,8 +4570,8 @@ revoke()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {
-  construct (target, args) {
-    <span class="kw3">return</span> <span class="kw">new</span> target(<mark class="md-mark md-code-mark"><span class="op">...</span>args</mark>)
+  <span class="fn">construct</span> <span class="params">(target, args)</span> {
+    <span class="kw3">return</span> <span class="kw">new</span> <span class="param">target</span>(<mark class="md-mark md-code-mark"><span class="op">...</span><span class="param">args</span></mark>)
   }
 }
 </code></pre>
@@ -4582,9 +4582,9 @@ revoke()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="md-code-function"><span class="kw">function</span> <span class="fn">target</span> <span class="params">(a, b, c)</span> </span>{
-  <span class="kw3">this</span>.a <span class="op">=</span> a
-  <span class="kw3">this</span>.b <span class="op">=</span> b
-  <span class="kw3">this</span>.c <span class="op">=</span> c
+  <span class="kw3">this</span>.a <span class="op">=</span> <span class="param">a</span>
+  <span class="kw3">this</span>.b <span class="op">=</span> <span class="param">b</span>
+  <span class="kw3">this</span>.c <span class="op">=</span> <span class="param">c</span>
 }
 <span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="cls">Proxy</span>(<span class="fn">target</span>, <span class="var">handler</span>)
 <span class="kw4">console.log</span>(<span class="kw">new</span> <span class="var">proxy</span>(<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>))
@@ -4603,15 +4603,15 @@ revoke()
 <span class="kw">class</span> <span class="cls">SportsCar</span> <span class="kw">extends</span> <span class="cls">Car</span> {}
 <span class="md-code-function"><span class="kw">function</span> <span class="fn">target</span> <span class="params">()</span> </span>{}
 <span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {
-  construct (<span class="fn">target</span>, args) {
-    <span class="kw">var</span> <mark class="md-mark md-code-mark">[<span class="var">status</span>]</mark> <span class="op">=</span> args
+  <span class="fn">construct</span> <span class="params">(target, args)</span> {
+    <span class="kw">var</span> <mark class="md-mark md-code-mark">[<span class="var">status</span>]</mark> <span class="op">=</span> <span class="param">args</span>
     <span class="kw">if</span> (<span class="var">status</span> <span class="op">===</span> <span class="str">'nsa'</span>) {
-      <span class="kw3">return</span> <mark class="md-mark md-code-mark"><span class="kw">new</span> <span class="cls">SurveillanceVan</span>(<span class="op">...</span>args)</mark>
+      <span class="kw3">return</span> <mark class="md-mark md-code-mark"><span class="kw">new</span> <span class="cls">SurveillanceVan</span>(<span class="op">...</span><span class="param">args</span>)</mark>
     }
     <span class="kw">if</span> (<span class="var">status</span> <span class="op">===</span> <span class="str">'single'</span>) {
-      <span class="kw3">return</span> <span class="kw">new</span> <span class="cls">SportsCar</span>(<span class="op">...</span>args)
+      <span class="kw3">return</span> <span class="kw">new</span> <span class="cls">SportsCar</span>(<span class="op">...</span><span class="param">args</span>)
     }
-    <span class="kw3">return</span> <span class="kw">new</span> <span class="cls">SUV</span>(<span class="op">...</span>args) <span class="com">// family</span>
+    <span class="kw3">return</span> <span class="kw">new</span> <span class="cls">SUV</span>(<span class="op">...</span><span class="param">args</span>) <span class="com">// family</span>
   }
 }
 </code></pre>
@@ -4647,7 +4647,7 @@ revoke()
   getPrototypeOf: <mark class="md-mark md-code-mark">target <span class="op">=&gt;</span> <span class="kw">Array</span>.<span class="built_in">prototype</span></mark>
 }
 <span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> {}
-<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(target, handler)
+<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, handler)
 <span class="kw4">console.log</span>(<span class="var">proxy</span> <span class="kw">instanceof</span> <span class="kw">Array</span>)
 <span class="com">// &lt;- true</span>
 <span class="kw4">console.log</span>(<span class="var">proxy</span>.<span class="built_in">push</span>)
@@ -4660,13 +4660,13 @@ revoke()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {
-  getPrototypeOf: target <span class="op">=&gt;</span> <span class="kw">Array</span>.prototype,
-  <span class="built_in">get</span> (target, key) {
-    <span class="kw3">return</span> <span class="cls">Reflect</span>.<span class="built_in">get</span>(target, key) <span class="op">||</span> <mark class="md-mark md-code-mark"><span class="cls">Reflect</span>.<span class="built_in">get</span>(<span class="kw">Array</span>.<span class="built_in">prototype</span>, key)</mark>
+  getPrototypeOf: target <span class="op">=&gt;</span> <span class="kw">Array</span>.<span class="built_in">prototype</span>,
+  <span class="built_in">get</span> <span class="params">(target, key)</span> {
+    <span class="kw3">return</span> <span class="cls">Reflect</span>.<span class="built_in">get</span>(<span class="param">target</span>, <span class="param">key</span>) <span class="op">||</span> <mark class="md-mark md-code-mark"><span class="cls">Reflect</span>.<span class="built_in">get</span>(<span class="kw">Array</span>.<span class="built_in">prototype</span>, <span class="param">key</span>)</mark>
   }
 }
 <span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> {}
-<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(target, handler)
+<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, handler)
 <span class="kw4">console.log</span>(<span class="var">proxy</span>.<span class="built_in">push</span>)
 <span class="com">// &lt;- function push () { [native code] }</span>
 <mark class="md-mark md-code-mark"><span class="var">proxy</span>.<span class="built_in">push</span>(<span class="str">'a'</span>, <span class="str">'b'</span>)</mark>
@@ -4688,13 +4688,13 @@ revoke()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {
-  setPrototypeOf (target, proto) {
-    <mark class="md-mark md-code-mark"><span class="cls">Object</span>.<span class="built_in">setPrototypeOf</span>(target, proto)</mark>
+  <span class="fn">setPrototypeOf</span> <span class="params">(target, proto)</span> {
+    <mark class="md-mark md-code-mark"><span class="cls">Object</span>.<span class="built_in">setPrototypeOf</span>(<span class="param">target</span>, <span class="param">proto</span>)</mark>
   }
 }
 <span class="kw">var</span> <span class="var">proto</span> <span class="op">=</span> {}
 <span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> <span class="md-code-function"><span class="kw">function</span> <span class="params">()</span> </span>{}
-<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(target, handler)
+<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, handler)
 <span class="var">proxy</span>.<span class="built_in">setPrototypeOf</span>(<span class="var">proxy</span>, <span class="var">proto</span>)
 <span class="kw4">console.log</span>(<span class="var">proxy</span>.<span class="built_in">prototype</span> <span class="op">===</span> <span class="var">proto</span>)
 <span class="com">// &lt;- true</span>
@@ -4708,13 +4708,13 @@ revoke()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {
-  setPrototypeOf (target, proto) {
+  <span class="fn">setPrototypeOf</span> <span class="params">(target, proto)</span> {
     <mark class="md-mark md-code-mark"><span class="kw">throw</span> <span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'Changing the prototype is forbidden'</span>)</mark>
   }
 }
 <span class="kw">var</span> <span class="var">proto</span> <span class="op">=</span> {}
 <span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> <span class="md-code-function"><span class="kw">function</span> <span class="params">()</span> </span>{}
-<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(target, handler)
+<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, handler)
 <span class="var">proxy</span>.<span class="built_in">setPrototypeOf</span>(<span class="var">proxy</span>, <span class="var">proto</span>)
 <span class="com">// &lt;- Error: Changing the prototype is forbidden</span>
 </code></pre>
@@ -4735,16 +4735,16 @@ revoke()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {
-  isExtensible (target) {
+  <span class="fn">isExtensible</span> <span class="params">(target)</span> {
     <span class="kw">if</span> (<span class="cls">Math</span>.<span class="built_in">random</span>() <span class="op">&gt;</span>
 <span class="num">0.1</span>) {
       <span class="kw">throw</span> <span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'gotta love sporadic obscure errors!'</span>)
     }
-    <span class="kw3">return</span> <mark class="md-mark md-code-mark"><span class="cls">Object</span>.<span class="built_in">isExtensible</span>(target)</mark>
+    <span class="kw3">return</span> <mark class="md-mark md-code-mark"><span class="cls">Object</span>.<span class="built_in">isExtensible</span>(<span class="param">target</span>)</mark>
   }
 }
 <span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> {}
-<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(target, handler)
+<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, handler)
 <span class="kw4">console.log</span>(<span class="cls">Object</span>.<span class="built_in">isExtensible</span>(<span class="var">proxy</span>))
 <span class="com">// &lt;- true</span>
 <span class="kw4">console.log</span>(<span class="cls">Object</span>.<span class="built_in">isExtensible</span>(<span class="var">proxy</span>))
@@ -4770,11 +4770,11 @@ revoke()
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">mustExtend</span> <span class="op">=</span> <mark class="md-mark md-code-mark"><span class="kw">new</span> <span class="md-code-set">WeakSet</span>()</mark>
 <span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {
-  preventExtensions (target) {
-    <span class="kw">if</span> (<mark class="md-mark md-code-mark"><span class="op">!</span><span class="var">mustExtend</span>.<span class="built_in">has</span>(target)</mark>) {
-      <span class="cls">Object</span>.preventExtensions(target)
+  <span class="fn">preventExtensions</span> <span class="params">(target)</span> {
+    <span class="kw">if</span> (<mark class="md-mark md-code-mark"><span class="op">!</span><span class="var">mustExtend</span>.<span class="built_in">has</span>(<span class="param">target</span>)</mark>) {
+      <span class="cls">Object</span>.<span class="method">preventExtensions</span>(<span class="param">target</span>)
     }
-    <span class="kw3">return</span> <mark class="md-mark md-code-mark"><span class="op">!</span><span class="cls">Object</span>.<span class="built_in">isExtensible</span>(target)</mark>
+    <span class="kw3">return</span> <mark class="md-mark md-code-mark"><span class="op">!</span><span class="cls">Object</span>.<span class="built_in">isExtensible</span>(<span class="param">target</span>)</mark>
   }
 }
 </code></pre>
@@ -4785,9 +4785,9 @@ revoke()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> {}
-<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(target, handler)
-<mark class="md-mark md-code-mark">mustExtend.<span class="built_in">add</span>(target)</mark>
-<span class="cls">Object</span>.preventExtensions(<span class="var">proxy</span>)
+<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, handler)
+<mark class="md-mark md-code-mark"><span class="var">mustExtend</span>.<span class="built_in">add</span>(<span class="param">target</span>)</mark>
+<span class="cls">Object</span>.<span class="method">preventExtensions</span>(<span class="var">proxy</span>)
 <span class="com">// &lt;- TypeError: proxy preventExtensions handler returned false</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -4797,10 +4797,10 @@ revoke()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> {}
-<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(target, handler)
-mustExtend.<span class="built_in">add</span>(target)
-<mark class="md-mark md-code-mark">mustExtend.<span class="built_in">delete</span>(target)</mark>
-<span class="cls">Object</span>.preventExtensions(<span class="var">proxy</span>)
+<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, handler)
+<span class="var">mustExtend</span>.<span class="built_in">add</span>(<span class="var">target</span>)
+<mark class="md-mark md-code-mark"><span class="var">mustExtend</span>.<span class="built_in">delete</span>(<span class="var">target</span>)</mark>
+<span class="cls">Object</span>.<span class="method">preventExtensions</span>(<span class="var">proxy</span>)
 <span class="kw4">console.log</span>(<mark class="md-mark md-code-mark"><span class="cls">Object</span>.<span class="built_in">isExtensible</span>(<span class="var">proxy</span>)</mark>)
 <span class="com">// &lt;- false</span>
 </code></pre>
@@ -9580,7 +9580,7 @@ p.catch(error <span class="op">=&gt;</span> <span class="kw4">console.log</span>
 <hr class="style8" />
 <p>This PDF was created (and styled) by <a href="https://github.com/rsperberg" title="link to Roger Sperberg github page">Roger Sperberg</a>. Any typographical or grammar errors or any issues with the PDF itself can be posted on the <a href="https://github.com/rsperberg/es6-info/issues" title="link to ES6-info issues page on github">issues page</a> of the <a href="https://github.com/rsperberg/es6-info" title="link to ES6-info repository on github">ES6-info repository</a> on GitHub.</p>
 <p>The <a href="https://github.com/rsperberg/es6-info/blob/master/ES6%20Whats%20new%20(smashing).pdf">latest version of this PDF</a> can be downloaded from the <a href="https://github.com/rsperberg/es6-info" title="link to ES6-info repository on github">ES6-info repository</a>.</p>
-<p><b>NOTE:</b> <em>This PDF was last revised on 2015-11-09</em></p>
+<p><b>NOTE:</b> <em>This PDF was last revised on 2015-11-10</em></p>
 <hr class="style8" />
 
 <!--  ++++++++++++++++++++++++++++ ++++++++++++++++++++++++++++++++ +++++++++++++++++++++++++  -->
