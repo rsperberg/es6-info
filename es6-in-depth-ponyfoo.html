@@ -4243,7 +4243,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {
-  defineProperty <span class="params">(target, key, descriptor)</span> {
+  <span class="fn">defineProperty</span> <span class="params">(target, key, descriptor)</span> {
     <mark class="md-mark md-code-mark"><span class="kw3">return</span> <span class="md-code-boolean">false</span></mark>
   }
 }
@@ -4468,7 +4468,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">twice</span> <span class="op">=</span> {
   <span class="fn">apply</span> <span class="params">(target, ctx, args)</span> {
-    <span class="kw3">return</span> <span class="cls">Reflect</span>.<span class="fn">apply</span>(<span class="op">...</span>arguments) <mark class="md-mark md-code-mark">* <span class="num">2</span></mark>
+    <span class="kw3">return</span> <span class="cls">Reflect</span>.<span class="fn">apply</span>(<span class="op">...</span>arguments) <mark class="md-mark md-code-mark"><span class="op">*</span> <span class="num">2</span></mark>
   }
 }
 <span class="md-code-function"><span class="kw">function</span> <span class="fn">sum</span> <span class="params">(left, right)</span> </span>{
@@ -4647,7 +4647,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
   getPrototypeOf: <mark class="md-mark md-code-mark">target <span class="op">=&gt;</span> <span class="kw">Array</span>.<span class="built_in">prototype</span></mark>
 }
 <span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> {}
-<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, handler)
+<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, <span class="var">handler</span>)
 <span class="kw4">console.log</span>(<span class="var">proxy</span> <span class="kw">instanceof</span> <span class="kw">Array</span>)
 <span class="com">// &lt;- true</span>
 <span class="kw4">console.log</span>(<span class="var">proxy</span>.<span class="built_in">push</span>)
@@ -4666,7 +4666,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
   }
 }
 <span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> {}
-<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, handler)
+<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, <span class="var">handler</span>)
 <span class="kw4">console.log</span>(<span class="var">proxy</span>.<span class="built_in">push</span>)
 <span class="com">// &lt;- function push () { [native code] }</span>
 <mark class="md-mark md-code-mark"><span class="var">proxy</span>.<span class="built_in">push</span>(<span class="str">'a'</span>, <span class="str">'b'</span>)</mark>
@@ -4694,7 +4694,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 }
 <span class="kw">var</span> <span class="var">proto</span> <span class="op">=</span> {}
 <span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> <span class="md-code-function"><span class="kw">function</span> <span class="params">()</span> </span>{}
-<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, handler)
+<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, <span class="var">handler</span>)
 <span class="var">proxy</span>.<span class="built_in">setPrototypeOf</span>(<span class="var">proxy</span>, <span class="var">proto</span>)
 <span class="kw4">console.log</span>(<span class="var">proxy</span>.<span class="built_in">prototype</span> <span class="op">===</span> <span class="var">proto</span>)
 <span class="com">// &lt;- true</span>
@@ -4714,12 +4714,11 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 }
 <span class="kw">var</span> <span class="var">proto</span> <span class="op">=</span> {}
 <span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> <span class="md-code-function"><span class="kw">function</span> <span class="params">()</span> </span>{}
-<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, handler)
+<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, <span class="var">handler</span>)
 <span class="var">proxy</span>.<span class="built_in">setPrototypeOf</span>(<span class="var">proxy</span>, <span class="var">proto</span>)
 <span class="com">// &lt;- Error: Changing the prototype is forbidden</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
-
 
 <p>Then again, you may want to fail silently with no error being thrown at all if you’d rather confuse the consumer — and that may just make them go away.</p>
 
@@ -4744,7 +4743,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
   }
 }
 <span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> {}
-<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, handler)
+<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, <span class="var">handler</span>)
 <span class="kw4">console.log</span>(<span class="cls">Object</span>.<span class="built_in">isExtensible</span>(<span class="var">proxy</span>))
 <span class="com">// &lt;- true</span>
 <span class="kw4">console.log</span>(<span class="cls">Object</span>.<span class="built_in">isExtensible</span>(<span class="var">proxy</span>))
@@ -4785,7 +4784,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> {}
-<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, handler)
+<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, <span class="var">handler</span>)
 <mark class="md-mark md-code-mark"><span class="var">mustExtend</span>.<span class="built_in">add</span>(<span class="param">target</span>)</mark>
 <span class="cls">Object</span>.<span class="method">preventExtensions</span>(<span class="var">proxy</span>)
 <span class="com">// &lt;- TypeError: proxy preventExtensions handler returned false</span>
@@ -4797,7 +4796,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> {}
-<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, handler)
+<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, <span class="var">handler</span>)
 <span class="var">mustExtend</span>.<span class="built_in">add</span>(<span class="var">target</span>)
 <mark class="md-mark md-code-mark"><span class="var">mustExtend</span>.<span class="built_in">delete</span>(<span class="var">target</span>)</mark>
 <span class="cls">Object</span>.<span class="method">preventExtensions</span>(<span class="var">proxy</span>)
@@ -4819,18 +4818,18 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {
-  <mark class="md-mark md-code-mark">getOwnPropertyDescriptor (target, key) {</mark>
-    <span class="fn">invariant</span>(key, <span class="str">'get property descriptor for'</span>)
-    <span class="kw3">return</span> <span class="cls">Object</span>.<span class="built_in">getOwnPropertyDescriptor</span>(target, key)
+  <mark class="md-mark md-code-mark"><span class="fn">getOwnPropertyDescriptor</span> <span class="params">(target, key)</span> {</mark>
+    <span class="fn">invariant</span>(<span class="param">key</span>, <span class="str">'get property descriptor for'</span>)
+    <span class="kw3">return</span> <span class="cls">Object</span>.<span class="built_in">getOwnPropertyDescriptor</span>(<span class="param">target</span>, <span class="param">key</span>)
   }
 }
 <span class="md-code-function"><span class="kw">function</span> <span class="fn">invariant</span> <span class="params">(key, action)</span> </span>{
-  <span class="kw">if</span> (key[<span class="num">0</span>] <span class="op">===</span> <span class="str">'_'</span>) {
+  <span class="kw">if</span> (<span class="param">key</span>[<span class="num">0</span>] <span class="op">===</span> <span class="str">'_'</span>) {
     <span class="kw">throw</span> <span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">`Invalid attempt to ${action} private "${key}" property`</span>)
   }
 }
 <span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> {}
-<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(target, handler)
+<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, <span class="var">handler</span>)
 <span class="cls">Object</span>.<span class="built_in">getOwnPropertyDescriptor</span>(<span class="var">proxy</span>, <span class="str">'_foo'</span>)
 <span class="com">// &lt;- <mark class="md-mark md-code-mark">Error: Invalid attempt to get property descriptor for private "_foo" property</mark></span>
 </code></pre>
@@ -4841,15 +4840,15 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">handler</span> <span class="op">=</span> {
-  getOwnPropertyDescriptor (target, key) {
-    <span class="kw">if</span> (key[<span class="num">0</span>] <span class="op">===</span> <span class="str">'_'</span>) {
-      <mark class="md-mark md-code-mark">return</mark>
+  <span class="fn">getOwnPropertyDescriptor</span> <span class="params">(target, key)</span> {
+    <span class="kw">if</span> (<span class="param">key</span>[<span class="num">0</span>] <span class="op">===</span> <span class="str">'_'</span>) {
+      <mark class="md-mark md-code-mark"><span class="kw3">return</span></mark>
     }
-    <span class="kw3">return</span> <span class="cls">Object</span>.<span class="built_in">getOwnPropertyDescriptor</span>(target, key)
+    <span class="kw3">return</span> <span class="cls">Object</span>.<span class="built_in">getOwnPropertyDescriptor</span>(<span class="param">target</span>, <span class="param">key</span>)
   }
 }
 <span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> { <mark class="md-mark md-code-mark">_foo</mark>: <span class="str">'bar'</span>, baz: <span class="str">'tar'</span> }
-<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(target, handler)
+<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, <span class="var">handler</span>)
 <span class="kw4">console.log</span>(<span class="cls">Object</span>.<span class="built_in">getOwnPropertyDescriptor</span>(<span class="var">proxy</span>, <span class="str">'wat'</span>))
 <span class="com">// &lt;- undefined</span>
 <span class="kw4">console.log</span>(<mark class="md-mark md-code-mark"><span class="cls">Object</span>.<span class="built_in">getOwnPropertyDescriptor</span>(<span class="var">proxy</span>, <span class="str">'_foo'</span>)</mark>)
@@ -5019,13 +5018,13 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <p>In ES5, this is a hard problem: How do you create a <code class="md-code md-code-inline">new Foo</code> passing an arbitrary number of arguments? You can’t do it directly, and it’s <a href="https://github.com/bevacqua/dominus/blob/master/src/apply.js#L4-L14" aria-label="Dominus on GitHub has an example where this was necessary">super verbose</a> if you need to do it anyways. You have to create an intermediary object that gets passed the arguments as an <code class="md-code md-code-inline">Array</code>. Then you have <em>that</em> object’s constructor return the result of applying the constructor of the object you originally intended to <code class="md-code md-code-inline">.apply</code>. Straightforward, right? <em>— What do you mean <strong>no</strong>?</em></p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">proto</span> <span class="op">=</span> Dominus.prototype
-<mark class="md-mark md-code-mark">Applied.prototype <span class="op">=</span> <span class="var">proto</span></mark>
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">proto</span> <span class="op">=</span> <span class="clss">Dominus</span>.<span class="built_in">prototype</span>
+<mark class="md-mark md-code-mark"><span class="fn">Applied</span>.<span class="built_in">prototype</span> <span class="op">=</span> <span class="var">proto</span></mark>
 <span class="md-code-function"><span class="kw">function</span> <span class="fn">Applied</span> <span class="params">(args)</span> </span>{
-  <span class="kw3">return</span> Dominus<mark class="md-mark md-code-mark">.<span class="built_in">apply</span>(<span class="kw3">this</span>, args)</mark>
+  <span class="kw3">return</span> <span class="clss">Dominus</span><mark class="md-mark md-code-mark">.<span class="built_in">apply</span>(<span class="kw3">this</span>, args)</mark>
 }
 <span class="md-code-function"><span class="kw">function</span> <span class="fn">apply</span> <span class="params">(a)</span> </span>{
-  <span class="kw3">return</span> <mark class="md-mark md-code-mark">new</mark> Applied(a)
+  <span class="kw3">return</span> <mark class="md-mark md-code-mark"><span class="kw">new</span></mark> <span class="clss">Applied</span>(<span class="param">a</span>)
 }
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -5034,7 +5033,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <p>Using <code class="md-code md-code-inline">apply</code> is actually easy, thankfully.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">apply([<span class="str">'.foo'</span>, <span class="str">'.bar'</span>])
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">apply</span>([<span class="str">'.foo'</span>, <span class="str">'.bar'</span>])
 <span class="built_in">apply.call</span>(<span class="md-code-null">null</span>, <span class="str">'.foo'</span>, <span class="str">'.bar'</span>)
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -5043,7 +5042,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <p>But that was <em>insane</em>, right? <strong>Who does that?</strong> Well, in ES5, everyone who has a valid reason to do it! Luckily ES6 has less insane approaches to this problem. One of them is simply to use the <a href="http://www.diveintopython.net/power_of_introspection/" aria-label="The Power of Introspection -- Dive Into Python">spread operator</a>.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">new</span> Dominus(<mark class="md-mark md-code-mark"><span class="op">...</span>args</mark>)
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">new</span> <span class="cls">Dominus</span>(<mark class="md-mark md-code-mark"><span class="op">...</span>args</mark>)
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -5051,7 +5050,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <p>Another alternative is to go the <code class="md-code md-code-inline">Reflect</code> route.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><mark class="md-mark md-code-mark"><span class="cls">Reflect</span>.<span class="built_in">construct</span></mark>(Dominus, args)
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><mark class="md-mark md-code-mark"><span class="cls">Reflect</span>.<span class="built_in">construct</span></mark>(<span class="cls">Dominus</span>, args)
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -5109,7 +5108,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
   }
 }
 <span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> { a: <span class="str">'b'</span> }
-<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(target, handler)
+<span class="kw">var</span> <span class="var">proxy</span> <span class="op">=</span> <span class="kw">new</span> <span class="md-code-proxy">Proxy</span>(<span class="var">target</span>, <span class="var">handler</span>)
 <span class="kw4">console.log</span>(<span class="var">proxy</span>.a)
 <span class="com">// &lt;- 'b'</span>
 </code></pre>
@@ -5331,7 +5330,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="md-code-function"><span class="kw">function</span> <span class="fn">isNumber</span> <span class="params">(value)</span> </span>{
-  <span class="kw3">return</span> <span class="kw">typeof</span> value <span class="op">===</span> <span class="str">'number'</span> <span class="op">&amp;&amp; !</span><span class="cls">Number</span>.<span class="built_in">isNaN</span>(value)
+  <span class="kw3">return</span> <span class="kw">typeof</span> <span class="param">value</span> <span class="op">===</span> <span class="str">'number'</span> <span class="op">&amp;&amp; !</span><span class="cls">Number</span>.<span class="built_in">isNaN</span>(<span class="param">value</span>)
 }
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -5404,10 +5403,11 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="cls">Number</span>.<span class="built_in">isFinite</span> <span class="op">=</span> <span class="md-code-function"><span class="kw">function</span> <span class="params">(value)</span> </span>{
-  <span class="kw3">return</span> <span class="kw">typeof</span> value <span class="op">===</span> <span class="str">'number'</span> <span class="op">&amp;&amp;</span> <span class="built_in">isFinite</span>(value)
+  <span class="kw3">return</span> <span class="kw">typeof</span> <span class="param">value</span> <span class="op">===</span> <span class="str">'number'</span> <span class="op">&amp;&amp;</span> <span class="built_in">isFinite</span>(<span class="param">value</span>)
 }
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
+
 
 
 <h2 id="numberparseint"><span class="md-heading"><code class="md-code md-code-inline">Number.parseInt</code></span></h2>
@@ -5530,7 +5530,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="cls">Number</span>.<span class="built_in">isInteger</span> <span class="op">=</span> <span class="md-code-function"><span class="kw">function</span> <span class="params">(value)</span> </span>{
-  <span class="kw3">return</span> <mark class="md-mark md-code-mark"><span class="cls">Number</span>.<span class="built_in">isFinite</span>(value)</mark> <span class="op">&amp;&amp;</span> <mark class="md-mark md-code-mark">value <span class="op">%</span> <span class="num">1</span></mark> <span class="op">===</span> <span class="num">0</span>
+  <span class="kw3">return</span> <mark class="md-mark md-code-mark"><span class="cls">Number</span>.<span class="built_in">isFinite</span>(<span class="param">value</span>)</mark> <span class="op">&amp;&amp;</span> <mark class="md-mark md-code-mark"><span class="param">value</span> <span class="op">%</span> <span class="num">1</span></mark> <span class="op">===</span> <span class="num">0</span>
 }
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -5599,7 +5599,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="md-code-function"><span class="kw">function</span> <span class="fn">withinErrorMargin</span> <span class="params">(left, right)</span> </span>{
-  <span class="kw3">return</span> <mark class="md-mark md-code-mark"><span class="cls">Math</span>.<span class="built_in">abs</span>(left - right)</mark> &lt; <span class="cls">Number</span>.<span class="built_in">EPSILON</span>
+  <span class="kw3">return</span> <mark class="md-mark md-code-mark"><span class="cls">Math</span>.<span class="built_in">abs</span>(<span class="param">left</span> <span class="op">-</span> <span class="param">right</span>)</mark> &lt; <span class="cls">Number</span>.<span class="built_in">EPSILON</span>
 }
 <span class="fn">withinErrorMargin</span>(<span class="num">0.1</span> <span class="op">+</span> <span class="num">0.2</span>, <span class="num">0.3</span>)
 <span class="com">// &lt;- true</span>
@@ -5747,11 +5747,11 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="md-code-function"><span class="kw">function</span> <span class="fn">trusty</span> <span class="params">(left, right, result)</span> </span>{
   <span class="kw">if</span> (
-    <span class="cls">Number</span>.<span class="built_in">isSafeInteger</span>(left) <span class="op">&amp;&amp;</span>
-    <span class="cls">Number</span>.<span class="built_in">isSafeInteger</span>(right) <span class="op">&amp;&amp;</span>
-    <span class="cls">Number</span>.<span class="built_in">isSafeInteger</span>(result)
+    <span class="cls">Number</span>.<span class="built_in">isSafeInteger</span>(<span class="param">left</span>) <span class="op">&amp;&amp;</span>
+    <span class="cls">Number</span>.<span class="built_in">isSafeInteger</span>(<span class="param">right</span>) <span class="op">&amp;&amp;</span>
+    <span class="cls">Number</span>.<span class="built_in">isSafeInteger</span>(<span class="param">result</span>)
   ) {
-    <span class="kw3">return</span> result
+    <span class="kw3">return</span> <span class="param">result</span>
   }
   <span class="kw">throw</span> <span class="kw">new</span> <span class="built_in">RangeError</span>(<span class="str">'Operation cannot be trusted!'</span>)
 }
@@ -5931,8 +5931,8 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="cls">Math</span>.<span class="built_in">trunc</span> <span class="op">=</span> <span class="md-code-function"><span class="kw">function</span> <span class="fn">truncate</span> <span class="params">(value)</span> </span>{
-  <span class="kw3">return</span> value <span class="op">&gt;</span>
-<span class="num">0</span> ? <span class="cls">Math</span>.<span class="built_in">floor</span>(value) : <span class="cls">Math</span>.ceil(value)
+  <span class="kw3">return</span> <span class="param">value</span> <span class="op">&gt;</span>
+<span class="num">0</span> ? <span class="cls">Math</span>.<span class="built_in">floor</span>(<span class="param">value</span>) : <span class="cls">Math</span>.<span class="built_in">ceil</span>(<span class="param">value</span>)
 }
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -5980,7 +5980,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="md-code-function"><span class="kw">function</span> <span class="fn">expm1</span> <span class="params">(value)</span> </span>{
-  <span class="kw3">return</span> <span class="cls">Math</span>.<span class="built_in">pow</span>(<span class="cls">Math</span>.<span class="built_in">E</span>, value) - <span class="num">1</span>
+  <span class="kw3">return</span> <span class="cls">Math</span>.<span class="built_in">pow</span>(<span class="cls">Math</span>.<span class="built_in">E</span>, <span class="param">value</span>) <span class="op">-</span> <span class="num">1</span>
 }
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -5990,7 +5990,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="md-code-function"><span class="kw">function</span> <span class="fn">expm1</span> <span class="params">(value)</span> </span>{
-  <span class="kw3">return</span> <span class="cls">Math</span>.<span class="built_in">exp</span>(value) - <span class="num">1</span>
+  <span class="kw3">return</span> <span class="cls">Math</span>.<span class="built_in">exp</span>(<span class="param">value</span>) <span class="op">-</span> <span class="num">1</span>
 }
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -6021,7 +6021,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="md-code-function"><span class="kw">function</span> <span class="fn">log1p</span> <span class="params">(value)</span> </span>{
- <span class="kw3">return</span> <span class="cls">Math</span>.<span class="built_in">log</span>(value + <span class="num">1</span>)
+ <span class="kw3">return</span> <span class="cls">Math</span>.<span class="built_in">log</span>(<span class="param">value</span> <span class="op">+</span> <span class="num">1</span>)
 }
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -6036,7 +6036,6 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <span class="com">// &lt;- <mark class="md-mark md-code-mark">1e-10</mark>, exactly the inverse of Math.expm1(1e-10)</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
-
 
 <p>Next up is <code class="md-code md-code-inline">Math.log10</code>.</p>
 
@@ -6148,7 +6147,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="md-code-function"><span class="kw">function</span> <span class="fn">hypot</span> <span class="params">(<mark class="md-mark md-code-mark"><span class="op">...</span></mark>values)</span> </span>{
-  <span class="kw3">return</span> <span class="cls">Math</span>.<span class="built_in">sqrt</span>(values<mark class="md-mark md-code-mark">.<span class="built_in">reduce</span></mark>((sum, value) <span class="op">=&gt;</span> sum <span class="op">+</span> <mark class="md-mark md-code-mark">value <span class="op">*</span> value</mark>, <span class="num">0</span>))
+  <span class="kw3">return</span> <span class="cls">Math</span>.<span class="built_in">sqrt</span>(<span class="param">values</span><mark class="md-mark md-code-mark">.<span class="built_in">reduce</span></mark>((sum, value) <span class="op">=&gt;</span> sum <span class="op">+</span> <mark class="md-mark md-code-mark">value <span class="op">*</span> value</mark>, <span class="num">0</span>))
 }
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -6295,8 +6294,8 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">function</span> <span class="fn">cast</span> ()
   <span class="kw3">return</span> <mark class="md-mark md-code-mark"><span class="kw">Array</span>.<span class="built_in">prototype.slice.call</span></mark>(arguments)
 }
-<span class="fn">cast</span>('a', 'b')
-// &lt;- ['a', 'b']
+<span class="fn">cast</span>(<span class="str">'a'</span>, <span class="str">'b'</span>)
+<span class="comment">// &lt;- ['a', 'b']</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -6334,7 +6333,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript">[<span class="op">...</span>$(<span class="str">'div'</span>)]
-<mark class="md-mark md-code-mark">TypeError: $(<span class="op">...</span>)[<span class="md-code-symbol">Symbol</span>.<span class="built_in">iterator</span>] is not a function</mark>
+<span class="com">// &lt;- <mark class="md-mark md-code-mark">TypeError: $(<span class="op">...</span>)[<span class="md-code-symbol">Symbol</span>.<span class="built_in">iterator</span>] is not a function</mark>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -6351,7 +6350,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <p>The one thing you cannot do with either <code class="md-code md-code-inline">Array.from</code> nor the spread operator is to pick a start index. Suppose you wanted to pull every <code class="md-code md-code-inline">&lt;div&gt;</code> after the first one. With <code class="md-code md-code-inline">.slice.call</code>, you could do it like so:</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">[].<span class="built_in">slice.call</span>(<span class="kw">document</span>.querySelectorAll(<span class="str">'div'</span>)<mark class="md-mark md-code-mark">, <span class="num">1</span></mark>)
+<pre class="md-code-block"><code class="md-code md-lang-javascript">[].<span class="built_in">slice.call</span>(<span class="kw">document</span>.<span class="built_in">querySelectorAll</span>(<span class="str">'div'</span>)<mark class="md-mark md-code-mark">, <span class="num">1</span></mark>)
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -6359,7 +6358,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <p>Of course, there’s nothing stopping you from using <code class="md-code md-code-inline">.slice</code> <em>after</em> casting. This is probably way easier to read, and looks more like functional programming, so there’s that.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">Array</span>.<span class="built_in">from</span>(<span class="built_in">document</span>.querySelectorAll(<span class="str">'div'</span>))<mark class="md-mark md-code-mark">.<span class="built_in">slice</span>(<span class="num">1</span>)</mark>
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">Array</span>.<span class="built_in">from</span>(<span class="kw">document</span>.<span class="built_in">querySelectorAll</span>(<span class="str">'div'</span>))<mark class="md-mark md-code-mark">.<span class="built_in">slice</span>(<span class="num">1</span>)</mark>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -6385,7 +6384,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="md-code-function"><span class="kw">function</span> <span class="fn">typesOf</span> <span class="params">(<mark class="md-mark md-code-mark"><span class="op">...</span></mark>all)</span> </span>{
-  <span class="kw3">return</span> all.<span class="built_in">map</span>(value <span class="op">=&gt;</span> <span class="kw">typeof</span> value)
+  <span class="kw3">return</span> all.<span class="built_in">map</span>(<span class="param">value</span> <span class="op">=&gt;</span> <span class="kw">typeof</span> <span class="param">value</span>)
 }
 <span class="fn">typesOf</span>(<span class="md-code-null">null</span>, [], <span class="md-code-nan">NaN</span>)
 <span class="com">// &lt;- ['object', 'object', 'number']</span>
@@ -6517,9 +6516,9 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <p>We could then consider the “pasting” part of the operation as an advanced usage of <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/splice" aria-label="Array.prototype.splice on MDN"><code class="md-code md-code-inline">.splice</code></a> — one of those lovely methods that can do just about anything. The method below does just that, and then returns <code class="md-code md-code-inline">items</code>, because <code class="md-code md-code-inline">.splice</code> returns the items that were spliced from an Array, and in our case this is no good. Note that we also had to use the <a href="#es6-spread-and-butter-in-depth" aria-label="ES6 Spread and Butter in Depth">spread operator</a> so that elements are inserted individually through <code class="md-code md-code-inline">.splice</code>, and not as an array.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="md-code-function"><span class="kw">function</span> <span class="fn">copyWithin</span> <span class="params">(items, target, start <span class="op">=</span> 0, end <span class="op">=</span> items.<span class="built_in">length</span>)</span> </span>{
-  items.<span class="built_in">splice</span>(target, end - start, <mark class="md-mark md-code-mark"><span class="op">...</span></mark>items.<span class="built_in">slice</span>(start, end))
-  <span class="kw3">return</span> items
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="md-code-function"><span class="kw">function</span> <span class="fn">copyWithin</span> <span class="params">(items, target, start <span class="op">=</span> <span class="num">0</span>, end <span class="op">=</span> items.<span class="built_in">length</span>)</span> </span>{
+  <span class="param">items</span>.<span class="built_in">splice</span>(<span class="param">target</span>, <span class="param">end</span> <span class="op">-</span> <span class="param">start</span>, <mark class="md-mark md-code-mark"><span class="op">...</span></mark><span class="param">items</span>.<span class="built_in">slice</span>(<span class="param">start</span>, <span class="param">end</span>))
+  <span class="kw3">return</span> <span class="param">items</span>
 }
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -6573,10 +6572,10 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <p>With that, we can update our <code class="md-code md-code-inline">copyWithin</code> method. We’ll stop using <code class="md-code md-code-inline">end - start</code> as the splice position and instead use the amount of <code class="md-code md-code-inline">replacements</code> that we have, as those numbers may be different now that we’re discarding array holes.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="md-code-function"><span class="kw">function</span> <span class="fn">copyWithin</span> <span class="params">(items, target, start <span class="op">=</span> 0, end <span class="op">=</span> items.<span class="built_in">length</span>)</span> </span>{
-  <span class="kw">var</span> <span class="var">replacements</span> <span class="op">=</span> items.<span class="built_in">slice</span>(start, end)<mark class="md-mark md-code-mark">.<span class="built_in">filter</span>(el <span class="op">=&gt;</span> <span class="md-code-boolean">true</span>)</mark>
-  items.<span class="built_in">splice</span>(target, <mark class="md-mark md-code-mark">replacements.<span class="built_in">length</span></mark>, <span class="op">...</span>replacements)
-  <span class="kw3">return</span> items
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="md-code-function"><span class="kw">function</span> <span class="fn">copyWithin</span> <span class="params">(items, target, start <span class="op">=</span> <span class="num">0</span>, end <span class="op">=</span> items.<span class="built_in">length</span>)</span> </span>{
+  <span class="kw">var</span> <span class="var">replacements</span> <span class="op">=</span> <span class="param">items</span>.<span class="built_in">slice</span>(<span class="param">start</span>, <span class="param">end</span>)<mark class="md-mark md-code-mark">.<span class="built_in">filter</span>(el <span class="op">=&gt;</span> <span class="md-code-boolean">true</span>)</mark>
+  <span class="param">items</span>.<span class="built_in">splice</span>(<span class="param">target</span>, <mark class="md-mark md-code-mark"><span class="var">replacements</span>.<span class="built_in">length</span></mark>, <span class="op">...</span><span class="var">replacements</span>)
+  <span class="kw3">return</span> <span class="param">items</span>
 }
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -6906,8 +6905,8 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">a</span> <span class="op">=</span> { b: <span class="str">'c'</span> }
-<span class="cls">Object</span>.<span class="built_in">defineProperty</span>(a, <span class="str">'invisible'</span>, { <mark class="md-mark md-code-mark">enumerable: false</mark>, value: <span class="str">'boo! ahhh!'</span> })
-<span class="cls">Object</span>.<span class="built_in">assign</span>(<mark class="md-mark md-code-mark">{}</mark>, a)
+<span class="cls">Object</span>.<span class="built_in">defineProperty</span>(<span class="var">a</span>, <span class="str">'invisible'</span>, { <mark class="md-mark md-code-mark">enumerable: <span class="bool">false</span></mark>, value: <span class="str">'boo! ahhh!'</span> })
+<span class="cls">Object</span>.<span class="built_in">assign</span>(<mark class="md-mark md-code-mark">{}</mark>, <span class="var">a</span>)
 <span class="com">// &lt;- <mark class="md-mark md-code-mark">{ b: 'c' }</mark></span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -6935,8 +6934,8 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">a</span> <span class="op">=</span> {}
-<span class="cls">Object</span>.<span class="built_in">defineProperty</span>(a, <mark class="md-mark md-code-mark">Symbol(<span class="str">'b'</span>)</mark>, { <mark class="md-mark md-code-mark">enumerable: false</mark>, value: <span class="str">'c'</span> })
-<span class="cls">Object</span>.<span class="built_in">assign</span>(<mark class="md-mark md-code-mark">{}</mark>, a)
+<span class="cls">Object</span>.<span class="built_in">defineProperty</span>(<span class="var">a</span>, <mark class="md-mark md-code-mark"><span class="symbol">Symbol</span>(<span class="str">'b'</span>)</mark>, { <mark class="md-mark md-code-mark">enumerable: <span class="bool">false</span></mark>, value: <span class="str">'c'</span> })
+<span class="cls">Object</span>.<span class="built_in">assign</span>(<mark class="md-mark md-code-mark">{}</mark>, <span class="var">a</span>)
 <span class="com">// &lt;- <mark class="md-mark md-code-mark">{}</mark></span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -6947,7 +6946,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">target</span> <span class="op">=</span> { a: { b: <span class="str">'c'</span>, d: <span class="str">'e'</span> } }
 <span class="kw">var</span> <span class="var">source</span> <span class="op">=</span> { a: { b: <span class="str">'ahh!'</span> } }
-<span class="cls">Object</span>.<span class="built_in">assign</span>(target, source)
+<span class="cls">Object</span>.<span class="built_in">assign</span>(<span class="var">target</span>, <span class="var">source</span>)
 <span class="com">// &lt;- <mark class="md-mark md-code-mark">{ a: { b: 'ahh!' } }</mark></span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -6979,7 +6978,7 @@ assignment(target, source)
       tables: <span class="md-code-boolean">false</span>
     }
   }
-  <span class="kw">var</span> <span class="var">options</span> <span class="op">=</span> <mark class="md-mark md-code-mark"><span class="cls">Object</span>.<span class="built_in">assign</span>({}, defaults, user)</mark>
+  <span class="kw">var</span> <span class="var">options</span> <span class="op">=</span> <mark class="md-mark md-code-mark"><span class="cls">Object</span>.<span class="built_in">assign</span>({}, <span class="var">defaults</span>, <span class="var">user</span>)</mark>
   <span class="kw4">console.log</span>(<span class="var">options</span>)
 }
 </code></pre>
@@ -7369,7 +7368,7 @@ assignment(target, source)
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="md-code-function"><span class="kw">function</span> <span class="fn">ToInteger</span> <span class="params">(number)</span> </span>{
-  <span class="kw3">return</span> <span class="cls">Math</span>.<span class="built_in">floor</span>(<span class="cls">Math</span>.<span class="built_in">abs</span>(number)) <span class="op">*</span> <span class="cls">Math</span>.<span class="built_in">sign</span>(number)
+  <span class="kw3">return</span> <span class="cls">Math</span>.<span class="built_in">floor</span>(<span class="cls">Math</span>.<span class="built_in">abs</span>(<span class="param">number</span>)) <span class="op">*</span> <span class="cls">Math</span>.<span class="built_in">sign</span>(<span class="param">number</span>)
 }
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -7388,7 +7387,7 @@ assignment(target, source)
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="md-code-function"><span class="kw">function</span> <span class="fn">pad</span> <span class="params">(text, spaces)</span> </span>{
-  <span class="kw3">return</span> text.<span class="built_in">split</span>(<span class="str">'\n'</span>).<span class="kw">map</span>(line <span class="op">=&gt;</span> <span class="str">' '</span><mark class="md-mark md-code-mark">.<span class="built_in">repeat</span>(spaces)</mark> <span class="op">+</span> line).<span class="built_in">join</span>(<span class="str">'\n'</span>)
+  <span class="kw3">return</span> <span class="param">text</span>.<span class="built_in">split</span>(<span class="str">'\n'</span>).<span class="kw">map</span>(line <span class="op">=&gt;</span> <span class="str">' '</span><mark class="md-mark md-code-mark">.<span class="built_in">repeat</span>(<span class="param">spaces</span>)</mark> <span class="op">+</span> line).<span class="built_in">join</span>(<span class="str">'\n'</span>)
 }
 <span class="fn">pad</span>(<span class="str">'a\nb\nc'</span>, <span class="num">2</span>)
 <span class="com">// &lt;- '  a\n  b\n  c'</span>
@@ -7721,7 +7720,7 @@ assignment(target, source)
 <p>There are different ways to represent strings that look identical to humans, even though their code points differ. Mathias gives an example as follows.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="str">'mañana'</span> <span class="op">===</span> <span class="str">'mañana'</span>
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="str">'mañana'</span> <span class="op">===</span> <span class="str">'mañana'</span>  <span class="com">// E.g., entered as 'man&#x200b;̃ana'</span>
 <span class="com">// &lt;- false</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -7732,7 +7731,7 @@ assignment(target, source)
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript">[<span class="op">...</span><span class="str">'mañana'</span>].<span class="kw">map</span>(cp <span class="op">=&gt;</span> cp.<span class="built_in">codePointAt</span>(<span class="num">0</span>).<span class="built_in">toString</span>(<span class="num">16</span>))
 <span class="com">// &lt;- ['6d', '61', <mark class="md-mark md-code-mark">'f1'</mark>, '61', '6e', '61']</span>
-[<span class="op">...</span><span class="str">'mañana'</span>].<span class="kw">map</span>(cp <span class="op">=&gt;</span> cp.<span class="built_in">codePointAt</span>(<span class="num">0</span>).<span class="built_in">toString</span>(<span class="num">16</span>))
+[<span class="op">...</span><span class="str">'mañana'</span>].<span class="kw">map</span>(cp <span class="op">=&gt;</span> cp.<span class="built_in">codePointAt</span>(<span class="num">0</span>).<span class="built_in">toString</span>(<span class="num">16</span>))  <span class="com">// E.g., 'man&#x200b;̃ana'</span>
 <span class="com">// &lt;- ['6d', '61', <mark class="md-mark md-code-mark">'6e', '303'</mark>, '61', '6e', '61']</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -7743,7 +7742,7 @@ assignment(target, source)
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="str">'mañana'</span>.<span class="built_in">length</span>
 <span class="com">// &lt;- 6</span>
-<span class="str">'mañana'</span>.<span class="built_in">length</span>
+<span class="str">'mañana'</span>.<span class="built_in">length</span>  <span class="com">// E.g., 'man&#x200b;̃ana'</span>
 <span class="com">// &lt;- 7</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -7752,7 +7751,7 @@ assignment(target, source)
 <p>If we normalize the second version, we’ll get back the same code points we had in the first version.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">normalized</span> <span class="op">=</span> <span class="str">'mañana'</span><mark class="md-mark md-code-mark">.<span class="built_in">normalize</span>()</mark>
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">normalized</span> <span class="op">=</span> <span class="str">'mañana'</span><mark class="md-mark md-code-mark">.<span class="built_in">normalize</span>()</mark>  <span class="com">// E.g., 'man&#x200b;̃ana'</span>
 [<span class="op">...</span><span class="var">normalized</span>].<span class="kw">map</span>(cp <span class="op">=&gt;</span> cp.<span class="built_in">codePointAt</span>(<span class="num">0</span>).<span class="built_in">toString</span>(<span class="num">16</span>))
 <span class="com">// &lt;- ['6d', '61', <mark class="md-mark md-code-mark">'f1'</mark>, '61', '6e', '61']</span>
 <span class="var">normalized</span>.<span class="built_in">length</span>
@@ -7776,9 +7775,9 @@ assignment(target, source)
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="md-code-function"><span class="kw">function</span> <span class="fn">compare</span> <span class="params">(left, right)</span> </span>{
-  <span class="kw3">return</span> left.<span class="built_in">normalize</span>() <span class="op">===</span> right.<span class="built_in">normalize</span>()
+  <span class="kw3">return</span> <span class="param">left</span>.<span class="built_in">normalize</span>() <span class="op">===</span> <span class="param">right</span>.<span class="built_in">normalize</span>()
 }
-<span class="fn">compare</span>(<span class="str">'mañana'</span>, <span class="str">'mañana'</span>)
+<span class="fn">compare</span>(<span class="str">'mañana'</span>, <span class="str">'mañana'</span>)  <span class="com">// E.g., compare 'mañana' with 'man&#x200b;̃ana'</span>
 <span class="com">// &lt;- true</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -7898,12 +7897,12 @@ assignment(target, source)
 <p>In CommonJS, you export values by exposing them on <code class="md-code md-code-inline">module.exports</code>. As seen in the snippet below, you could expose anything from a value type to an object, an array, or a function.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><mark class="md-mark md-code-mark">module.exports =</mark> <span class="num">1</span>
-<span class="built_in">module</span>.exports <span class="op">=</span> <span class="md-code-nan">NaN</span>
-<span class="built_in">module</span>.exports <span class="op">=</span> <span class="str">'foo'</span>
-<span class="built_in">module</span>.exports <span class="op">=</span> { foo: <span class="str">'bar'</span> }
-<span class="built_in">module</span>.exports <span class="op">=</span> [<span class="str">'foo'</span>, <span class="str">'bar'</span>]
-<span class="built_in">module</span>.exports <span class="op">=</span> <span class="md-code-function"><span class="kw">function</span> <span class="fn">foo</span> <span class="params">()</span> </span>{}
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><mark class="md-mark md-code-mark"><span class="built_in">module.exports</span> =</mark> <span class="num">1</span>
+<span class="built_in">module.exports</span> <span class="op">=</span> <span class="md-code-nan">NaN</span>
+<span class="built_in">module.exports</span> <span class="op">=</span> <span class="str">'foo'</span>
+<span class="built_in">module.exports</span> <span class="op">=</span> { foo: <span class="str">'bar'</span> }
+<span class="built_in">module.exports</span> <span class="op">=</span> [<span class="str">'foo'</span>, <span class="str">'bar'</span>]
+<span class="built_in">module.exports</span> <span class="op">=</span> <span class="md-code-function"><span class="kw">function</span> <span class="fn">foo</span> <span class="params">()</span> </span>{}
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -7917,12 +7916,12 @@ assignment(target, source)
 <p>You can mimic the CommonJS code we just saw by changing <code class="md-code md-code-inline">module.exports =</code> into <code class="md-code md-code-inline">export default</code>.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><mark class="md-mark md-code-mark">export default</mark> <span class="num">1</span>
-export <span class="kw">default</span> <span class="md-code-nan">NaN</span>
-export <span class="kw">default</span> <span class="str">'foo'</span>
-export <span class="kw">default</span> { foo: <span class="str">'bar'</span> }
-export <span class="kw">default</span> [<span class="str">'foo'</span>, <span class="str">'bar'</span>]
-export <span class="kw">default</span> <span class="md-code-function"><span class="kw">function</span> <span class="fn">foo</span> <span class="params">()</span> </span>{}
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><mark class="md-mark md-code-mark"><span class="kw">export default</span></mark> <span class="num">1</span>
+<span class="kw">export default</span> <span class="md-code-nan">NaN</span>
+<span class="kw">export default</span> <span class="str">'foo'</span>
+<span class="kw">export default</span> { foo: <span class="str">'bar'</span> }
+<span class="kw">export default</span> [<span class="str">'foo'</span>, <span class="str">'bar'</span>]
+<span class="kw">export default</span> <span class="md-code-function"><span class="kw">function</span> <span class="fn">foo</span> <span class="params">()</span> </span>{}
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -7931,7 +7930,7 @@ export <span class="kw">default</span> <span class="md-code-function"><span clas
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="md-code-function"><span class="kw">function</span> <span class="fn">foo</span> <span class="params">()</span> </span>{
-  export <span class="kw">default</span> <span class="str">'bar'</span> <span class="com">// SyntaxError</span>
+  <span class="kw">export default</span> <span class="str">'bar'</span> <span class="com">// SyntaxError</span>
 }
 foo()
 </code></pre>
@@ -7956,8 +7955,8 @@ foo()
 <p>We can replicate the above in ES6 modules by using the named exports syntax. Instead of assigning to <code class="md-code md-code-inline">module.exports</code> like with CommonJS, in ES6 you can declare bindings you want to <code class="md-code md-code-inline">export</code>. Note that the code below cannot be refactored to extract the variable declarations into standalone statements and then just <code class="md-code md-code-inline">export foo</code>, as that’d be a syntax error. Here again, we see how ES6 modules favor static analysis by being rigid in how the declarative module system API works.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">export <span class="kw">var</span> <span class="var">foo</span> <span class="op">=</span> <span class="str">'bar'</span>
-export <span class="kw">var</span> <span class="var">baz</span> <span class="op">=</span> <span class="str">'ponyfoo'</span>
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">export</span> <span class="kw">var</span> <span class="var">foo</span> <span class="op">=</span> <span class="str">'bar'</span>
+<span class="kw">export</span> <span class="kw">var</span> <span class="var">baz</span> <span class="op">=</span> <span class="str">'ponyfoo'</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -7973,8 +7972,8 @@ export <span class="kw">var</span> <span class="var">baz</span> <span class="op"
 <p>If you had an <code class="md-code md-code-inline">./a</code> module like the one found below, the <code class="md-code md-code-inline">foo</code> export would be bound to <code class="md-code md-code-inline">'bar'</code> for 500ms and then change into <code class="md-code md-code-inline">'baz'</code>.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">export <span class="kw">var</span> <span class="var">foo</span> <span class="op">=</span> <span class="str">'bar'</span>
-setTimeout(() <span class="op">=&gt;</span> foo <span class="op">=</span> <span class="str">'baz'</span>, <span class="num">500</span>)
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">export</span> <span class="kw">var</span> <span class="var">foo</span> <span class="op">=</span> <span class="str">'bar'</span>
+<span class="built_in">setTimeout</span>(() <span class="op">=&gt;</span> <span class="var">foo</span> <span class="op">=</span> <span class="str">'baz'</span>, <span class="num">500</span>)
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -7990,7 +7989,7 @@ setTimeout(() <span class="op">=&gt;</span> foo <span class="op">=</span> <span 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">foo</span> <span class="op">=</span> <span class="str">'ponyfoo'</span>
 <span class="kw">var</span> <span class="var">bar</span> <span class="op">=</span> <span class="str">'baz'</span>
-export <mark class="md-mark md-code-mark">{ foo, bar }</mark>
+<span class="kw">export</span> <mark class="md-mark md-code-mark">{ <span class="var">foo</span>, <span class="var">bar</span> }</mark>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -7998,7 +7997,7 @@ export <mark class="md-mark md-code-mark">{ foo, bar }</mark>
 <p>If you’d like to export something with a different name, you can use the <code class="md-code md-code-inline">export { foo as bar }</code> syntax, as shown below.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">export { foo <mark class="md-mark md-code-mark">as ponyfoo</mark> }
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">export</span> { foo <mark class="md-mark md-code-mark"><span class="kw">as</span> ponyfoo</mark> }
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8006,7 +8005,7 @@ export <mark class="md-mark md-code-mark">{ foo, bar }</mark>
 <p>You could also specify <code class="md-code md-code-inline">as default</code> when using the named member list <code class="md-code md-code-inline">export</code> declaration flavor. The code below is the same as doing <code class="md-code md-code-inline">export default foo</code> and <code class="md-code md-code-inline">export bar</code> afterwards — but in a single statement.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">export { foo <mark class="md-mark md-code-mark">as default</mark>, bar }
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">export</span> { foo <mark class="md-mark md-code-mark"><span class="kw">as</span> <span class="kw">default</span></mark>, bar }
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8020,11 +8019,11 @@ export <mark class="md-mark md-code-mark">{ foo, bar }</mark>
 <p>Having the ability to define named exports, exporting a list with aliases and whatnot, and also exposing a a <em>“default”</em> <code class="md-code md-code-inline">export</code> will mostly introduce confusion, and <em>for the most part</em> I’d encourage you to use <code class="md-code md-code-inline">export default</code> — and to do that at the end of your module files. You could just call your API object <code class="md-code md-code-inline">api</code> or name it after the module itself.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <mark class="md-mark md-code-mark">api</mark> <span class="op">=</span> {
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <mark class="md-mark md-code-mark"><span class="var">api</span></mark> <span class="op">=</span> {
   foo: <span class="str">'bar'</span>,
   baz: <span class="str">'ponyfoo'</span>
 }
-export <span class="kw">default</span> <mark class="md-mark md-code-mark">api</mark>
+<span class="kw">export</span> <span class="kw">default</span> <mark class="md-mark md-code-mark"><span class="var">api</span></mark>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8048,7 +8047,7 @@ export <span class="kw">default</span> <mark class="md-mark md-code-mark">api</m
 <p>Let’s take <a href="http://lodash.com/docs" aria-label="Lodash is a JavaScript 'utility belt' library"><code class="md-code md-code-inline">lodash</code></a> as an example for a minute. The following statement simply loads the Lodash module from our module. It doesn’t create any variables, though. It <strong>will execute</strong> any code in the top level of the <code class="md-code md-code-inline">lodash</code> module, though.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><mark class="md-mark md-code-mark">import</mark> <span class="str">'lodash'</span>
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><mark class="md-mark md-code-mark"><span class="kw">import</span></mark> <span class="str">'lodash'</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8062,7 +8061,7 @@ export <span class="kw">default</span> <mark class="md-mark md-code-mark">api</m
 <p>In CommonJS you’d <code class="md-code md-code-inline">import</code> something using a <code class="md-code md-code-inline">require</code> statement, like so.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> _ <span class="op">=</span> <span class="built_in">require</span>(<span class="str">'lodash'</span>)
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">_</span> <span class="op">=</span> <span class="built_in">require</span>(<span class="str">'lodash'</span>)
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8070,7 +8069,7 @@ export <span class="kw">default</span> <mark class="md-mark md-code-mark">api</m
 <p>To import the default exported binding from an ES6 module, you just have to pick a name for it. The syntax is a bit different than declaring a variable because you’re importing a <em>binding</em>, and also to make it easier on static analysis tools.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">import <mark class="md-mark md-code-mark">_</mark> from <span class="str">'lodash'</span>
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">import</span> <mark class="md-mark md-code-mark"><span class="var">_</span></mark> <span class="kw">from</span> <span class="str">'lodash'</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8084,7 +8083,7 @@ export <span class="kw">default</span> <mark class="md-mark md-code-mark">api</m
 <p>The syntax here is very similar to the one we just used for default exports, you just add some braces and pick any named exports you want. Note that this syntax is similar to the <a href="#es6-destructuring-in-depth" aria-label="ES6 JavaScript Destructuring in Depth">destructuring assignment syntax</a>, but also bit different.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">import <mark class="md-mark md-code-mark">{map, reduce}</mark> from <span class="str">'lodash'</span>
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">import</span> <mark class="md-mark md-code-mark">{map, reduce}</mark> <span class="kw">from</span> <span class="str">'lodash'</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8092,7 +8091,7 @@ export <span class="kw">default</span> <mark class="md-mark md-code-mark">api</m
 <p>Another way in which it differs from destructuring is that you could use aliases to rename imported bindings. You can mix and match aliased and non-aliased named exports as you see fit.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">import {cloneDeep <mark class="md-mark md-code-mark">as clone</mark>, map} from <span class="str">'lodash'</span>
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">import</span> {cloneDeep <mark class="md-mark md-code-mark"><span class="kw">as</span> clone</mark>, map} <span class="kw">from</span> <span class="str">'lodash'</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8100,9 +8099,9 @@ export <span class="kw">default</span> <mark class="md-mark md-code-mark">api</m
 <p>You can also mix and match named exports and the default export. If you want it inside the brackets you’ll have to use the <code class="md-code md-code-inline">default</code> name, which you can alias; or you could also just mix the default import side-by-side with the named imports list.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">import {<mark class="md-mark md-code-mark">default</mark>, map} from <span class="str">'lodash'</span>
-import {<span class="kw">default</span> <mark class="md-mark md-code-mark">as _</mark>, map} from <span class="str">'lodash'</span>
-import <mark class="md-mark md-code-mark">_</mark>, {map} from <span class="str">'lodash'</span>
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">import</span> {<mark class="md-mark md-code-mark">default</mark>, map} <span class="kw">from</span> <span class="str">'lodash'</span>
+<span class="kw">import</span> {<span class="kw">default</span> <mark class="md-mark md-code-mark"><span class="kw">as</span> _</mark>, map} <span class="kw">from</span> <span class="str">'lodash'</span>
+<span class="kw">import</span> <mark class="md-mark md-code-mark">_</mark>, {map} <span class="kw">from</span> <span class="str">'lodash'</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8116,7 +8115,7 @@ import <mark class="md-mark md-code-mark">_</mark>, {map} from <span class="str"
 <p>You could also import the namespace object for a module. Instead of importing the named exports or the default value, it imports all the things. Note that the <code class="md-code md-code-inline">import *</code> syntax must be followed by an alias where all the bindings will be placed. If there was a default export, it’ll be placed in <code class="md-code md-code-inline">alias.default</code>.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">import <span class="op">*</span> as _ from <span class="str">'lodash'</span>
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">import</span> <span class="op">*</span> <span class="kw">as</span> _ <span class="kw">from</span> <span class="str">'lodash'</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8222,10 +8221,10 @@ import <mark class="md-mark md-code-mark">_</mark>, {map} from <span class="str"
 
 <p>Promises are usually vaguely defined as <em>“a proxy for a value that will eventually become available”</em>. They can be used for both synchronous and asynchronous code flows, although they make asynchronous flows easier to reason about — once you’ve mastered promises, that is.</p>
 
-<p>Consider as an example the <em>upcoming</em> <a href="https://developer.mozilla.org/en-US/docs/Web/API/GlobalFetch/fetch#Syntax" aria-label="fetch() API on MDN"><code class="md-code md-code-inline">fetch</code></a> API. This API is a simplification of <code class="md-code md-code-inline">XMLHttpRequest</code>. It aims to be super simple to use for the most basic use cases: making a <code class="md-code md-code-inline">GET</code> request against a resource relative to the current page over <code class="md-code md-code-inline">http(s)</code> — it also provides a comprehensive API that caters to advanced use cases as well, but that’s not our focus for now. In it’s most basic incarnation, you can make a request for <code class="md-code md-code-inline">GET foo</code> like so.</p>
+<p>Consider as an example the <em>upcoming</em> <a href="https://developer.mozilla.org/en-US/docs/Web/API/GlobalFetch/fetch#Syntax" aria-label="fetch() API on MDN"><code class="md-code md-code-inline">fetch</code></a> API. This API is a simplification of <code class="md-code md-code-inline">XMLHttpRequest</code>. It aims to be super simple to use for the most basic use cases: making a <code class="md-code md-code-inline">GET</code> request against a resource relative to the current page over <code class="md-code md-code-inline">http(s)</code> — it also provides a comprehensive API that caters to advanced use cases as well, but that’s not our focus for now. In its most basic incarnation, you can make a request for <code class="md-code md-code-inline">GET foo</code> like so.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">fetch(<span class="str">'foo'</span>)
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>)
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8233,7 +8232,7 @@ import <mark class="md-mark md-code-mark">_</mark>, {map} from <span class="str"
 <p>The <code class="md-code md-code-inline">fetch('foo')</code> statement doesn’t seem <a href="http://buff.ly/1NRZf70" aria-label="See it on Promisees">all that exciting</a>. It makes a <em>“fire-and-forget”</em> <code class="md-code md-code-inline">GET</code> request against <code class="md-code md-code-inline">foo</code> relative to the resource we’re currently on. The <code class="md-code md-code-inline">fetch</code> method returns a <code class="md-code md-code-inline">Promise</code>. You can chain a <code class="md-code md-code-inline">.then</code> callback that will be executed once the <code class="md-code md-code-inline">foo</code> resource finishes loading.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">fetch(<span class="str">'foo'</span>)<mark class="md-mark md-code-mark">.then</mark>(response <span class="op">=&gt;</span> <span class="com">/* do something */</span>)
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>)<mark class="md-mark md-code-mark">.<span class="built_in">then</span></mark>(response <span class="op">=&gt;</span> <span class="com">/* do something */</span>)
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8247,8 +8246,8 @@ import <mark class="md-mark md-code-mark">_</mark>, {map} from <span class="str"
 <p>If the <code class="md-code md-code-inline">fetch</code> API used callbacks, you’d get one last parameter that then gets executed whenever fetching ends. Typical asynchronous code flow conventions dictate that we allocate the first parameter for errors <em>(that may or may not occur)</em> during the <em>fetching process</em>. The rest of the parameters can be used to pass in resulting data. Often, a single parameter is used.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">fetch(<span class="str">'foo'</span>, <mark class="md-mark md-code-mark">(err, res) <span class="op">=&gt;</span> {</mark>
-  <mark class="md-mark md-code-mark">if (err) {</mark>
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>, <mark class="md-mark md-code-mark">(err, res) <span class="op">=&gt;</span> {</mark>
+  <mark class="md-mark md-code-mark"><span class="kw">if</span> (err) {</mark>
     <span class="com">// handle error</span>
   <mark class="md-mark md-code-mark">}</mark>
   <span class="com">// handle response</span>
@@ -8262,11 +8261,11 @@ import <mark class="md-mark md-code-mark">_</mark>, {map} from <span class="str"
 <p>Another option might have been to use an <em>event-driven</em> API model. In this model the object returned by <code class="md-code md-code-inline">fetch</code> would be able to listen <code class="md-code md-code-inline">.on</code> events, binding as many event handlers as needed for any events. Typically there’s an <code class="md-code md-code-inline">error</code> event for when things go awry and a <code class="md-code md-code-inline">data</code> event that’s called when the operation completes successfully.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">fetch(<span class="str">'foo'</span>)
-  <mark class="md-mark md-code-mark">.on</mark>(<span class="str">'error'</span>, <mark class="md-mark md-code-mark">err <span class="op">=&gt;</span> {</mark>
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>)
+  <mark class="md-mark md-code-mark">.<span class="built_in">on</span></mark>(<span class="str">'error'</span>, <mark class="md-mark md-code-mark">err <span class="op">=&gt;</span> {</mark>
     <span class="com">// handle error</span>
   <mark class="md-mark md-code-mark">}</mark>)
-  <mark class="md-mark md-code-mark">.on</mark>(<span class="str">'data'</span>, <mark class="md-mark md-code-mark">res <span class="op">=&gt;</span> {</mark>
+  <mark class="md-mark md-code-mark">.<span class="built_in">on</span></mark>(<span class="str">'data'</span>, <mark class="md-mark md-code-mark">res <span class="op">=&gt;</span> {</mark>
     <span class="com">// handle response</span>
   <mark class="md-mark md-code-mark">}</mark>)
 </code></pre>
@@ -8282,11 +8281,11 @@ import <mark class="md-mark md-code-mark">_</mark>, {map} from <span class="str"
 <p>Instead of binding event listeners through <code class="md-code md-code-inline">.on</code>, promises offer a slightly different API. The snippet of code shown below displays the actual API of the <code class="md-code md-code-inline">fetch</code> method, which returns a <code class="md-code md-code-inline">Promise</code> object. Much like with events, you can bind as many listeners as you’d like with both <code class="md-code md-code-inline">.catch</code> and <code class="md-code md-code-inline">.then</code>. Note how there’s no need for an event type anymore with the declarative methods used by promises.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">p</span> <span class="op">=</span> fetch(<span class="str">'foo'</span>)
-<mark class="md-mark md-code-mark">p.then</mark>(<mark class="md-mark md-code-mark">res <span class="op">=&gt;</span> {</mark>
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">p</span> <span class="op">=</span> <span class="built_in">fetch</span>(<span class="str">'foo'</span>)
+<mark class="md-mark md-code-mark"><span class="var">p</span>.<span class="built_in">then</span></mark>(<mark class="md-mark md-code-mark">res <span class="op">=&gt;</span> {</mark>
   <span class="com">// handle response</span>
 <mark class="md-mark md-code-mark">}</mark>)
-<mark class="md-mark md-code-mark">p.catch</mark>(<mark class="md-mark md-code-mark">error <span class="op">=&gt;</span> {</mark>
+<mark class="md-mark md-code-mark"><span class="var">p</span>.<span class="built_in">catch</span></mark>(<mark class="md-mark md-code-mark">error <span class="op">=&gt;</span> {</mark>
   <span class="com">// handle error</span>
 <mark class="md-mark md-code-mark">}</mark>)
 </code></pre>
@@ -8298,8 +8297,8 @@ import <mark class="md-mark md-code-mark">_</mark>, {map} from <span class="str"
 <p>Also note that <code class="md-code md-code-inline">.then</code> is able to register a reaction to rejections as its second argument. The above could be expressed as the following piece of code.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">fetch(<span class="str">'foo'</span>)
-  <mark class="md-mark md-code-mark">.then</mark>(
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>)
+  <mark class="md-mark md-code-mark">.<span class="built_in">then</span></mark>(
     <mark class="md-mark md-code-mark">res <span class="op">=&gt;</span> {</mark>
       <span class="com">// handle response</span>
     <mark class="md-mark md-code-mark">}</mark>,
@@ -8338,7 +8337,7 @@ import <mark class="md-mark md-code-mark">_</mark>, {map} from <span class="str"
 <p>Going back to our example — here’s some of the code we had. In the simplest use case, this is all we wanted.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">fetch(<span class="str">'foo'</span>)<mark class="md-mark md-code-mark">.then</mark>(<mark class="md-mark md-code-mark">res <span class="op">=&gt;</span> {</mark>
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>)<mark class="md-mark md-code-mark">.<span class="built_in">then</span></mark>(<mark class="md-mark md-code-mark">res <span class="op">=&gt;</span> {</mark>
   <span class="com">// handle response</span>
 <mark class="md-mark md-code-mark">}</mark>)
 </code></pre>
@@ -8348,9 +8347,9 @@ import <mark class="md-mark md-code-mark">_</mark>, {map} from <span class="str"
 <p>What if an error happens in one of the reactions passed to <code class="md-code md-code-inline">.then</code>? You can catch those with <code class="md-code md-code-inline">.catch</code>. The example in the snippet below <a href="http://buff.ly/1Jo8NyJ">logs the error</a> caught when trying to access <code class="md-code md-code-inline">prop</code> from the <em>undefined <code class="md-code md-code-inline">a</code> property</em> in <code class="md-code md-code-inline">res</code>.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">fetch(<span class="str">'foo'</span>)
-  .then(res <span class="op">=&gt;</span> res.a.prop.that.does.not.exist)
-  .catch(err <span class="op">=&gt;</span> <mark class="md-mark md-code-mark">console.error(err.message)</mark>)
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>)
+  .<span class="built_in">then</span>(res <span class="op">=&gt;</span> res.a.prop.that.does.not.exist)
+  .<span class="built_in">catch</span>(err <span class="op">=&gt;</span> <mark class="md-mark md-code-mark">console.error(err.message)</mark>)
 <span class="com">// &lt;- 'Cannot read property "prop" of undefined'</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8359,10 +8358,10 @@ import <mark class="md-mark md-code-mark">_</mark>, {map} from <span class="str"
 <p>Note that <em>where</em> you tack your reactions onto matters. The following example <strong>won’t</strong> print the <code class="md-code md-code-inline">err.message</code> twice — only once. That’s because no errors happened in the first <code class="md-code md-code-inline">.catch</code>, so the rejection branch for that promise wasn’t executed. Check out <a href="http://buff.ly/1gLqKjU">the Promisee</a> for a visual explanation of the code below.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">fetch(<span class="str">'foo'</span>)
-  .then(res <span class="op">=&gt;</span> res.a.prop.that.does.not.exist)
-  .catch(err <span class="op">=&gt;</span> <span class="built_in">console</span>.error(err.message))
-  .catch(err <span class="op">=&gt;</span> <span class="built_in">console</span>.error(err.message))
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>)
+  .<span class="built_in">then</span>(res <span class="op">=&gt;</span> res.a.prop.that.does.not.exist)
+  .<span class="built_in">catch</span>(err <span class="op">=&gt;</span> <span class="built_in">console</span>.error(err.message))
+  .<span class="built_in">catch</span>(err <span class="op">=&gt;</span> <span class="built_in">console</span>.error(err.message))
 <span class="com">// &lt;- 'Cannot read property "prop" of undefined'</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8371,9 +8370,9 @@ import <mark class="md-mark md-code-mark">_</mark>, {map} from <span class="str"
 <p>In contrast, the snippet found below <em>will</em> <a href="http://buff.ly/1PqlHS2">print the <code class="md-code md-code-inline">err.message</code> twice</a>. It works by saving a reference to the promise returned by <code class="md-code md-code-inline">.then</code>, and then tacking two <code class="md-code md-code-inline">.catch</code> reactions onto it. The second <code class="md-code md-code-inline">.catch</code> in the previous example was capturing errors produced in the promise returned from the first <code class="md-code md-code-inline">.catch</code>, while in this case both <code class="md-code md-code-inline">.catch</code> branch off of <code class="md-code md-code-inline">p</code>.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">p</span> <span class="op">=</span> fetch(<span class="str">'foo'</span>).then(res <span class="op">=&gt;</span> res.a.prop.that.does.not.exist)
-p.catch(err <span class="op">=&gt;</span> <span class="built_in">console</span>.error(err.message))
-p.catch(err <span class="op">=&gt;</span> <span class="built_in">console</span>.error(err.message))
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">p</span> <span class="op">=</span> <span class="built_in">fetch</span>(<span class="str">'foo'</span>).<span class="built_in">then</span>(res <span class="op">=&gt;</span> res.a.prop.that.does.not.exist)
+<span class="var">p</span>.<span class="built_in">catch</span>(err <span class="op">=&gt;</span> <span class="built_in">console</span>.error(err.message))
+<span class="var">p</span>.<span class="built_in">catch</span>(err <span class="op">=&gt;</span> <span class="built_in">console</span>.error(err.message))
 <span class="com">// &lt;- 'Cannot read property "prop" of undefined'</span>
 <span class="com">// &lt;- 'Cannot read property "prop" of undefined'</span>
 </code></pre>
@@ -8383,10 +8382,10 @@ p.catch(err <span class="op">=&gt;</span> <span class="built_in">console</span>.
 <p>Here’s another example that puts that difference the spotlight. The second catch is triggered this time because it’s <a href="http://buff.ly/1Jo9KHf">bound to the rejection branch</a> on the first <code class="md-code md-code-inline">.catch</code>.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">fetch(<span class="str">'foo'</span>)
-  .then(res <span class="op">=&gt;</span> res.a.prop.that.does.not.exist)
-  .catch(err <span class="op">=&gt;</span> { <mark class="md-mark md-code-mark">throw</mark> <span class="kw">new</span> <span class="md-code-error">Error</span>(err.message) })
-  .catch(err <span class="op">=&gt;</span> <span class="built_in">console</span>.error(err.message))
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>)
+  .<span class="built_in">then</span>(res <span class="op">=&gt;</span> res.a.prop.that.does.not.exist)
+  .<span class="built_in">catch</span>(err <span class="op">=&gt;</span> { <mark class="md-mark md-code-mark">throw</mark> <span class="kw">new</span> <span class="md-code-error">Error</span>(err.message) })
+  .<span class="built_in">catch</span>(err <span class="op">=&gt;</span> <span class="built_in">console</span>.error(err.message))
 <span class="com">// &lt;- 'Cannot read property "prop" of undefined'</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8395,10 +8394,10 @@ p.catch(err <span class="op">=&gt;</span> <span class="built_in">console</span>.
 <p>If the first <code class="md-code md-code-inline">.catch</code> call didn’t return anything, then <a href="http://buff.ly/1Jo9KHf">nothing would be printed</a>.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">fetch(<span class="str">'foo'</span>)
-  .then(res <span class="op">=&gt;</span> res.a.prop.that.does.not.exist)
-  .catch(err <span class="op">=&gt;</span> <mark class="md-mark md-code-mark">{}</mark>)
-  .catch(err <span class="op">=&gt;</span> <span class="built_in">console</span>.error(err.message))
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>)
+  .<span class="built_in">then</span>(res <span class="op">=&gt;</span> res.a.prop.that.does.not.exist)
+  .<span class="built_in">catch</span>(err <span class="op">=&gt;</span> <mark class="md-mark md-code-mark">{}</mark>)
+  .<span class="built_in">catch</span>(err <span class="op">=&gt;</span> <span class="built_in">console</span>.error(err.message))
 <span class="com">// nothing happens</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8411,16 +8410,16 @@ p.catch(err <span class="op">=&gt;</span> <span class="built_in">console</span>.
 <p>In fact, the last example can be represented as shown below. This snippet makes it much easier to understand what we’ve discussed so far. Glance over it and then I’ll give you some bullet points.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <mark class="md-mark md-code-mark">p1</mark> <span class="op">=</span> fetch(<span class="str">'foo'</span>)
-<span class="kw">var</span> <mark class="md-mark md-code-mark">p2</mark> <span class="op">=</span> p1.then(res <span class="op">=&gt;</span> res.a.prop.that.does.not.exist)
-<span class="kw">var</span> <mark class="md-mark md-code-mark">p3</mark> <span class="op">=</span> p2.catch(err <span class="op">=&gt;</span> {})
-<span class="kw">var</span> <mark class="md-mark md-code-mark">p4</mark> <span class="op">=</span> p3.catch(err <span class="op">=&gt;</span> <span class="built_in">console</span>.error(err.message))
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <mark class="md-mark md-code-mark"><span class="var">p1</span></mark> <span class="op">=</span> <span class="built_in">fetch</span>(<span class="str">'foo'</span>)
+<span class="kw">var</span> <mark class="md-mark md-code-mark"><span class="var">p2</span></mark> <span class="op">=</span> <span class="var">p1</span>.<span class="built_in">then</span>(res <span class="op">=&gt;</span> res.a.prop.that.does.not.exist)
+<span class="kw">var</span> <mark class="md-mark md-code-mark"><span class="var">p3</span></mark> <span class="op">=</span> <span class="var">p2</span>.<span class="built_in">catch</span>(err <span class="op">=&gt;</span> {})
+<span class="kw">var</span> <mark class="md-mark md-code-mark"><span class="var">p4</span></mark> <span class="op">=</span> <span class="var">p3</span>.<span class="built_in">catch</span>(err <span class="op">=&gt;</span> <span class="built_in">console</span>.error(err.message))
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
 
 <p>Good boy! Have some bullet points. Or you could just look at the <a href="http://buff.ly/1NS1Uxl">Promisees visualization</a>.</p><ol>
-  <li><code class="md-code md-code-inline">fetch</code> returns a <strong>brand new</strong> <code class="md-code md-code-inline">p1</code> promise</li>
+  <li><code class="md-code md-code-inline"><span class="built_in">fetch</span></code> returns a <strong>brand new</strong> <code class="md-code md-code-inline">p1</code> promise</li>
   <li><code class="md-code md-code-inline">p1.then</code> returns a <strong>brand new</strong> <code class="md-code md-code-inline">p2</code> promise</li>
   <li><code class="md-code md-code-inline">p2.catch</code> returns a <strong>brand new</strong> <code class="md-code md-code-inline">p3</code> promise</li>
   <li><code class="md-code md-code-inline">p3.catch</code> returns a <strong>brand new</strong> <code class="md-code md-code-inline">p4</code> promise</li>
@@ -8441,8 +8440,8 @@ p.catch(err <span class="op">=&gt;</span> <span class="built_in">console</span>.
 <p>Promises can be created from scratch by using <code class="md-code md-code-inline">new Promise(resolver)</code>. The <code class="md-code md-code-inline">resolver</code> parameter is a method that will be used to resolve the promise. It takes two arguments, a <code class="md-code md-code-inline">resolve</code> method and a <code class="md-code md-code-inline">reject</code> method. These promises are fulfilled and rejected, respectively, on the next tick — as <a href="http://buff.ly/1LzF6k8">seen on Promisees</a>.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">new</span> Promise(resolve <span class="op">=&gt;</span> <mark class="md-mark md-code-mark">resolve()</mark>) <span class="com">// promise is fulfilled</span>
-<span class="kw">new</span> Promise((resolve, reject) <span class="op">=&gt;</span> <mark class="md-mark md-code-mark">reject()</mark>) <span class="com">// promise is rejected</span>
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">new</span> <span class="prom">Promise</span>(resolve <span class="op">=&gt;</span> <mark class="md-mark md-code-mark">resolve()</mark>) <span class="com">// promise is fulfilled</span>
+<span class="kw">new</span> <span class="prom">Promise</span>((resolve, reject) <span class="op">=&gt;</span> <mark class="md-mark md-code-mark">reject()</mark>) <span class="com">// promise is rejected</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8450,13 +8449,13 @@ p.catch(err <span class="op">=&gt;</span> <span class="built_in">console</span>.
 <p>Resolving and rejecting promises without a value isn’t that useful, though. Usually promises will resolve to some <code class="md-code md-code-inline">result</code>, like the response from an AJAX call as we saw with <code class="md-code md-code-inline">fetch</code>. Similarly, you’ll probably want to state the <code class="md-code md-code-inline">reason</code> for your rejections — typically using an <code class="md-code md-code-inline">Error</code> object. The code below codifies what you’ve just read (see the <a href="http://buff.ly/1KxmM9p">visualization</a>, too).</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">new</span> Promise(resolve <span class="op">=&gt;</span> resolve({ foo: <span class="str">'bar'</span> }))
-  .then(result <span class="op">=&gt;</span> <span class="kw4">console.log</span>(result))
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">new</span> <span class="prom">Promise</span>(resolve <span class="op">=&gt;</span> resolve({ foo: <span class="str">'bar'</span> }))
+  .<span class="built_in">then</span>(result <span class="op">=&gt;</span> <span class="kw4">console.log</span>(result))
   <span class="com">// &lt;- { foo: 'bar' }</span>
 
-<span class="kw">new</span> Promise((resolve, reject) <span class="op">=&gt;</span>
+<span class="kw">new</span> <span class="prom">Promise</span>((resolve, reject) <span class="op">=&gt;</span>
   reject(<span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'failed to deliver on my promise to you'</span>)))
-  .catch(reason <span class="op">=&gt;</span> <span class="kw4">console.log</span>(reason))
+  .<span class="built_in">catch</span>(reason <span class="op">=&gt;</span> <span class="kw4">console.log</span>(reason))
   <span class="com">// &lt;- Error: failed to deliver on my promise to you</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8465,7 +8464,7 @@ p.catch(err <span class="op">=&gt;</span> <span class="built_in">console</span>.
 <p>As you may have guessed, there’s nothing inherently synchronous about promises. Fulfillment and rejection can both be completely asynchronous. That’s the whole point of promises! The promise below is fulfilled <a href="http://buff.ly/1PxIwmX">after two seconds</a> elapse.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">new</span> Promise(resolve <span class="op">=&gt;</span> setTimeout(resolve, <span class="num">2000</span>))
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">new</span> <span class="prom">Promise</span>(resolve <span class="op">=&gt;</span> setTimeout(resolve, <span class="num">2000</span>))
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8474,7 +8473,7 @@ p.catch(err <span class="op">=&gt;</span> <span class="built_in">console</span>.
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="md-code-function"><span class="kw">function</span> <span class="fn">resolveUnderThreeSeconds</span> <span class="params">(delay)</span> </span>{
-  <span class="kw3">return</span> <span class="kw">new</span> Promise(<span class="md-code-function"><span class="kw">function</span> <span class="params">(resolve, reject)</span> </span>{
+  <span class="kw3">return</span> <span class="kw">new</span> <span class="prom">Promise</span>(<span class="md-code-function"><span class="kw">function</span> <span class="params">(resolve, reject)</span> </span>{
     setTimeout(resolve, delay)
     setTimeout(reject, <span class="num">3000</span>)
   })
@@ -8499,14 +8498,14 @@ resolveUnderThreeSeconds(<span class="num">7000</span>) <span class="com">// ful
 <p>Besides returning resolution values, you could also resolve with <em>another promise</em>. What happens in those cases? In the following snippet we create a promise <code class="md-code md-code-inline">p</code> that will be rejected in three seconds. We also create a promise <code class="md-code md-code-inline">p2</code> that will be resolved with <code class="md-code md-code-inline">p</code> in a second. Since <code class="md-code md-code-inline">p</code> is still two seconds out, resolving <code class="md-code md-code-inline">p2</code> won’t have an immediate effect. Two seconds later, when <code class="md-code md-code-inline">p</code> is rejected, <code class="md-code md-code-inline">p2</code> will be rejected as well, with the same rejection reason that was provided to <code class="md-code md-code-inline">p</code>.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">p</span> <span class="op">=</span> <span class="kw">new</span> Promise(<span class="md-code-function"><span class="kw">function</span> <span class="params">(resolve, reject)</span> </span>{
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">p</span> <span class="op">=</span> <span class="kw">new</span> <span class="prom">Promise</span>(<span class="md-code-function"><span class="kw">function</span> <span class="params">(resolve, reject)</span> </span>{
   setTimeout(() <span class="op">=&gt;</span> reject(<span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'fail'</span>)), <span class="num">3000</span>)
 })
-<span class="kw">var</span> <span class="var">p2</span> <span class="op">=</span> <span class="kw">new</span> Promise(<span class="md-code-function"><span class="kw">function</span> <span class="params">(resolve, reject)</span> </span>{
+<span class="kw">var</span> <span class="var">p2</span> <span class="op">=</span> <span class="kw">new</span> <span class="prom">Promise</span>(<span class="md-code-function"><span class="kw">function</span> <span class="params">(resolve, reject)</span> </span>{
   setTimeout(() <span class="op">=&gt;</span> resolve(p), <span class="num">1000</span>)
 })
-p2.then(result <span class="op">=&gt;</span> <span class="kw4">console.log</span>(result))
-p2.catch(error <span class="op">=&gt;</span> <span class="kw4">console.log</span>(error))
+<span class="var">p2</span>.<span class="built_in">then</span>(result <span class="op">=&gt;</span> <span class="kw4">console.log</span>(result))
+<span class="var">p2</span>.<span class="built_in">catch</span>(error <span class="op">=&gt;</span> <span class="kw4">console.log</span>(error))
 <span class="com">// &lt;- Error: fail</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8536,7 +8535,7 @@ p2.catch(error <span class="op">=&gt;</span> <span class="kw4">console.log</span
 <p>Sometimes you want to create a Promise but you don’t want to go through the trouble of using the constructor. The following statement creates a promise that’s fulfilled with a result of <code class="md-code md-code-inline">'foo'</code>.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">new</span> Promise(resolve <span class="op">=&gt;</span> resolve(<span class="str">'foo'</span>))
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">new</span> <span class="prom">Promise</span>(resolve <span class="op">=&gt;</span> resolve(<span class="str">'foo'</span>))
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8568,13 +8567,13 @@ p2.catch(error <span class="op">=&gt;</span> <span class="kw4">console.log</span
 <p>From this point on, the promise is <em>settled</em>. If at a later point in time another reaction is chained onto the settled promise, the appropriate branch for that reaction is executed in the next tick of the program. In the example below, <code class="md-code md-code-inline">p</code> is resolved with a value of <code class="md-code md-code-inline">100</code> after two seconds. Then, <code class="md-code md-code-inline">100</code> is printed onto the screen. Two seconds later, another <code class="md-code md-code-inline">.then</code> branch is added onto <code class="md-code md-code-inline">p</code>, but since <code class="md-code md-code-inline">p</code> has already fulfilled, the new branch gets executed right away.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">p</span> <span class="op">=</span> <span class="kw">new</span> Promise(<span class="md-code-function"><span class="kw">function</span> <span class="params">(resolve, reject)</span> </span>{
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">p</span> <span class="op">=</span> <span class="kw">new</span> <span class="prom">Promise</span>(<span class="md-code-function"><span class="kw">function</span> <span class="params">(resolve, reject)</span> </span>{
   setTimeout(() <span class="op">=&gt;</span> resolve(<span class="num">100</span>), <span class="num">2000</span>)
 })
-p.then(result <span class="op">=&gt;</span> <span class="kw4">console.log</span>(result))
+p.<span class="built_in">then</span>(result <span class="op">=&gt;</span> <span class="kw4">console.log</span>(result))
 <span class="com">// &lt;- 100</span>
 
-setTimeout(() <span class="op">=&gt;</span> p.then(result <span class="op">=&gt;</span> <span class="kw4">console.log</span>(result <span class="op">*</span> <span class="num">20</span>)), <span class="num">4000</span>)
+setTimeout(() <span class="op">=&gt;</span> p.<span class="built_in">then</span>(result <span class="op">=&gt;</span> <span class="kw4">console.log</span>(result <span class="op">*</span> <span class="num">20</span>)), <span class="num">4000</span>)
 <span class="com">// &lt;- 2000</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8589,9 +8588,9 @@ setTimeout(() <span class="op">=&gt;</span> p.then(result <span class="op">=&gt;
 <p>The example below shows how we use a promise and <code class="md-code md-code-inline">.then</code> another promise that will only be settled once the returned promise also settles. Once that happens, we get back the response from the wrapped promise, and we use the <code class="md-code md-code-inline">res.url</code> to figure out what random article we were graced with.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">fetch(<span class="str">'foo'</span>)
-  .then(response <span class="op">=&gt;</span> fetch(<span class="str">'/articles/random'</span>))
-  .then(response <span class="op">=&gt;</span> <span class="kw4">console.log</span>(response.url))
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>)
+  .<span class="built_in">then</span>(response <span class="op">=&gt;</span> fetch(<span class="str">'/articles/random'</span>))
+  .<span class="built_in">then</span>(response <span class="op">=&gt;</span> <span class="kw4">console.log</span>(response.url))
 <span class="com">// &lt;- 'http://ponyfoo.com/articles/es6-symbols-in-depth'</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8601,13 +8600,13 @@ setTimeout(() <span class="op">=&gt;</span> p.then(result <span class="op">=&gt;
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">p</span> <span class="op">=</span> Promise.resolve()
-  .then(data <span class="op">=&gt;</span> <span class="kw">new</span> Promise(<span class="md-code-function"><span class="kw">function</span> <span class="params">(resolve, reject)</span> </span>{
+  .<span class="built_in">then</span>(data <span class="op">=&gt;</span> <span class="kw">new</span> <span class="prom">Promise</span>(<span class="md-code-function"><span class="kw">function</span> <span class="params">(resolve, reject)</span> </span>{
     setTimeout(<span class="cls">Math</span>.<span class="built_in">random</span>() <span class="op">&gt;</span>
 <span class="num">0.5</span> ? resolve : reject, <span class="num">1000</span>)
   }))
 
-p.then(data <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="str">'okay!'</span>))
-p.catch(data <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="str">'boo!'</span>))
+p.<span class="built_in">then</span>(data <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="str">'okay!'</span>))
+p.<span class="built_in">catch</span>(data <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="str">'boo!'</span>))
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8630,8 +8629,8 @@ p.catch(data <span class="op">=&gt;</span> <span class="kw4">console.log</span>(
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript">Promise.resolve([<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>])
-  .then(values <span class="op">=&gt;</span> values.<span class="kw">map</span>(value <span class="op">=&gt;</span> value <span class="op">*</span> <span class="num">2</span>))
-  .then(values <span class="op">=&gt;</span> <span class="kw4">console.log</span>(values))
+  .<span class="built_in">then</span>(values <span class="op">=&gt;</span> values.<span class="kw">map</span>(value <span class="op">=&gt;</span> value <span class="op">*</span> <span class="num">2</span>))
+  .<span class="built_in">then</span>(values <span class="op">=&gt;</span> <span class="kw4">console.log</span>(values))
   <span class="com">// &lt;- [2, 4, 6]</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8641,8 +8640,8 @@ p.catch(data <span class="op">=&gt;</span> <span class="kw4">console.log</span>(
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript">Promise.reject(<span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'Database ds.214.53.4.12 connection timeout!'</span>))
-  .catch(error <span class="op">=&gt;</span> { <span class="kw">throw</span> <span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'Internal Server Error'</span>) })
-  .catch(error <span class="op">=&gt;</span> <span class="built_in">console.info</span>(error))
+  .<span class="built_in">catch</span>(error <span class="op">=&gt;</span> { <span class="kw">throw</span> <span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'Internal Server Error'</span>) })
+  .<span class="built_in">catch</span>(error <span class="op">=&gt;</span> <span class="built_in">console.info</span>(error))
   <span class="com">// &lt;- Error: Internal Server Error</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8722,11 +8721,11 @@ request(<span class="str">'https://twitter.com'</span>, <span class="md-code-fun
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript">Promise.all([
-  fetch(<span class="str">'/'</span>),
-  fetch(<span class="str">'foo'</span>)
+  <span class="built_in">fetch</span>(<span class="str">'/'</span>),
+  <span class="built_in">fetch</span>(<span class="str">'foo'</span>)
 ])
-  .then(responses <span class="op">=&gt;</span> responses.<span class="kw">map</span>(response <span class="op">=&gt;</span> response.statusText))
-  .then(status <span class="op">=&gt;</span> <span class="kw4">console.log</span>(status.join(<span class="str">', '</span>)))
+  .<span class="built_in">then</span>(responses <span class="op">=&gt;</span> responses.<span class="kw">map</span>(response <span class="op">=&gt;</span> response.statusText))
+  .<span class="built_in">then</span>(status <span class="op">=&gt;</span> <span class="kw4">console.log</span>(status.join(<span class="str">', '</span>)))
   <span class="com">// &lt;- 'OK, Not Found'</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8737,11 +8736,11 @@ request(<span class="str">'https://twitter.com'</span>, <span class="md-code-fun
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript">Promise.all([
   <mark class="md-mark md-code-mark">Promise.reject()</mark>,
-  fetch(<span class="str">'/'</span>),
-  fetch(<span class="str">'foo'</span>)
+  <span class="built_in">fetch</span>(<span class="str">'/'</span>),
+  <span class="built_in">fetch</span>(<span class="str">'foo'</span>)
 ])
-  .then(responses <span class="op">=&gt;</span> responses.<span class="kw">map</span>(response <span class="op">=&gt;</span> response.statusText))
-  .then(status <span class="op">=&gt;</span> <span class="kw4">console.log</span>(status.join(<span class="str">', '</span>)))
+  .<span class="built_in">then</span>(responses <span class="op">=&gt;</span> responses.<span class="kw">map</span>(response <span class="op">=&gt;</span> response.statusText))
+  .<span class="built_in">then</span>(status <span class="op">=&gt;</span> <span class="kw4">console.log</span>(status.join(<span class="str">', '</span>)))
   <span class="com">// nothing happens</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8755,10 +8754,10 @@ request(<span class="str">'https://twitter.com'</span>, <span class="md-code-fun
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript">Promise.race([
-  fetch(<span class="str">'/'</span>),
-  fetch(<span class="str">'foo'</span>)
+  <span class="built_in">fetch</span>(<span class="str">'/'</span>),
+  <span class="built_in">fetch</span>(<span class="str">'foo'</span>)
 ])
-  .then(response <span class="op">=&gt;</span> <span class="kw4">console.log</span>(response.statusText))
+  .<span class="built_in">then</span>(response <span class="op">=&gt;</span> <span class="kw4">console.log</span>(response.statusText))
   <span class="com">// &lt;- 'OK', or maybe 'Not Found'.</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8768,13 +8767,13 @@ request(<span class="str">'https://twitter.com'</span>, <span class="md-code-fun
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">p</span> <span class="op">=</span> Promise.race([
-  fetch(<span class="str">'/resource-that-may-take-a-while'</span>),
-  <span class="kw">new</span> Promise(<span class="md-code-function"><span class="kw">function</span> <span class="params">(resolve, reject)</span> </span>{
+  <span class="built_in">fetch</span>(<span class="str">'/resource-that-may-take-a-while'</span>),
+  <span class="kw">new</span> <span class="prom">Promise</span>(<span class="md-code-function"><span class="kw">function</span> <span class="params">(resolve, reject)</span> </span>{
     setTimeout(() <span class="op">=&gt;</span> reject(<span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'request timeout'</span>)), <span class="num">5000</span>)
   })
 ])
-p.then(response <span class="op">=&gt;</span> <span class="kw4">console.log</span>(response))
-p.catch(error <span class="op">=&gt;</span> <span class="kw4">console.log</span>(error))
+p.<span class="built_in">then</span>(response <span class="op">=&gt;</span> <span class="kw4">console.log</span>(response))
+p.<span class="built_in">catch</span>(error <span class="op">=&gt;</span> <span class="kw4">console.log</span>(error))
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
