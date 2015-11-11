@@ -273,7 +273,7 @@ code.md-code, pre code { color: #f8f8f8; font-family: Share-Tech; font-weight: 7
   .classname, .cls, .clss { color:#9DF39F;}  /* #71b0fe was #ffbcc6 pale red;  */
 .md-code-error, .error, .md-code-type-error, .md-code-typeerror, .type-error, .typeerror { color: red;}
 .md-code-symbol, .symbol, .md-code-map, .map, .md-code-date, .date, .md-code-set, .set,
-  .md-code-proxy, .proxy { color: #9DF39F;}  /*     now same as class   #ffbcc6 pale red;  */
+  .md-code-proxy, .proxy, .md-code-promise, .promise, .prom { color: #9DF39F;}  /*     now same as class   #ffbcc6 pale red;  */
 
 .md-code-header,.md-code-inheritance,.md-code-name,
 .md-code-value,.md-lang-ruby .md-code-symbol,.md-lang-xml .md-code-cdata{color:#718c00
@@ -301,7 +301,7 @@ code.md-code, pre code { color: #f8f8f8; font-family: Share-Tech; font-weight: 7
 	filter:alpha(opacity=50)
   }
 mark { border: 1px solid red !important;}
-mark.md-mark { background-color: #002240 !important; color:inherit !important;}
+mark.md-mark { background-color: #002c55 !important; color:inherit !important;}
 
 .c-pink { color: #e92c6c }
 .punctuation, .punc, .punct {color:#ccbca2; }
