@@ -2701,12 +2701,12 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
   <span class="kw">try</span> {
     <span class="kw3">yield</span> <span class="str">'[Me] Will ES6 die a painful death?'</span>
   } <span class="kw">catch</span> (e) {
-    <span class="built_in">console.error</span>(<span class="str">'Error'</span>, e.<span class="built_in">message</span>)
+    <span class="kw4">console.error</span>(<span class="str">'Error'</span>, e.<span class="built_in">message</span>)
   }
   <span class="kw">try</span> {
     <span class="kw3">yield</span> <span class="str">'[Me] How youuu doing?'</span>
   } <span class="kw">catch</span> (e) {
-    <span class="built_in">console.error</span>(<span class="str">'Error'</span>, e.<span class="built_in">message</span>)
+    <span class="kw4">console.error</span>(<span class="str">'Error'</span>, e.<span class="built_in">message</span>)
   }
 })
 </code></pre>
@@ -5932,7 +5932,7 @@ app.use(morgan(<span class="str">':status :method :url'</span>, {
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="cls">Math</span>.<span class="built_in">trunc</span> <span class="op">=</span> <span class="md-code-function"><span class="kw">function</span> <span class="fn">truncate</span> <span class="params">(value)</span> </span>{
   <span class="kw3">return</span> <span class="param">value</span> <span class="op">&gt;</span>
-<span class="num">0</span> ? <span class="cls">Math</span>.<span class="built_in">floor</span>(<span class="param">value</span>) : <span class="cls">Math</span>.<span class="built_in">ceil</span>(<span class="param">value</span>)
+<span class="num">0</span> <span class="op">?</span> <span class="cls">Math</span>.<span class="built_in">floor</span>(<span class="param">value</span>) <span class="op">:</span> <span class="cls">Math</span>.<span class="built_in">ceil</span>(<span class="param">value</span>)
 }
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8232,7 +8232,7 @@ foo()
 <p>The <code class="md-code md-code-inline">fetch('foo')</code> statement doesn’t seem <a href="http://buff.ly/1NRZf70" aria-label="See it on Promisees">all that exciting</a>. It makes a <em>“fire-and-forget”</em> <code class="md-code md-code-inline">GET</code> request against <code class="md-code md-code-inline">foo</code> relative to the resource we’re currently on. The <code class="md-code md-code-inline">fetch</code> method returns a <code class="md-code md-code-inline">Promise</code>. You can chain a <code class="md-code md-code-inline">.then</code> callback that will be executed once the <code class="md-code md-code-inline">foo</code> resource finishes loading.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>)<mark class="md-mark md-code-mark">.<span class="built_in">then</span></mark>(response <span class="op">=&gt;</span> <span class="com">/* do something */</span>)
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>)<mark class="md-mark md-code-mark">.<span class="built_in">then</span></mark>(<span class="param">response</span> <span class="op">=&gt;</span> <span class="com">/* do something */</span>)
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8246,8 +8246,8 @@ foo()
 <p>If the <code class="md-code md-code-inline">fetch</code> API used callbacks, you’d get one last parameter that then gets executed whenever fetching ends. Typical asynchronous code flow conventions dictate that we allocate the first parameter for errors <em>(that may or may not occur)</em> during the <em>fetching process</em>. The rest of the parameters can be used to pass in resulting data. Often, a single parameter is used.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>, <mark class="md-mark md-code-mark">(err, res) <span class="op">=&gt;</span> {</mark>
-  <mark class="md-mark md-code-mark"><span class="kw">if</span> (err) {</mark>
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>, <mark class="md-mark md-code-mark"><span class="params">(err, res)</span> <span class="op">=&gt;</span> {</mark>
+  <mark class="md-mark md-code-mark"><span class="kw">if</span> (<span class="param">err</span>) {</mark>
     <span class="com">// handle error</span>
   <mark class="md-mark md-code-mark">}</mark>
   <span class="com">// handle response</span>
@@ -8262,10 +8262,10 @@ foo()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>)
-  <mark class="md-mark md-code-mark">.<span class="built_in">on</span></mark>(<span class="str">'error'</span>, <mark class="md-mark md-code-mark">err <span class="op">=&gt;</span> {</mark>
+  <mark class="md-mark md-code-mark">.<span class="built_in">on</span></mark>(<span class="str">'error'</span>, <mark class="md-mark md-code-mark"><span class="param">err</span> <span class="op">=&gt;</span> {</mark>
     <span class="com">// handle error</span>
   <mark class="md-mark md-code-mark">}</mark>)
-  <mark class="md-mark md-code-mark">.<span class="built_in">on</span></mark>(<span class="str">'data'</span>, <mark class="md-mark md-code-mark">res <span class="op">=&gt;</span> {</mark>
+  <mark class="md-mark md-code-mark">.<span class="built_in">on</span></mark>(<span class="str">'data'</span>, <mark class="md-mark md-code-mark"><span class="param">res</span> <span class="op">=&gt;</span> {</mark>
     <span class="com">// handle response</span>
   <mark class="md-mark md-code-mark">}</mark>)
 </code></pre>
@@ -8282,10 +8282,10 @@ foo()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">p</span> <span class="op">=</span> <span class="built_in">fetch</span>(<span class="str">'foo'</span>)
-<mark class="md-mark md-code-mark"><span class="var">p</span>.<span class="built_in">then</span></mark>(<mark class="md-mark md-code-mark">res <span class="op">=&gt;</span> {</mark>
+<mark class="md-mark md-code-mark"><span class="var">p</span>.<span class="built_in">then</span></mark>(<mark class="md-mark md-code-mark"><span class="param">res</span> <span class="op">=&gt;</span> {</mark>
   <span class="com">// handle response</span>
 <mark class="md-mark md-code-mark">}</mark>)
-<mark class="md-mark md-code-mark"><span class="var">p</span>.<span class="built_in">catch</span></mark>(<mark class="md-mark md-code-mark">error <span class="op">=&gt;</span> {</mark>
+<mark class="md-mark md-code-mark"><span class="var">p</span>.<span class="built_in">catch</span></mark>(<mark class="md-mark md-code-mark"><span class="param">error</span> <span class="op">=&gt;</span> {</mark>
   <span class="com">// handle error</span>
 <mark class="md-mark md-code-mark">}</mark>)
 </code></pre>
@@ -8299,10 +8299,10 @@ foo()
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>)
   <mark class="md-mark md-code-mark">.<span class="built_in">then</span></mark>(
-    <mark class="md-mark md-code-mark">res <span class="op">=&gt;</span> {</mark>
+    <mark class="md-mark md-code-mark"><span class="param">res</span> <span class="op">=&gt;</span> {</mark>
       <span class="com">// handle response</span>
     <mark class="md-mark md-code-mark">}</mark>,
-    <mark class="md-mark md-code-mark">err <span class="op">=&gt;</span> {</mark>
+    <mark class="md-mark md-code-mark"><span class="param">err</span> <span class="op">=&gt;</span> {</mark>
       <span class="com">// handle error</span>
     <mark class="md-mark md-code-mark">}</mark>
   )
@@ -8337,7 +8337,7 @@ foo()
 <p>Going back to our example — here’s some of the code we had. In the simplest use case, this is all we wanted.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>)<mark class="md-mark md-code-mark">.<span class="built_in">then</span></mark>(<mark class="md-mark md-code-mark">res <span class="op">=&gt;</span> {</mark>
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>)<mark class="md-mark md-code-mark">.<span class="built_in">then</span></mark>(<mark class="md-mark md-code-mark"><span class="param">res</span> <span class="op">=&gt;</span> {</mark>
   <span class="com">// handle response</span>
 <mark class="md-mark md-code-mark">}</mark>)
 </code></pre>
@@ -8348,8 +8348,8 @@ foo()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>)
-  .<span class="built_in">then</span>(res <span class="op">=&gt;</span> res.a.prop.that.does.not.exist)
-  .<span class="built_in">catch</span>(err <span class="op">=&gt;</span> <mark class="md-mark md-code-mark">console.error(err.message)</mark>)
+  .<span class="built_in">then</span>(<span class="param">res</span> <span class="op">=&gt;</span> <span class="param">res</span>.a.prop.that.does.not.exist)
+  .<span class="built_in">catch</span>(<span class="param">err</span> <span class="op">=&gt;</span> <mark class="md-mark md-code-mark"><span class="kw4">console.error</span>(<span class="param">err</span>.message)</mark>)
 <span class="com">// &lt;- 'Cannot read property "prop" of undefined'</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8359,9 +8359,9 @@ foo()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>)
-  .<span class="built_in">then</span>(res <span class="op">=&gt;</span> res.a.prop.that.does.not.exist)
-  .<span class="built_in">catch</span>(err <span class="op">=&gt;</span> <span class="built_in">console</span>.error(err.message))
-  .<span class="built_in">catch</span>(err <span class="op">=&gt;</span> <span class="built_in">console</span>.error(err.message))
+  .<span class="built_in">then</span>(<span class="param">res</span> <span class="op">=&gt;</span> <span class="param">res</span>.a.prop.that.does.not.exist)
+  .<span class="built_in">catch</span>(<span class="param">err</span> <span class="op">=&gt;</span> <span class="kw4">console.error</span>(<span class="param">err</span>.message))
+  .<span class="built_in">catch</span>(<span class="param">err</span> <span class="op">=&gt;</span> <span class="kw4">console.error</span>(<span class="param">err</span>.message))
 <span class="com">// &lt;- 'Cannot read property "prop" of undefined'</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8370,9 +8370,9 @@ foo()
 <p>In contrast, the snippet found below <em>will</em> <a href="http://buff.ly/1PqlHS2">print the <code class="md-code md-code-inline">err.message</code> twice</a>. It works by saving a reference to the promise returned by <code class="md-code md-code-inline">.then</code>, and then tacking two <code class="md-code md-code-inline">.catch</code> reactions onto it. The second <code class="md-code md-code-inline">.catch</code> in the previous example was capturing errors produced in the promise returned from the first <code class="md-code md-code-inline">.catch</code>, while in this case both <code class="md-code md-code-inline">.catch</code> branch off of <code class="md-code md-code-inline">p</code>.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">p</span> <span class="op">=</span> <span class="built_in">fetch</span>(<span class="str">'foo'</span>).<span class="built_in">then</span>(res <span class="op">=&gt;</span> res.a.prop.that.does.not.exist)
-<span class="var">p</span>.<span class="built_in">catch</span>(err <span class="op">=&gt;</span> <span class="built_in">console</span>.error(err.message))
-<span class="var">p</span>.<span class="built_in">catch</span>(err <span class="op">=&gt;</span> <span class="built_in">console</span>.error(err.message))
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">p</span> <span class="op">=</span> <span class="built_in">fetch</span>(<span class="str">'foo'</span>).<span class="built_in">then</span>(<span class="param">res</span> <span class="op">=&gt;</span> <span class="param">res</span>.a.prop.that.does.not.exist)
+<span class="var">p</span>.<span class="built_in">catch</span>(<span class="param">err</span> <span class="op">=&gt;</span> <span class="kw4">console.error</span>(<span class="param">err</span>.message))
+<span class="var">p</span>.<span class="built_in">catch</span>(<span class="param">err</span> <span class="op">=&gt;</span> <span class="kw4">console.error</span>(<span class="param">err</span>.message))
 <span class="com">// &lt;- 'Cannot read property "prop" of undefined'</span>
 <span class="com">// &lt;- 'Cannot read property "prop" of undefined'</span>
 </code></pre>
@@ -8383,9 +8383,9 @@ foo()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>)
-  .<span class="built_in">then</span>(res <span class="op">=&gt;</span> res.a.prop.that.does.not.exist)
-  .<span class="built_in">catch</span>(err <span class="op">=&gt;</span> { <mark class="md-mark md-code-mark">throw</mark> <span class="kw">new</span> <span class="md-code-error">Error</span>(err.message) })
-  .<span class="built_in">catch</span>(err <span class="op">=&gt;</span> <span class="built_in">console</span>.error(err.message))
+  .<span class="built_in">then</span>(<span class="param">res</span> <span class="op">=&gt;</span> <span class="param">res</span>.a.prop.that.does.not.exist)
+  .<span class="built_in">catch</span>(<span class="param">err</span> <span class="op">=&gt;</span> { <mark class="md-mark md-code-mark"><span class="built_in">throw</span></mark> <span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="param">err</span>.message) })
+  .<span class="built_in">catch</span>(<span class="param">err</span> <span class="op">=&gt;</span> <span class="kw4">console.error</span>(<span class="param">err</span>.message))
 <span class="com">// &lt;- 'Cannot read property "prop" of undefined'</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8395,9 +8395,9 @@ foo()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>)
-  .<span class="built_in">then</span>(res <span class="op">=&gt;</span> res.a.prop.that.does.not.exist)
-  .<span class="built_in">catch</span>(err <span class="op">=&gt;</span> <mark class="md-mark md-code-mark">{}</mark>)
-  .<span class="built_in">catch</span>(err <span class="op">=&gt;</span> <span class="built_in">console</span>.error(err.message))
+  .<span class="built_in">then</span>(<span class="param">res</span> <span class="op">=&gt;</span> <span class="param">res</span>.a.prop.that.does.not.exist)
+  .<span class="built_in">catch</span>(<span class="param">err</span> <span class="op">=&gt;</span> <mark class="md-mark md-code-mark">{}</mark>)
+  .<span class="built_in">catch</span>(<span class="param">err</span> <span class="op">=&gt;</span> <span class="kw4">console.error</span>(<span class="param">err</span>.message))
 <span class="com">// nothing happens</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8411,9 +8411,9 @@ foo()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <mark class="md-mark md-code-mark"><span class="var">p1</span></mark> <span class="op">=</span> <span class="built_in">fetch</span>(<span class="str">'foo'</span>)
-<span class="kw">var</span> <mark class="md-mark md-code-mark"><span class="var">p2</span></mark> <span class="op">=</span> <span class="var">p1</span>.<span class="built_in">then</span>(res <span class="op">=&gt;</span> res.a.prop.that.does.not.exist)
-<span class="kw">var</span> <mark class="md-mark md-code-mark"><span class="var">p3</span></mark> <span class="op">=</span> <span class="var">p2</span>.<span class="built_in">catch</span>(err <span class="op">=&gt;</span> {})
-<span class="kw">var</span> <mark class="md-mark md-code-mark"><span class="var">p4</span></mark> <span class="op">=</span> <span class="var">p3</span>.<span class="built_in">catch</span>(err <span class="op">=&gt;</span> <span class="built_in">console</span>.error(err.message))
+<span class="kw">var</span> <mark class="md-mark md-code-mark"><span class="var">p2</span></mark> <span class="op">=</span> <span class="var">p1</span>.<span class="built_in">then</span>(<span class="param">res</span> <span class="op">=&gt;</span> <span class="param">res</span>.a.prop.that.does.not.exist)
+<span class="kw">var</span> <mark class="md-mark md-code-mark"><span class="var">p3</span></mark> <span class="op">=</span> <span class="var">p2</span>.<span class="built_in">catch</span>(<span class="param">err</span> <span class="op">=&gt;</span> {})
+<span class="kw">var</span> <mark class="md-mark md-code-mark"><span class="var">p4</span></mark> <span class="op">=</span> <span class="var">p3</span>.<span class="built_in">catch</span>(<span class="param">err</span> <span class="op">=&gt;</span> <span class="kw4">console.error</span>(<span class="param">err</span>.message))
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8440,8 +8440,8 @@ foo()
 <p>Promises can be created from scratch by using <code class="md-code md-code-inline">new Promise(resolver)</code>. The <code class="md-code md-code-inline">resolver</code> parameter is a method that will be used to resolve the promise. It takes two arguments, a <code class="md-code md-code-inline">resolve</code> method and a <code class="md-code md-code-inline">reject</code> method. These promises are fulfilled and rejected, respectively, on the next tick — as <a href="http://buff.ly/1LzF6k8">seen on Promisees</a>.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">new</span> <span class="prom">Promise</span>(resolve <span class="op">=&gt;</span> <mark class="md-mark md-code-mark">resolve()</mark>) <span class="com">// promise is fulfilled</span>
-<span class="kw">new</span> <span class="prom">Promise</span>((resolve, reject) <span class="op">=&gt;</span> <mark class="md-mark md-code-mark">reject()</mark>) <span class="com">// promise is rejected</span>
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">new</span> <span class="prom">Promise</span>(<span class="param">resolve</span> <span class="op">=&gt;</span> <mark class="md-mark md-code-mark">resolve()</mark>) <span class="com">// promise is fulfilled</span>
+<span class="kw">new</span> <span class="prom">Promise</span>(<span class="params">(resolve, reject)</span> <span class="op">=&gt;</span> <mark class="md-mark md-code-mark">reject()</mark>) <span class="com">// promise is rejected</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8449,13 +8449,13 @@ foo()
 <p>Resolving and rejecting promises without a value isn’t that useful, though. Usually promises will resolve to some <code class="md-code md-code-inline">result</code>, like the response from an AJAX call as we saw with <code class="md-code md-code-inline">fetch</code>. Similarly, you’ll probably want to state the <code class="md-code md-code-inline">reason</code> for your rejections — typically using an <code class="md-code md-code-inline">Error</code> object. The code below codifies what you’ve just read (see the <a href="http://buff.ly/1KxmM9p">visualization</a>, too).</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">new</span> <span class="prom">Promise</span>(resolve <span class="op">=&gt;</span> resolve({ foo: <span class="str">'bar'</span> }))
-  .<span class="built_in">then</span>(result <span class="op">=&gt;</span> <span class="kw4">console.log</span>(result))
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">new</span> <span class="prom">Promise</span>(<span class="param">resolve</span> <span class="op">=&gt;</span> resolve({ foo: <span class="str">'bar'</span> }))
+  .<span class="built_in">then</span>(<span class="param">result</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="param">result</span>))
   <span class="com">// &lt;- { foo: 'bar' }</span>
 
-<span class="kw">new</span> <span class="prom">Promise</span>((resolve, reject) <span class="op">=&gt;</span>
+<span class="kw">new</span> <span class="prom">Promise</span>(<span class="params">(resolve, reject)</span> <span class="op">=&gt;</span>
   reject(<span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'failed to deliver on my promise to you'</span>)))
-  .<span class="built_in">catch</span>(reason <span class="op">=&gt;</span> <span class="kw4">console.log</span>(reason))
+  .<span class="built_in">catch</span>(<span class="param">reason</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="param">reason</span>))
   <span class="com">// &lt;- Error: failed to deliver on my promise to you</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8464,7 +8464,7 @@ foo()
 <p>As you may have guessed, there’s nothing inherently synchronous about promises. Fulfillment and rejection can both be completely asynchronous. That’s the whole point of promises! The promise below is fulfilled <a href="http://buff.ly/1PxIwmX">after two seconds</a> elapse.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">new</span> <span class="prom">Promise</span>(resolve <span class="op">=&gt;</span> setTimeout(resolve, <span class="num">2000</span>))
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">new</span> <span class="prom">Promise</span>(<span class="param">resolve</span> <span class="op">=&gt;</span> <span class="built_in">setTimeout</span>(<span class="param">resolve</span>, <span class="num">2000</span>))
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8474,12 +8474,12 @@ foo()
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="md-code-function"><span class="kw">function</span> <span class="fn">resolveUnderThreeSeconds</span> <span class="params">(delay)</span> </span>{
   <span class="kw3">return</span> <span class="kw">new</span> <span class="prom">Promise</span>(<span class="md-code-function"><span class="kw">function</span> <span class="params">(resolve, reject)</span> </span>{
-    setTimeout(resolve, delay)
-    setTimeout(reject, <span class="num">3000</span>)
+    <span class="built_in">setTimeout</span>(<span class="param">resolve</span>, <span class="param">delay</span>)
+    <span class="built_in">setTimeout</span>(<span class="param">reject</span>, <span class="num">3000</span>)
   })
 }
-resolveUnderThreeSeconds(<span class="num">2000</span>) <span class="com">// resolves!</span>
-resolveUnderThreeSeconds(<span class="num">7000</span>) <span class="com">// fulfillment took so long, it was rejected.</span>
+<span class="fn">resolveUnderThreeSeconds</span>(<span class="num">2000</span>) <span class="com">// resolves!</span>
+<span class="fn">resolveUnderThreeSeconds</span>(<span class="num">7000</span>) <span class="com">// fulfillment took so long, it was rejected.</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8499,13 +8499,13 @@ resolveUnderThreeSeconds(<span class="num">7000</span>) <span class="com">// ful
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">p</span> <span class="op">=</span> <span class="kw">new</span> <span class="prom">Promise</span>(<span class="md-code-function"><span class="kw">function</span> <span class="params">(resolve, reject)</span> </span>{
-  setTimeout(() <span class="op">=&gt;</span> reject(<span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'fail'</span>)), <span class="num">3000</span>)
+  <span class="built_in">setTimeout</span>(() <span class="op">=&gt;</span> <span class="param">reject</span>(<span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'fail'</span>)), <span class="num">3000</span>)
 })
 <span class="kw">var</span> <span class="var">p2</span> <span class="op">=</span> <span class="kw">new</span> <span class="prom">Promise</span>(<span class="md-code-function"><span class="kw">function</span> <span class="params">(resolve, reject)</span> </span>{
-  setTimeout(() <span class="op">=&gt;</span> resolve(p), <span class="num">1000</span>)
+  <span class="built_in">setTimeout</span>(() <span class="op">=&gt;</span> <span class="param">resolve</span>(<span class="var">p</span>), <span class="num">1000</span>)
 })
-<span class="var">p2</span>.<span class="built_in">then</span>(result <span class="op">=&gt;</span> <span class="kw4">console.log</span>(result))
-<span class="var">p2</span>.<span class="built_in">catch</span>(error <span class="op">=&gt;</span> <span class="kw4">console.log</span>(error))
+<span class="var">p2</span>.<span class="built_in">then</span>(<span class="param">result</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="param">result</span>))
+<span class="var">p2</span>.<span class="built_in">catch</span>(<span class="param">error</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="param">error</span>))
 <span class="com">// &lt;- Error: fail</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8523,9 +8523,6 @@ resolveUnderThreeSeconds(<span class="num">7000</span>) <span class="com">// ful
 <img src="auxi/10_frame_2.gif" alt="stage 2 - Animation of a promise blocking another one" />
 <img src="auxi/10_frame_3.gif" alt="stage 3 - Animation of a promise blocking another one" />
 
-
-
-
 <p>Note that you this behavior is only possible for fulfillment branches using <code class="md-code md-code-inline">resolve</code>. If you try to replicate the same behavior with <code class="md-code md-code-inline">reject</code> you’ll find that the <code class="md-code md-code-inline">p2</code> promise is just rejected with the <code class="md-code md-code-inline">p</code> promise as the rejection <code class="md-code md-code-inline">reason</code>.</p>
 
 
@@ -8535,7 +8532,7 @@ resolveUnderThreeSeconds(<span class="num">7000</span>) <span class="com">// ful
 <p>Sometimes you want to create a Promise but you don’t want to go through the trouble of using the constructor. The following statement creates a promise that’s fulfilled with a result of <code class="md-code md-code-inline">'foo'</code>.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">new</span> <span class="prom">Promise</span>(resolve <span class="op">=&gt;</span> resolve(<span class="str">'foo'</span>))
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">new</span> <span class="prom">Promise</span>(<span class="param">resolve</span> <span class="op">=&gt;</span> resolve(<span class="str">'foo'</span>))
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8543,7 +8540,7 @@ resolveUnderThreeSeconds(<span class="num">7000</span>) <span class="com">// ful
 <p>If you already know the value a promise should be fulfilled with, you can use <code class="md-code md-code-inline">Promise.resolve</code> instead. The following statement is equivalent to the previous one.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">Promise.resolve(<span class="str">'foo'</span>)
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="prom">Promise</span>.resolve(<span class="str">'foo'</span>)
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8551,10 +8548,9 @@ resolveUnderThreeSeconds(<span class="num">7000</span>) <span class="com">// ful
 <p>Similarly, if you already know the rejection reason, you can use <code class="md-code md-code-inline">Promise.reject</code>. The next statement creates a promise that’s going to settle into a rejection, with <code class="md-code md-code-inline">reason</code>.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">Promise.reject(reason)
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="prom">Promise</span>.reject(reason)
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
-
 
 <p>What else should we know about settling a promise?</p>
 
@@ -8568,16 +8564,15 @@ resolveUnderThreeSeconds(<span class="num">7000</span>) <span class="com">// ful
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">p</span> <span class="op">=</span> <span class="kw">new</span> <span class="prom">Promise</span>(<span class="md-code-function"><span class="kw">function</span> <span class="params">(resolve, reject)</span> </span>{
-  setTimeout(() <span class="op">=&gt;</span> resolve(<span class="num">100</span>), <span class="num">2000</span>)
+  <span class="built_in">setTimeout</span>(<span class="params">()</span> <span class="op">=&gt;</span> resolve(<span class="num">100</span>), <span class="num">2000</span>)
 })
-p.<span class="built_in">then</span>(result <span class="op">=&gt;</span> <span class="kw4">console.log</span>(result))
+<span class="var">p</span>.<span class="built_in">then</span>(<span class="param">result</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="param">result</span>))
 <span class="com">// &lt;- 100</span>
 
-setTimeout(() <span class="op">=&gt;</span> p.<span class="built_in">then</span>(result <span class="op">=&gt;</span> <span class="kw4">console.log</span>(result <span class="op">*</span> <span class="num">20</span>)), <span class="num">4000</span>)
+<span class="built_in">setTimeout</span>(<span class="params">()</span> <span class="op">=&gt;</span> <span class="var">p</span>.<span class="built_in">then</span>(<span class="param">result</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="param">result</span> <span class="op">*</span> <span class="num">20</span>)), <span class="num">4000</span>)
 <span class="com">// &lt;- 2000</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
-
 
 <p>A promise can return another promise — this is what enables and powers most of their asynchronous behavior. In the <a href="#creating-a-promise-from-scratch">previous section</a>, when creating a promise from scratch, we saw that we can <code class="md-code md-code-inline">resolve</code> with another promise. We can also return promises when calling <code class="md-code md-code-inline">.then</code>.</p>
 
@@ -8589,8 +8584,8 @@ setTimeout(() <span class="op">=&gt;</span> p.<span class="built_in">then</span>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="built_in">fetch</span>(<span class="str">'foo'</span>)
-  .<span class="built_in">then</span>(response <span class="op">=&gt;</span> fetch(<span class="str">'/articles/random'</span>))
-  .<span class="built_in">then</span>(response <span class="op">=&gt;</span> <span class="kw4">console.log</span>(response.url))
+  .<span class="built_in">then</span>(<span class="param">response</span> <span class="op">=&gt;</span> <span class="built_in">fetch</span>(<span class="str">'/articles/random'</span>))
+  .<span class="built_in">then</span>(<span class="param">response</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="param">response</span>.url))
 <span class="com">// &lt;- 'http://ponyfoo.com/articles/es6-symbols-in-depth'</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8599,14 +8594,14 @@ setTimeout(() <span class="op">=&gt;</span> p.<span class="built_in">then</span>
 <p>Obviously, in the real world, your second <code class="md-code md-code-inline">fetch</code> would probably depend on the response from the first one. Here’s another example of returning a promise, where we <a href="http://buff.ly/1VbxElo">randomly <code class="md-code md-code-inline">fulfill</code> or <code class="md-code md-code-inline">reject</code></a> after a second.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">p</span> <span class="op">=</span> Promise.resolve()
-  .<span class="built_in">then</span>(data <span class="op">=&gt;</span> <span class="kw">new</span> <span class="prom">Promise</span>(<span class="md-code-function"><span class="kw">function</span> <span class="params">(resolve, reject)</span> </span>{
-    setTimeout(<span class="cls">Math</span>.<span class="built_in">random</span>() <span class="op">&gt;</span>
-<span class="num">0.5</span> ? resolve : reject, <span class="num">1000</span>)
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">p</span> <span class="op">=</span> <span class="prom">Promise</span>.<span class="param">resolve</span>()
+  .<span class="built_in">then</span>(<span class="param">data</span> <span class="op">=&gt;</span> <span class="kw">new</span> <span class="prom">Promise</span>(<span class="kw">function</span> <span class="params">(resolve, reject)</span> {
+    <span class="built_in">setTimeout</span>(<span class="cls">Math</span>.<span class="built_in">random</span>() <span class="op">&gt;</span>
+<span class="num">0.5</span> <span class="op">?</span> <span class="param">resolve</span> <span class="op">:</span> <span class="param">reject</span>, <span class="num">1000</span>)
   }))
 
-p.<span class="built_in">then</span>(data <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="str">'okay!'</span>))
-p.<span class="built_in">catch</span>(data <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="str">'boo!'</span>))
+<span class="var">p</span>.<span class="built_in">then</span>(<span class="param">data</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="str">'okay!'</span>))
+<span class="var">p</span>.<span class="built_in">catch</span>(<span class="param">data</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="str">'boo!'</span>))
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8618,7 +8613,6 @@ p.<span class="built_in">catch</span>(data <span class="op">=&gt;</span> <span c
 <img src="auxi/14_frame_1.gif" alt="stage 1 - Animation of the code shown right above" />
 <img src="auxi/14_frame_2.gif" alt="stage 2 - Animation of the code shown right above" />
 
-
 <p>Okay it’s <strong>not</strong> <em>that fun</em>. I did have fun making the Promisees tool itself!</p>
 
 
@@ -8628,9 +8622,9 @@ p.<span class="built_in">catch</span>(data <span class="op">=&gt;</span> <span c
 <p>You’re not just limited to returning other promises from your <code class="md-code md-code-inline">.then</code> and <code class="md-code md-code-inline">.catch</code> callbacks. You could also return values, transforming what you had. The example below first creates a promise fulfilled with <code class="md-code md-code-inline">[1, 2, 3]</code> and then has a fulfillment branch on top of that which maps thoes values into <code class="md-code md-code-inline">[2, 4, 6]</code>. Calling <code class="md-code md-code-inline">.then</code> on that branch of the promise will produce the doubled values.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">Promise.resolve([<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>])
-  .<span class="built_in">then</span>(values <span class="op">=&gt;</span> values.<span class="kw">map</span>(value <span class="op">=&gt;</span> value <span class="op">*</span> <span class="num">2</span>))
-  .<span class="built_in">then</span>(values <span class="op">=&gt;</span> <span class="kw4">console.log</span>(values))
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="prom">Promise</span>.resolve([<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>])
+  .<span class="built_in">then</span>(<span class="param">values</span> <span class="op">=&gt;</span> values.<span class="kw">map</span>(<span class="param">value</span> <span class="op">=&gt;</span> <span class="param">value</span> <span class="op">*</span> <span class="num">2</span>))
+  .<span class="built_in">then</span>(<span class="param">values</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="param">values</span>))
   <span class="com">// &lt;- [2, 4, 6]</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8639,13 +8633,12 @@ p.<span class="built_in">catch</span>(data <span class="op">=&gt;</span> <span c
 <p>Note that you can do the same thing in rejection branches. An interesting fact that may catch your eye is that if a <code class="md-code md-code-inline">.catch</code> branch goes smoothly without errors, then it will be fulfilled with the returned value. That means that if you still want to have an error for that branch, you should <code class="md-code md-code-inline">throw</code> again. The following piece of code takes an internal error and <strong>masks it</strong> behind a generic <em>“Internal Server Error”</em> message as to not leak off potentially dangerous information to its clients <a href="http://buff.ly/1LA2FcS">(visualization)</a>.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">Promise.reject(<span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'Database ds.214.53.4.12 connection timeout!'</span>))
-  .<span class="built_in">catch</span>(error <span class="op">=&gt;</span> { <span class="kw">throw</span> <span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'Internal Server Error'</span>) })
-  .<span class="built_in">catch</span>(error <span class="op">=&gt;</span> <span class="built_in">console.info</span>(error))
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="prom">Promise</span>.reject(<span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'Database ds.214.53.4.12 connection timeout!'</span>))
+  .<span class="built_in">catch</span>(<span class="param">error</span> <span class="op">=&gt;</span> { <span class="kw">throw</span> <span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'Internal Server Error'</span>) })
+  .<span class="built_in">catch</span>(<span class="param">error</span> <span class="op">=&gt;</span> <span class="built_in">console.info</span>(<span class="param">error</span>))
   <span class="com">// &lt;- Error: Internal Server Error</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
-
 
 <p>Mapping promise results is particularly useful when dealing with multiple concurrent promises. Let’s see how that looks like.</p>
 
@@ -8658,7 +8651,7 @@ p.<span class="built_in">catch</span>(data <span class="op">=&gt;</span> <span c
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript">request(<span class="str">'https://google.com'</span>, <span class="md-code-function"><span class="kw">function</span> <span class="params">(err, goog)</span> </span>{
   request(<span class="str">'https://twitter.com'</span>, <span class="md-code-function"><span class="kw">function</span> <span class="params">(err, twit)</span> </span>{
-    <span class="kw4">console.log</span>(goog.<span class="built_in">length</span>, twit.<span class="built_in">length</span>)
+    <span class="kw4">console.log</span>(<span class="param">goog</span>.<span class="built_in">length</span>, <span class="param">twit</span>.<span class="built_in">length</span>)
   })
 })
 </code></pre>
@@ -8670,18 +8663,18 @@ p.<span class="built_in">catch</span>(data <span class="op">=&gt;</span> <span c
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">results</span> <span class="op">=</span> {}
 request(<span class="str">'https://google.com'</span>, <span class="md-code-function"><span class="kw">function</span> <span class="params">(err, goog)</span> </span>{
-  results.goog <span class="op">=</span> goog
+  <span class="var">results</span>.<span class="param">goog</span> <span class="op">=</span> <span class="param">goog</span>
   done()
 })
 request(<span class="str">'https://twitter.com'</span>, <span class="md-code-function"><span class="kw">function</span> <span class="params">(err, twit)</span> </span>{
-  results.twit <span class="op">=</span> twit
-  done()
+  <span class="var">results</span>.<span class="param">twit</span> <span class="op">=</span> <span class="param">twit</span>
+  <span class="fn">done</span>()
 })
 <span class="md-code-function"><span class="kw">function</span> <span class="fn">done</span> <span class="params">()</span> </span>{
-  <span class="kw">if</span> (<span class="cls">Object</span>.keys(results).<span class="built_in">length</span> &lt; <span class="num">2</span>) {
+  <span class="kw">if</span> (<span class="cls">Object</span>.<span class="built_in">keys</span>(<span class="var">results</span>).<span class="built_in">length</span> &lt; <span class="num">2</span>) {
     <span class="kw3">return</span>
   }
-  <span class="kw4">console.log</span>(results.goog.<span class="built_in">length</span>, results.twit.<span class="built_in">length</span>)
+  <span class="kw4">console.log</span>(<span class="var">results</span>.<span class="param">goog</span>.<span class="built_in">length</span>, <span class="var">results</span>.<span class="param">twit</span>.<span class="built_in">length</span>)
 }
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8692,13 +8685,13 @@ request(<span class="str">'https://twitter.com'</span>, <span class="md-code-fun
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript">contra.concurrent({
   goog: <span class="md-code-function"><span class="kw">function</span> <span class="params">(<mark class="md-mark md-code-mark">next</mark>)</span> </span>{
-    request(<span class="str">'https://google.com'</span>, <mark class="md-mark md-code-mark">next</mark>)
+    request(<span class="str">'https://google.com'</span>, <mark class="md-mark md-code-mark"><span class="param">next</span></mark>)
   }
   twit: <span class="md-code-function"><span class="kw">function</span> <span class="params">(next)</span> </span>{
-    request(<span class="str">'https://twitter.com'</span>, next)
+    request(<span class="str">'https://twitter.com'</span>, <span class="param">next</span>)
   }
 }, <span class="md-code-function"><span class="kw">function</span> <span class="params">(err, <mark class="md-mark md-code-mark">results</mark>)</span> </span>{
-  <span class="kw4">console.log</span>(results.goog.<span class="built_in">length</span>, results.twit.<span class="built_in">length</span>)
+  <span class="kw4">console.log</span>(<span class="param">results</span>.goog.<span class="built_in">length</span>, <span class="param">results</span>.twit.<span class="built_in">length</span>)
 })
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8711,7 +8704,7 @@ request(<span class="str">'https://twitter.com'</span>, <span class="md-code-fun
   goog: <mark class="md-mark md-code-mark">contra.curry</mark>(request, <span class="str">'https://google.com'</span>),
   twit: <mark class="md-mark md-code-mark">contra.curry</mark>(request, <span class="str">'https://twitter.com'</span>)
 }, <span class="md-code-function"><span class="kw">function</span> <span class="params">(err, results)</span> </span>{
-  <span class="kw4">console.log</span>(results.goog.<span class="built_in">length</span>, results.twit.<span class="built_in">length</span>)
+  <span class="kw4">console.log</span>(<span class="param">results</span>.goog.<span class="built_in">length</span>, <span class="param">results</span>.twit.<span class="built_in">length</span>)
 })
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8720,12 +8713,12 @@ request(<span class="str">'https://twitter.com'</span>, <span class="md-code-fun
 <p>Promises already make the “run this after this other thing in series” use case very easy, using <code class="md-code md-code-inline">.then</code> as we saw in several examples earlier. For the <em>“run these things concurrently”</em> use case, we can use <code class="md-code md-code-inline">Promise.all</code> <a href="http://buff.ly/1Pyen6L">(visualization here)</a>.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">Promise.all([
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="prom">Promise</span>.<span class="built_in">all</span>([
   <span class="built_in">fetch</span>(<span class="str">'/'</span>),
   <span class="built_in">fetch</span>(<span class="str">'foo'</span>)
 ])
-  .<span class="built_in">then</span>(responses <span class="op">=&gt;</span> responses.<span class="kw">map</span>(response <span class="op">=&gt;</span> response.statusText))
-  .<span class="built_in">then</span>(status <span class="op">=&gt;</span> <span class="kw4">console.log</span>(status.join(<span class="str">', '</span>)))
+  .<span class="built_in">then</span>(<span class="param">responses</span> <span class="op">=&gt;</span> <span class="param">responses</span>.<span class="kw">map</span>(<span class="param">response</span> <span class="op">=&gt;</span> <span class="param">response</span>.statusText))
+  .<span class="built_in">then</span>(<span class="param">status</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="param">status</span>.<span class="built_in">join</span>(<span class="str">', '</span>)))
   <span class="com">// &lt;- 'OK, Not Found'</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8734,13 +8727,13 @@ request(<span class="str">'https://twitter.com'</span>, <span class="md-code-fun
 <p>Note that even if a single dependency is rejected, the <code class="md-code md-code-inline">Promise.all</code> method will be rejected entirely as well.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">Promise.all([
-  <mark class="md-mark md-code-mark">Promise.reject()</mark>,
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="prom">Promise</span>.<span class="built_in">all</span>([
+  <mark class="md-mark md-code-mark"><span class="prom">Promise</span>.<span class="built_in">reject</span>()</mark>,
   <span class="built_in">fetch</span>(<span class="str">'/'</span>),
   <span class="built_in">fetch</span>(<span class="str">'foo'</span>)
 ])
-  .<span class="built_in">then</span>(responses <span class="op">=&gt;</span> responses.<span class="kw">map</span>(response <span class="op">=&gt;</span> response.statusText))
-  .<span class="built_in">then</span>(status <span class="op">=&gt;</span> <span class="kw4">console.log</span>(status.join(<span class="str">', '</span>)))
+  .<span class="built_in">then</span>(<span class="param">responses</span> <span class="op">=&gt;</span> <span class="param">responses</span>.<span class="kw">map</span>(<span class="param">response</span> <span class="op">=&gt;</span> <span class="param">response</span>.statusText))
+  .<span class="built_in">then</span>(<span class="param">status</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="param">status</span>.<span class="built_in">join</span>(<span class="str">', '</span>)))
   <span class="com">// nothing happens</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8753,11 +8746,11 @@ request(<span class="str">'https://twitter.com'</span>, <span class="md-code-fun
 <p>Then there’s <code class="md-code md-code-inline">Promise.race</code>. This is a similar method to <code class="md-code md-code-inline">Promise.all</code>, except the first promise to settle will “win” the race, and its value will be passed along to branches of the race. If you run the <a href="http://buff.ly/1gRYr3p">visualization</a> for the following piece of code a few times, you’ll notice that this race doesn’t have a clear winner. It depends on the server and the network!</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript">Promise.race([
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="prom">Promise</span>.race([
   <span class="built_in">fetch</span>(<span class="str">'/'</span>),
   <span class="built_in">fetch</span>(<span class="str">'foo'</span>)
 ])
-  .<span class="built_in">then</span>(response <span class="op">=&gt;</span> <span class="kw4">console.log</span>(response.statusText))
+  .<span class="built_in">then</span>(<span class="param">response</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="param">response</span>.statusText))
   <span class="com">// &lt;- 'OK', or maybe 'Not Found'.</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
@@ -8766,14 +8759,14 @@ request(<span class="str">'https://twitter.com'</span>, <span class="md-code-fun
 <p>Rejections will also finish the race, and the race promise will be rejected. As a closing note we may indicate that this could be useful for scenarios where we want to time out a promise we otherwise have no control over. For instance, the following race does make sense.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">p</span> <span class="op">=</span> Promise.race([
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">p</span> <span class="op">=</span> <span class="prom">Promise</span>.race([
   <span class="built_in">fetch</span>(<span class="str">'/resource-that-may-take-a-while'</span>),
   <span class="kw">new</span> <span class="prom">Promise</span>(<span class="md-code-function"><span class="kw">function</span> <span class="params">(resolve, reject)</span> </span>{
-    setTimeout(() <span class="op">=&gt;</span> reject(<span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'request timeout'</span>)), <span class="num">5000</span>)
+    <span class="built_in">setTimeout</span>(() <span class="op">=&gt;</span> reject(<span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'request timeout'</span>)), <span class="num">5000</span>)
   })
 ])
-p.<span class="built_in">then</span>(response <span class="op">=&gt;</span> <span class="kw4">console.log</span>(response))
-p.<span class="built_in">catch</span>(error <span class="op">=&gt;</span> <span class="kw4">console.log</span>(error))
+p.<span class="built_in">then</span>(<span class="param">response</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="param">response</span>))
+p.<span class="built_in">catch</span>(<span class="param">error</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="param">error</span>))
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -9579,7 +9572,7 @@ p.<span class="built_in">catch</span>(error <span class="op">=&gt;</span> <span 
 <hr class="style8" />
 <p>This PDF was created (and styled) by <a href="https://github.com/rsperberg" title="link to Roger Sperberg github page">Roger Sperberg</a>. Any typographical or grammar errors or any issues with the PDF itself can be posted on the <a href="https://github.com/rsperberg/es6-info/issues" title="link to ES6-info issues page on github">issues page</a> of the <a href="https://github.com/rsperberg/es6-info" title="link to ES6-info repository on github">ES6-info repository</a> on GitHub.</p>
 <p>The <a href="https://github.com/rsperberg/es6-info/blob/master/ES6%20Whats%20new%20(smashing).pdf">latest version of this PDF</a> can be downloaded from the <a href="https://github.com/rsperberg/es6-info" title="link to ES6-info repository on github">ES6-info repository</a>.</p>
-<p><b>NOTE:</b> <em>This PDF was last revised on 2015-11-10</em></p>
+<p><b>NOTE:</b> <em>This PDF was last revised on 2015-11-11</em></p>
 <hr class="style8" />
 
 <!--  ++++++++++++++++++++++++++++ ++++++++++++++++++++++++++++++++ +++++++++++++++++++++++++  -->
