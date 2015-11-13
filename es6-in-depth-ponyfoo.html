@@ -8440,8 +8440,8 @@ foo()
 <p>Promises can be created from scratch by using <code class="md-code md-code-inline">new Promise(resolver)</code>. The <code class="md-code md-code-inline">resolver</code> parameter is a method that will be used to resolve the promise. It takes two arguments, a <code class="md-code md-code-inline">resolve</code> method and a <code class="md-code md-code-inline">reject</code> method. These promises are fulfilled and rejected, respectively, on the next tick — as <a href="http://buff.ly/1LzF6k8">seen on Promisees</a>.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">new</span> <span class="prom">Promise</span>(<span class="param">resolve</span> <span class="op">=&gt;</span> <mark class="md-mark md-code-mark">resolve()</mark>) <span class="com">// promise is fulfilled</span>
-<span class="kw">new</span> <span class="prom">Promise</span>(<span class="params">(resolve, reject)</span> <span class="op">=&gt;</span> <mark class="md-mark md-code-mark">reject()</mark>) <span class="com">// promise is rejected</span>
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">new</span> <span class="prom">Promise</span>(<span class="param">resolve</span> <span class="op">=&gt;</span> <mark class="md-mark md-code-mark"><span class="param">resolve</span>()</mark>) <span class="com">// promise is fulfilled</span>
+<span class="kw">new</span> <span class="prom">Promise</span>(<span class="params">(resolve, reject)</span> <span class="op">=&gt;</span> <mark class="md-mark md-code-mark"><span class="param">reject</span>()</mark>) <span class="com">// promise is rejected</span>
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8449,12 +8449,12 @@ foo()
 <p>Resolving and rejecting promises without a value isn’t that useful, though. Usually promises will resolve to some <code class="md-code md-code-inline">result</code>, like the response from an AJAX call as we saw with <code class="md-code md-code-inline">fetch</code>. Similarly, you’ll probably want to state the <code class="md-code md-code-inline">reason</code> for your rejections — typically using an <code class="md-code md-code-inline">Error</code> object. The code below codifies what you’ve just read (see the <a href="http://buff.ly/1KxmM9p">visualization</a>, too).</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">new</span> <span class="prom">Promise</span>(<span class="param">resolve</span> <span class="op">=&gt;</span> resolve({ foo: <span class="str">'bar'</span> }))
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">new</span> <span class="prom">Promise</span>(<span class="param">resolve</span> <span class="op">=&gt;</span> <span class="param">resolve</span>({ foo: <span class="str">'bar'</span> }))
   .<span class="built_in">then</span>(<span class="param">result</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="param">result</span>))
   <span class="com">// &lt;- { foo: 'bar' }</span>
 
 <span class="kw">new</span> <span class="prom">Promise</span>(<span class="params">(resolve, reject)</span> <span class="op">=&gt;</span>
-  reject(<span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'failed to deliver on my promise to you'</span>)))
+  <span class="param">reject</span>(<span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'failed to deliver on my promise to you'</span>)))
   .<span class="built_in">catch</span>(<span class="param">reason</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="param">reason</span>))
   <span class="com">// &lt;- Error: failed to deliver on my promise to you</span>
 </code></pre>
@@ -8493,6 +8493,9 @@ foo()
 <img src="auxi/06_frame_1.gif" alt="stage 1 - See the promises unfold with this animation" />
 <img src="auxi/06_frame_2.gif" alt="stage 2 - See the promises unfold with this animation" />
 <img src="auxi/06_frame_3.gif" alt="stage 3 - See the promises unfold with this animation" />
+<p> &nbsp; </p>
+<img src="auxi/06_frame_animated.gif" alt="See the promises unfold with this animation" />
+<img src="auxi/06_frame_animated.mov" alt="See the promises unfold with this animation" />
 
 
 <p>Besides returning resolution values, you could also resolve with <em>another promise</em>. What happens in those cases? In the following snippet we create a promise <code class="md-code md-code-inline">p</code> that will be rejected in three seconds. We also create a promise <code class="md-code md-code-inline">p2</code> that will be resolved with <code class="md-code md-code-inline">p</code> in a second. Since <code class="md-code md-code-inline">p</code> is still two seconds out, resolving <code class="md-code md-code-inline">p2</code> won’t have an immediate effect. Two seconds later, when <code class="md-code md-code-inline">p</code> is rejected, <code class="md-code md-code-inline">p2</code> will be rejected as well, with the same rejection reason that was provided to <code class="md-code md-code-inline">p</code>.</p>
@@ -8540,7 +8543,7 @@ foo()
 <p>If you already know the value a promise should be fulfilled with, you can use <code class="md-code md-code-inline">Promise.resolve</code> instead. The following statement is equivalent to the previous one.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="prom">Promise</span>.resolve(<span class="str">'foo'</span>)
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="prom">Promise</span>.<span class="built_in">resolve</span>(<span class="str">'foo'</span>)
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8548,7 +8551,7 @@ foo()
 <p>Similarly, if you already know the rejection reason, you can use <code class="md-code md-code-inline">Promise.reject</code>. The next statement creates a promise that’s going to settle into a rejection, with <code class="md-code md-code-inline">reason</code>.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="prom">Promise</span>.reject(reason)
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="prom">Promise</span>.<span class="built_in">reject</span>(reason)
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -8564,7 +8567,7 @@ foo()
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
 <pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">p</span> <span class="op">=</span> <span class="kw">new</span> <span class="prom">Promise</span>(<span class="md-code-function"><span class="kw">function</span> <span class="params">(resolve, reject)</span> </span>{
-  <span class="built_in">setTimeout</span>(<span class="params">()</span> <span class="op">=&gt;</span> resolve(<span class="num">100</span>), <span class="num">2000</span>)
+  <span class="built_in">setTimeout</span>(<span class="params">()</span> <span class="op">=&gt;</span> <span class="param">resolve</span>(<span class="num">100</span>), <span class="num">2000</span>)
 })
 <span class="var">p</span>.<span class="built_in">then</span>(<span class="param">result</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="param">result</span>))
 <span class="com">// &lt;- 100</span>
@@ -8622,7 +8625,7 @@ foo()
 <p>You’re not just limited to returning other promises from your <code class="md-code md-code-inline">.then</code> and <code class="md-code md-code-inline">.catch</code> callbacks. You could also return values, transforming what you had. The example below first creates a promise fulfilled with <code class="md-code md-code-inline">[1, 2, 3]</code> and then has a fulfillment branch on top of that which maps thoes values into <code class="md-code md-code-inline">[2, 4, 6]</code>. Calling <code class="md-code md-code-inline">.then</code> on that branch of the promise will produce the doubled values.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="prom">Promise</span>.resolve([<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>])
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="prom">Promise</span>.<span class="built_in">resolve</span>([<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>])
   .<span class="built_in">then</span>(<span class="param">values</span> <span class="op">=&gt;</span> values.<span class="kw">map</span>(<span class="param">value</span> <span class="op">=&gt;</span> <span class="param">value</span> <span class="op">*</span> <span class="num">2</span>))
   .<span class="built_in">then</span>(<span class="param">values</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="param">values</span>))
   <span class="com">// &lt;- [2, 4, 6]</span>
@@ -8633,7 +8636,7 @@ foo()
 <p>Note that you can do the same thing in rejection branches. An interesting fact that may catch your eye is that if a <code class="md-code md-code-inline">.catch</code> branch goes smoothly without errors, then it will be fulfilled with the returned value. That means that if you still want to have an error for that branch, you should <code class="md-code md-code-inline">throw</code> again. The following piece of code takes an internal error and <strong>masks it</strong> behind a generic <em>“Internal Server Error”</em> message as to not leak off potentially dangerous information to its clients <a href="http://buff.ly/1LA2FcS">(visualization)</a>.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="prom">Promise</span>.reject(<span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'Database ds.214.53.4.12 connection timeout!'</span>))
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="prom">Promise</span>.<span class="built_in">reject</span>(<span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'Database ds.214.53.4.12 connection timeout!'</span>))
   .<span class="built_in">catch</span>(<span class="param">error</span> <span class="op">=&gt;</span> { <span class="kw">throw</span> <span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'Internal Server Error'</span>) })
   .<span class="built_in">catch</span>(<span class="param">error</span> <span class="op">=&gt;</span> <span class="built_in">console.info</span>(<span class="param">error</span>))
   <span class="com">// &lt;- Error: Internal Server Error</span>
@@ -8746,7 +8749,7 @@ request(<span class="str">'https://twitter.com'</span>, <span class="md-code-fun
 <p>Then there’s <code class="md-code md-code-inline">Promise.race</code>. This is a similar method to <code class="md-code md-code-inline">Promise.all</code>, except the first promise to settle will “win” the race, and its value will be passed along to branches of the race. If you run the <a href="http://buff.ly/1gRYr3p">visualization</a> for the following piece of code a few times, you’ll notice that this race doesn’t have a clear winner. It depends on the server and the network!</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="prom">Promise</span>.race([
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="prom">Promise</span>.<span class="built_in">race</span>([
   <span class="built_in">fetch</span>(<span class="str">'/'</span>),
   <span class="built_in">fetch</span>(<span class="str">'foo'</span>)
 ])
@@ -8759,14 +8762,14 @@ request(<span class="str">'https://twitter.com'</span>, <span class="md-code-fun
 <p>Rejections will also finish the race, and the race promise will be rejected. As a closing note we may indicate that this could be useful for scenarios where we want to time out a promise we otherwise have no control over. For instance, the following race does make sense.</p>
 
 <!--  pre  +++++++++++++++++++++++++++++++++++  -->
-<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">p</span> <span class="op">=</span> <span class="prom">Promise</span>.race([
+<pre class="md-code-block"><code class="md-code md-lang-javascript"><span class="kw">var</span> <span class="var">p</span> <span class="op">=</span> <span class="prom">Promise</span>.<span class="built_in">race</span>([
   <span class="built_in">fetch</span>(<span class="str">'/resource-that-may-take-a-while'</span>),
   <span class="kw">new</span> <span class="prom">Promise</span>(<span class="md-code-function"><span class="kw">function</span> <span class="params">(resolve, reject)</span> </span>{
-    <span class="built_in">setTimeout</span>(() <span class="op">=&gt;</span> reject(<span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'request timeout'</span>)), <span class="num">5000</span>)
+    <span class="built_in">setTimeout</span>(<span class="params">()</span> <span class="op">=&gt;</span> <span class="param">reject</span>(<span class="kw">new</span> <span class="md-code-error">Error</span>(<span class="str">'request timeout'</span>)), <span class="num">5000</span>)
   })
 ])
-p.<span class="built_in">then</span>(<span class="param">response</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="param">response</span>))
-p.<span class="built_in">catch</span>(<span class="param">error</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="param">error</span>))
+<span class="var">p</span>.<span class="built_in">then</span>(<span class="param">response</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="param">response</span>))
+<span class="var">p</span>.<span class="built_in">catch</span>(<span class="param">error</span> <span class="op">=&gt;</span> <span class="kw4">console.log</span>(<span class="param">error</span>))
 </code></pre>
 <!--  ++++++++++++++++++++++++++++++++++++++++  -->
 
@@ -9572,7 +9575,7 @@ p.<span class="built_in">catch</span>(<span class="param">error</span> <span cla
 <hr class="style8" />
 <p>This PDF was created (and styled) by <a href="https://github.com/rsperberg" title="link to Roger Sperberg github page">Roger Sperberg</a>. Any typographical or grammar errors or any issues with the PDF itself can be posted on the <a href="https://github.com/rsperberg/es6-info/issues" title="link to ES6-info issues page on github">issues page</a> of the <a href="https://github.com/rsperberg/es6-info" title="link to ES6-info repository on github">ES6-info repository</a> on GitHub.</p>
 <p>The <a href="https://github.com/rsperberg/es6-info/blob/master/ES6%20Whats%20new%20(smashing).pdf">latest version of this PDF</a> can be downloaded from the <a href="https://github.com/rsperberg/es6-info" title="link to ES6-info repository on github">ES6-info repository</a>.</p>
-<p><b>NOTE:</b> <em>This PDF was last revised on 2015-11-11</em></p>
+<p><b>NOTE:</b> <em>This PDF was last revised on 2015-11-12</em></p>
 <hr class="style8" />
 
 <!--  ++++++++++++++++++++++++++++ ++++++++++++++++++++++++++++++++ +++++++++++++++++++++++++  -->
